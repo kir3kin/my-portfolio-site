@@ -1,0 +1,53 @@
+@import '../../utils/vars.scss';
+
+
+.nav {
+
+	&__wrapper {
+		background:$header-color;
+		color: #fff;
+	}
+	
+	
+	&__list {
+		
+		display: flex;
+		flex-flow: row;
+		justify-content: flex-end;
+
+		
+		a {
+			padding: 1rem 2rem;
+			font-size: 1.8rem;
+			display: block;
+
+
+			&:hover {
+				background: #0d47a1;
+				text-shadow: inset 1px 1px rgba(0,0,0,.2);
+			}
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+// <nav>
+	// <div className="nav__wrapper">
+		// <ul className="nav__list">
+		// 	<li><NavLink to="/">My projects</NavLink></li>
+		// 	<li><NavLink to="/about">About me</NavLink></li>
+		// </ul>
+	// </div>
+// </nav>
+
+
+
+

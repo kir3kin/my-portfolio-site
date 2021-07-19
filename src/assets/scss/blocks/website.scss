@@ -1,0 +1,16 @@
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-family: $font-family;
+	font-size: 1.4rem;
+	line-height: 1.4;
+	// color: $main-color--text;
+	background-color: $theme-color;
+}
+
+.wrapper {
+	width: $website-width;
+	margin: 0 auto;
+}
