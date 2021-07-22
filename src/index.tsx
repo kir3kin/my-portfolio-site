@@ -17,4 +17,5 @@ const App: React.FC = () => (
 		</Fragment>
 	</BrowserRouter>
 )
+
 render(<App />, document.getElementById('app'))

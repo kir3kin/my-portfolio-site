@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { iOneProject} from "../interfaces/interfaces"
 
 type ProjectItemProps = {
@@ -9,35 +9,51 @@ type ProjectItemProps = {
 	): void
 }
 
-export const ProjectItem: React.FC<ProjectItemProps> = ({
-	project,
-	changeModalContent
+// export const ProjectItem: React.FC<ProjectItemProps> = ({
+export const ProjectItem: React.FC<any> = ({
+	project
+	// changeModalContent
 }) => {
 
-	const placeholderImg = 'https://via.placeholder.com/300x200'
-	const projectImg = project.mainInfo.img ? require(`../assets/images/projects/${project.mainInfo.img}`) : placeholderImg
+	const [active, setActive] = useState<boolean>(false)
+
+	const toggleProject = () => {
+		setActive(prev => !prev)
+	}
+
+
+	const defaultImg = 'https://via.placeholder.com/600x600'
+	// const projectImg = project.mainInfo.img ? require(`../${project.mainInfo.img}`) : defaultImg
 
 	const inProgress = project.inProgress ? 'example__inprogress' : ''
 
+	console.log('project:', project)
+
+const columnClasses = ['portfolio__column']
+// if (active) columnClasses.push('portfolio__column--active')
+columnClasses.push('portfolio__column--active')
+
 	return (
-		<div className="portfolio__column">
+		<div className={columnClasses.join(' ')}>
 			<div className="portfolio__item example">
 				<div className="example__img">
 					<a
 						className={inProgress}
 						href={project.mainInfo.website}>
 						<img
-							src={projectImg}
+							src={defaultImg}
 							alt={`${project.mainInfo.title} ${project.mainInfo.desc}`.toLowerCase()}
 						/>
 					</a>
 				</div>
-				<h3 className="example__title">{project.mainInfo.title} {project.mainInfo.desc}</h3>
-				<div className="example__details">
-					<button onClick={() => changeModalContent(project.id, true)} className="example__desc">Project Description</button>
-					
-					<a href={project.mainInfo.github} className="example__link">{project.mainInfo.title} on the github</a>
-					<a href={project.mainInfo.website} className="example__link">{project.mainInfo.title} - website</a>
+
+				<div className="example__body">
+					<h3 className="example__title">{project.mainInfo.title} {project.mainInfo.desc}</h3>
+					<div className="example__details">
+						<button onClick={() => toggleProject()} className="example__desc">Project Description</button>
+						<a href={project.mainInfo.github} className="example__link">{project.mainInfo.title} on the github</a>
+						<a href={project.mainInfo.website} className="example__link">{project.mainInfo.title} - website</a>
+					</div>
 				</div>
 			</div>
 		</div>
