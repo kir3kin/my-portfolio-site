@@ -1,7 +1,7 @@
 import React from "react"
 import { ProjectDescList } from "./ProjectDescList"
-import '../assets/scss/blocks/components/projectDesc.scss'
-import { iProjectDesc } from "../interfaces/projectsInterface"
+import '../../assets/scss/blocks/components/projectDesc.scss'
+import { iProjectDesc } from "../../interfaces/projectsInterface"
 
 type projectDescProps = {
 	description: iProjectDesc

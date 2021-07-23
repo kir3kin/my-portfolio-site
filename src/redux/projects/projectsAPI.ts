@@ -1,9 +1,11 @@
 import axios from 'axios'
-import { iDBData, iProjects } from '../interfaces/projectsInterface'
+import { iDBData, iProjects } from '../../interfaces/projectsInterface'
 
-export const getProjects = async () => {
+export const fetchProjects = async () => {
 	const dbData = await axios.get('http://localhost:3042/api/get')
-	return await getStructuredData(dbData.data)
+	return new Promise<{data: iProjects}>(resolve => {
+		resolve({data: getStructuredData(dbData.data)})
+	})
 }
 
 type getStructuredDataType = (data: iDBData[]) => iProjects

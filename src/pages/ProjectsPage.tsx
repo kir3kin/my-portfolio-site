@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { ProjectItem } from '../components/ProjectItem'
+import React, { useEffect } from 'react'
+import { ProjectItem } from '../components/projects/ProjectItem'
 import '../assets/scss/blocks/pages/projectsPage.scss'
-import { iProjects } from "../interfaces/projectsInterface"
-import { getProjects } from '../projects/projects'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { getProjects, selectProjects } from '../redux/projects/projectsSlice'
 
 export const ProjectsPage: React.FC = () => {
-	const [myProjects, setMyProjects] = useState({} as iProjects)
+	const storeProjects = useAppSelector(selectProjects)
+	const dispatch = useAppDispatch()
+
 	useEffect(() => {
-		getProjects().then(res => {
-			setMyProjects(res)
-		})
-		.catch(e => console.log('error:', e))
+		dispatch(getProjects())
 	}, [])
 	
 	return (
@@ -20,10 +19,10 @@ export const ProjectsPage: React.FC = () => {
 					<h1 className="portfolio__title">My projects</h1>
 					<div className="portfolio__examples">
 						<div className="portfolio__row">
-							{Object.keys(myProjects).map(project_id => {
+							{Object.keys(storeProjects).map(project_id => {
 								return <ProjectItem
 									key={project_id}
-									project={myProjects[project_id]}
+									project={storeProjects[project_id]}
 								/>
 							})}
 						</div>
