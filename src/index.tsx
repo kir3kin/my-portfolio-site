@@ -1,21 +1,13 @@
-import React, { Fragment } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import React from 'react'
 import { render } from 'react-dom'
 import './assets/scss/main'
-import { ProjectsPage } from './pages/ProjectsPage'
-import { AboutPage } from './pages/AboutPage'
-import { Navbar } from './components/Navbar'
+import { App } from './App'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
-const App: React.FC = () => (
-	<BrowserRouter>
-	<Fragment>
-		{/* <Navbar /> */}
-		<Switch>
-			<Route component={ProjectsPage} path="/" exact />
-			{/* <Route component={AboutPage} path="/about" /> */}
-		</Switch>
-		</Fragment>
-	</BrowserRouter>
+render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('app')
 )
-
-render(<App />, document.getElementById('app'))

@@ -15,8 +15,6 @@ app.get('/api/get', (req, res) => {
 	})
 })
 
-
-
 app.listen(3042, () => {
 	console.log("Let's start the party");
 })

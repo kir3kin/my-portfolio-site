@@ -41,6 +41,9 @@
 
 	&__column--active {
 		flex: 100%;
+		transform: translate(0, -6px);
+		box-shadow: 0 0px 30px rgba(0,0,0,.2);
+		margin: 1rem 0;
 	}
 }
 
@@ -51,6 +54,7 @@
 	align-items: center;
 	padding: 1rem;
 	text-align: center;
+	min-width: 310px;
 
 	&__img {
 		height: auto;
@@ -136,8 +140,6 @@
 
 }
 
-
-
 .portfolio__column--active .example {
 	display: flex;
 	flex-flow: row wrap;
@@ -152,13 +154,18 @@
 
 	&__body {
 		display: flex;
+		width: 100%;
+		flex-flow: column;
+		margin: 2rem 0;
 	}
 	
-	&__body, &__details {
+	&__details {
 		flex-flow: row nowrap;
+		justify-content: space-around;
 	}
-	
 
-
-
+	&__title {
+		font-size: 2.8rem;
+		color: #0d47a1;
+	}
 } 
