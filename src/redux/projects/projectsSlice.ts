@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { iProjects } from '../../interfaces/projectsInterface'
+import { iProjects, projectsStatusType } from '../../interfaces/projects'
 import { fetchProjects } from './projectsAPI';
 import { RootState } from '../store'
 
 interface iProjectsState {
   data: iProjects
-  status: "empty" | "loading" | "loaded" | "failed"
+  status: projectsStatusType
 }
 const initialState: iProjectsState = {
   data: {},
@@ -41,4 +41,6 @@ export const projectsSlice = createSlice({
 
 export const {} = projectsSlice.actions
 export const selectProjects = (state: RootState) => state.projects.data
+export const selectProjectsStatus = (state: RootState) => state.projects.status
+
 export default projectsSlice.reducer

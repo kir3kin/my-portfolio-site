@@ -1,40 +1,47 @@
-import React, { useState, useEffect } from "react"
-import { iProject } from "../../interfaces/projectsInterface"
+import React, { useEffect, useRef, useMemo, useCallback } from "react"
+import { iProject } from "../../interfaces/projects"
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"
-import { registerProjectDescription, selectProjectsStatus, toggleProjectDescription } from "../../redux/projects/descriptionsSlice"
+import { registerProjectDescription, selectDescriptionStatus, toggleProjectDescription } from "../../redux/projects/descriptionsSlice"
 import { ProjectDesc } from "./ProjectDesc"
+import { CSSTransition } from 'react-transition-group'
+import type { RootState } from '../../redux/store';
 
-type ProjectItemProps = {
-	project: iProject
-}
-
-export const ProjectItem: React.FC<ProjectItemProps> = ({
+export const ProjectItem: React.FC<{project: iProject}> = ({
 	project
 }) => {
 	const dispatch = useAppDispatch()
-	const activeProjects = useAppSelector(selectProjectsStatus)
-
 	
+	// ============ project item's render's optimization ============
+	const selectCurrentDescription = useMemo(selectDescriptionStatus, [])
+	const selectDescriptionStatusByTitle = (projectTitle: string) => (state: RootState) => selectCurrentDescription(state, projectTitle)
+	// ============
+	const isActive = useAppSelector(selectDescriptionStatusByTitle(project.mainInfo.title))
+
+	// ============ project registration in store ============
 	useEffect(() => {dispatch(registerProjectDescription(project.mainInfo.title))}, [])
-	const active = activeProjects[project.mainInfo.title]
-
-
-	const toggleDescription = (projectName: string): void => {dispatch(toggleProjectDescription(projectName))}
-
+	// ============
+	
+	const projectWrap = useRef<HTMLDivElement>(null)
+	const scrollWindowToProject = useCallback((time: number): void => {
+		setTimeout(()=> {
+			window.scrollTo({
+				top: projectWrap.current!.offsetTop,
+				behavior: "smooth"
+			})
+		}, time)
+	}, [])
+	
+	const toggleDescription = useCallback((projectTitle: string) => {
+		dispatch(toggleProjectDescription(projectTitle))
+		scrollWindowToProject(1100)
+	}, [])
 
 	// ============ project image ========================
-	type getProjectImageType = (
+	const getProjectImage = (
 		path: string,
-		defaultImg?: string
-	) => string
-	const getProjectImage: getProjectImageType = (
-		path,
-		defaultImg = 'https://via.placeholder.com/600x600'
-	): string => {
-		return path ? require(`../../${path}`) : defaultImg
-	}
-
-	const projectImg: string = getProjectImage(project.mainInfo.img)
+		defaultImg: string = 'https://via.placeholder.com/600x600'
+	): string => path ? require(`../../${path}`) : defaultImg
+	const projectImg: string = useMemo(() => getProjectImage(project.mainInfo.img), [])
 	// ============
 
 	// ============ project in progress ? ============
@@ -43,15 +50,18 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
 
 	// ============ project wrap's classes ============
 	const columnClasses: string[] = ['portfolio__column']
-	if (active) columnClasses.push('portfolio__column--active')
+	if (isActive) columnClasses.push('portfolio__column--active')
 	// ============
 
 	// ============ button for toggle description ============
-	const projectBtn: string = active ? "Close" : "Open"
+	const projectBtn: string = isActive ? "Close" : "Open"
 	// ============
 
 	return (
-		<div className={columnClasses.join(' ')}>
+		<div
+			ref={projectWrap}
+			className={columnClasses.join(' ')}
+		>
 			<div className="portfolio__item example">
 				<div className="example__img">
 					<a
@@ -84,9 +94,19 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({
 						>Website</a>
 					</div>
 				</div>
-				{active && <ProjectDesc
-					description={project.fullDesc}
-				/> }
+
+				<CSSTransition
+					in={isActive}
+					timeout={{
+						enter: 2000,
+						exit: 1500
+					}}
+					classNames={'project-description'}
+					mountOnEnter
+					unmountOnExit
+				>
+					<ProjectDesc description={project.fullDesc} />
+				</CSSTransition>
 			</div>
 		</div>
 	)

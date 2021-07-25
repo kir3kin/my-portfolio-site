@@ -1,7 +1,7 @@
 import React from "react"
-import { iInfoProps } from '../interfaces/interfaces'
+// import { iInfoProps } from '../interfaces/interfaces'
 
-export const AboutInfoItem: React.FC<iInfoProps> = ({
+export const AboutInfoItem: React.FC<any> = ({
 	info
 }) => {
 	const classes = ['private__item', `private__${info.className}`]

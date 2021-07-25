@@ -1,8 +1,7 @@
 @import './utils/_vars';
 @import './utils/_mixins';
 @import '~reset-scss';
-@import './utils/fonts.scss';
-
+@import './fonts';
 
 /*** Blocks ***/
 @import './blocks/website';

@@ -5,6 +5,12 @@
 	display: flex;
 	align-items: center;
 
+	&__server-error{
+		text-align: center;
+		font-size: 3rem;
+	}
+
+
 	&__wrapper {
 		padding: 2rem 1rem 2rem;
 		box-shadow: inset 0 0 10px rgba(0,0,0,.2);
@@ -26,12 +32,10 @@
 	}
 
 	&__column {
-		flex: 0 0 33.3336%;
+		flex: 0 0 45%;
 		padding: 1rem;
 		background: transparent;
 		border-radius: 20px;
-
-		transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
 		
 		&:hover {
 			transform: translate(0, -6px);
@@ -55,9 +59,13 @@
 	padding: 1rem;
 	text-align: center;
 	min-width: 310px;
+	flex-flow: column;
+	flex: 0 0 50%;
+
 
 	&__img {
-		height: auto;
+		// height: auto;
+		width: 100%;
 		cursor: pointer;
 		display: block;
 		border-radius: 1rem;
@@ -68,7 +76,7 @@
 		
 		img {
 			width: 100%;
-			height: 166px;
+			height: 215px;
 			object-fit: cover;
 		}
 
@@ -115,7 +123,6 @@
 			content: 'In progress...';
 			display: flex;
 			justify-content: center;
-			// align-items: baseline;
 
 			width: 100%;
 			height: 100%;
@@ -137,11 +144,9 @@
 			opacity: 0;
 		}
 	}
-
 }
 
 .portfolio__column--active .example {
-	display: flex;
 	flex-flow: row wrap;
 
 	&__img {
@@ -156,7 +161,7 @@
 		display: flex;
 		width: 100%;
 		flex-flow: column;
-		margin: 2rem 0;
+		margin: 2rem 0 0;
 	}
 	
 	&__details {
@@ -168,4 +173,11 @@
 		font-size: 2.8rem;
 		color: #0d47a1;
 	}
-} 
+}
+
+.portfolio__column {
+	transition: transform .2s ease-in-out, box-shadow .2s ease-in-out, flex 1.5s ease-in-out;
+}
+.example__img img {
+	transition: 1.3s ease-in-out;
+}

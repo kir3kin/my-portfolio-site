@@ -1,5 +1,5 @@
 import React, { Fragment } from "react"
-import { iProjectDescEl } from "../../interfaces/projectsInterface"
+import { iProjectDescEl } from "../../interfaces/projects"
 
 type projectDescListProps = {
 	elements: iProjectDescEl

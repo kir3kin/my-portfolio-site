@@ -14,6 +14,7 @@ export interface iDBData {
 	link: string
 	children: string
 }
+
 // projects
 export interface iProjects {
 	[key: string] : iProject
@@ -46,3 +47,5 @@ export interface iProjectDescEl {
 		children: string[]
 	}
 }
+
+export type projectsStatusType = "empty" | "loading" | "loaded" | "failed"

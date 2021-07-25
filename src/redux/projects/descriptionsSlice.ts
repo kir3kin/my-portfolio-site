@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, createSelector } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 interface iProjectDescriptions {
@@ -29,5 +29,14 @@ export const descriptionsSlice = createSlice({
 })
 
 export const { registerProjectDescription, toggleProjectDescription } = descriptionsSlice.actions
-export const selectProjectsStatus = (state: RootState) => state.descriptions
+
+export const selectDescriptionStatus = () => {
+  return createSelector(
+    (state: RootState) => state.descriptions,
+    (_: any, projectName: string) => projectName,
+    (descriptions, projectName) => descriptions[projectName]
+  )
+}
+
+
 export default descriptionsSlice.reducer
