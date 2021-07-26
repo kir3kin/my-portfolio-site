@@ -28,6 +28,7 @@ app.get('/api/get', (req, res) => {
 	
 	db.query(query.toString(), (err, result) => {
 		res.send(result)
+		if (err) console.log(err)
 	})
 })
 

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { iDBData, iProjects } from '../../interfaces/projects'
 
 export const fetchProjects = async () => {
-	const dbData = await axios.get('http://localhost:3042/api/get')
+	const dbData = await axios.get('http://188.68.221.195:3042/api/get')
 	return new Promise<{data: iProjects}>(resolve => {
 		resolve({data: getStructuredData(dbData.data)})
 	})
