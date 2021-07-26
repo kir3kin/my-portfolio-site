@@ -1,3 +1,10 @@
+const fs = require('fs')
+const http = require('http')
+const https = require('https')
+const privateKey  = fs.readFileSync('./keys/selfsigned.key', 'utf8')
+const certificate = fs.readFileSync('./keys/selfsigned.crt', 'utf8')
+const credentials = {key: privateKey, cert: certificate}
+
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -5,7 +12,6 @@ const db = require('./config')
 const sqlQuery = require('./slqQuery')
 
 app.use(cors())
-
 app.get('/api/get', (req, res) => {
 	const fields = [
 		'p.id AS project_id',
@@ -32,4 +38,8 @@ app.get('/api/get', (req, res) => {
 	})
 })
 
-app.listen(3042, () => {})
+const httpServer = http.createServer(app)
+const httpsServer = https.createServer(credentials, app)
+
+httpServer.listen(3046, () => {})
+httpsServer.listen(3044, () => {})
