@@ -41,5 +41,5 @@ app.get('/api/get', (req, res) => {
 const httpServer = http.createServer(app)
 const httpsServer = https.createServer(credentials, app)
 
-httpServer.listen(3046, () => {})
+httpServer.listen(3042, () => {})
 httpsServer.listen(3044, () => {})
