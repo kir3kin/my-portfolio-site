@@ -1,4 +1,4 @@
-class sqlQuery {
+export class sqlQuery {
 	_fields
 	_table
 	_join = ''
@@ -29,5 +29,3 @@ class sqlQuery {
 		return `SELECT ${this._fields} FROM ${this._table} ${this._join}`
 	}
 }
-
-module.exports = sqlQuery
