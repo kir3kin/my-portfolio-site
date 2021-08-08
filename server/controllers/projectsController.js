@@ -1,5 +1,5 @@
-import { db } from '../../db/config.js'
-import { sqlQuery } from '../../db/sqlQuery.js'
+import { db } from '../db/config.js'
+import { sqlQuery } from '../db/sqlQuery.js'
 
 const fields = [
 	'p.id AS project_id',

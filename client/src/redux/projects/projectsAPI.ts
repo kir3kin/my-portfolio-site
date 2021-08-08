@@ -8,9 +8,7 @@ const SERVERS = {
 }
 
 export const fetchProjects = async () => {
-	const dbData = await axios.get('http://localhost:3042/api/projects')
-	// const dbData = await axios.get(SERVERS['HTTP'])
-	// const dbData = await axios.get(SERVERS['HTTPS'])
+	const dbData = await axios.get(SERVERS['HTTPS'])
 	return new Promise<{data: iProjects}>(resolve => {
 		resolve({data: getStructuredData(dbData.data)})
 	})
