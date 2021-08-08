@@ -45,6 +45,7 @@ const babelLoaders = (presets) => {
 	return babelOptions
 }
 
+// todo: erase "return {"
 module.exports = () => {
 	return {
 		entry: {
@@ -126,4 +127,4 @@ module.exports = () => {
 			],
 		},
 	}
-};
+}
