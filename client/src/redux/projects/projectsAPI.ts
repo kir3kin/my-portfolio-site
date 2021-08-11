@@ -3,16 +3,11 @@ import { iDBData, iProjects } from '../../interfaces/projects'
 
 const SERVERS = {
 	'LOCALHOST': 'http://localhost:3040/api/projects',
-	'HTTPS': 'https://188.68.221.195:3043/api/projects',
-	'HTTP': 'http://188.68.221.195:3040/api/projects',
-	'HTTPS_2': 'https://185.233.116.164:3043/api/projects',
-	'HTTPS_3': 'https://kir3kin.pp.ua:3043/api/projects',
-	'HTTP_2': 'http://185.233.116.164:3040/api/projects',
-	'HTTP_3': 'http://kir3kin.pp.ua:3040/api/projects'
+	'HTTPS': 'https://albal.fun:3043/api/projects'
 }
 
 export const fetchProjects = async () => {
-	const dbData = await axios.get(SERVERS['HTTPS_3'])
+	const dbData = await axios.get(SERVERS['HTTPS'])
 	return new Promise<{data: iProjects}>(resolve => {
 		resolve({data: getStructuredData(dbData.data)})
 	})
