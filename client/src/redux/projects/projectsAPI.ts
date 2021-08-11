@@ -6,10 +6,11 @@ const SERVERS = {
 	'HTTPS': 'https://188.68.221.195:3043/api/projects',
 	'HTTP': 'http://188.68.221.195:3040/api/projects',
 	'HTTPS_2': 'https://185.233.116.164:3043/api/projects',
+	'HTTP_2': 'http://185.233.116.164:3040/api/projects'
 }
 
 export const fetchProjects = async () => {
-	const dbData = await axios.get(SERVERS['HTTPS_2'])
+	const dbData = await axios.get(SERVERS['HTTP_2'])
 	return new Promise<{data: iProjects}>(resolve => {
 		resolve({data: getStructuredData(dbData.data)})
 	})
