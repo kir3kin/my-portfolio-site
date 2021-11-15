@@ -1,47 +1,48 @@
-import React, { useEffect } from 'react'
-import { ProjectItem } from '../components/projects/ProjectItem'
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { getProjects, selectProjects, selectProjectsStatus } from '../redux/projects/projectsSlice'
-import { Loader } from '../components/Loader'
-import '../assets/scss/blocks/pages/projectsPage.scss'
+import React, { useCallback, useEffect, useMemo } from "react"
+import { ProjectList } from "../components/ProjectList"
+import { useAppDispatch, useAppSelector } from "../redux/hooks"
+import { getProjects, selectProjectList, selectProjectListStatus, makeSelectProjectsByTechs } from "../redux/reducers/projectsSlice"
+import { getTechnologies, selectChosen, selectTechnologyList, selectTechnologyListStatus } from "../redux/reducers/technologiesSlice"
+import { TechInputs } from "../components/TechInputs"
 
 export const ProjectsPage: React.FC = () => {
-	const storeProjects = useAppSelector(selectProjects)
-	const projectsStatus = useAppSelector(selectProjectsStatus)
 	const dispatch = useAppDispatch()
-
 	useEffect(() => {
-		dispatch(getProjects())
-	}, [])
+			dispatch(getProjects())
+			dispatch(getTechnologies())
+	}, [dispatch])
 
-	const tempErrorMsg = (
-		<h2
-			className="portfolio__server-error"
-		>An error occured. Please contact with administrator:<br/>&lt;i.akhabanin@gmail.com&gt;</h2>
-	)
+	// const some = useAppSelector(makeSelectProjectsByTechs)
+	const selectProjectsByTechs = useMemo(makeSelectProjectsByTechs, [])
+
+	const commonStore = {
+		
+		projectList: useAppSelector(selectProjectsByTechs),
+		technologyList: useAppSelector(selectTechnologyList),
+		projectsStatus: useAppSelector(selectProjectListStatus),
+		technologiesStatus: useAppSelector(selectTechnologyListStatus)
+	}
 	
 	return (
-		<section className="portfolio">
-			<div className="wrapper">
-				<div className="portfolio__wrapper">
-					<h1 className="portfolio__title">My projects</h1>
+		<div className="wrapper">
+			<div className="container">
+				<aside className="sidebar">
+					<TechInputs
+						techs={commonStore.technologyList}
+						status={commonStore.technologiesStatus}
+					/>
+				</aside>
+				<main className="projects">
+					<h1 className="projects__header header--stylish">Projects</h1>
 
-					{projectsStatus === 'loading' && <Loader />}
-					{projectsStatus === 'failed' && tempErrorMsg}
-					{projectsStatus === 'loaded' && (
-						<div className="portfolio__examples">
-							<div className="portfolio__row">
-								{Object.keys(storeProjects).sort((a,b) => +b-(+a)).map(project_id => {
-									return <ProjectItem
-										key={project_id}
-										project={storeProjects[project_id]}
-									/>
-								})}
-							</div>
-						</div>
-					)}
-				</div>
+					{(commonStore.projectList.length >= 1) ? (
+						<ProjectList
+							projects={commonStore.projectList}
+							status={commonStore.projectsStatus}
+						/>
+					) : (<p className="projects__notfoud">No projects are found!</p>)}
+				</main>
 			</div>
-		</section>
+		</div>
 	)
 }

@@ -1,29 +1,40 @@
-/* Wrapper size */
-$website-width: 1020px;
+/* Container size */
+$website-width: 1200px;
+
+
+/* Project card's sizes */
+$project-card-w-xl: 25rem;
+$project-card-h-xl: 20rem;
+$project-img-w-xl: 60rem;
+$project-img-h-xl: 37rem;
 
 /* Font family */
 $font-family: 'Acme', Arial, Helvetica, sans-serif;
 
+
 /* colors */
 $theme-color: #fff;
-$header-color: #7b1fa2;
-$project-link-color: #42a5f5;
+$theme-border-color: #212121;
+$text-color: #5d4037;
+$project-page-links: darkblue;
+$page-notfoud-color: #ff3d00;
 
 /* Fonts sizes */
-$portfolio-header-size: 4rem;
-$project-header-size: 2.2rem;
-$project-desc-size: 1.8rem;
-
-$project-modal-title-size: 4rem;
 
 
-$info-item-size: 1.6rem;
+// Transition time
+$tech-buttons: .2s linear;
+$project-card: .3s ease-in-out;
+$project-links: .2s linear;
 
+// Technologies colors
+$tech-tag-default: #aaa;
 
-
-// about me
-$about-header-color: #222222;
-$about-react-color: #61DAFB;
-$about-ts-color: #007ACC;
-$about-redux-color: #764ABC;
-$about-js-color: #FFCA28;
+$tech-tags-colors: (
+	'library': #5DD2F3,
+	'language': #1a237e,
+	'database': #69f0ae,
+	'jre': #004d40,
+	'state-container': #6a1b9a,
+	'code-editor': #b71c1c
+);

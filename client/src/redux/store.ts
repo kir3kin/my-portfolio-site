@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import projectsSlice from './projects/projectsSlice'
-import descriptionstSlice from './projects/descriptionsSlice'
+import projectsSlice from './reducers/projectsSlice'
+import projectSlice from './reducers/projectSlice'
+import technologiesSlice from './reducers/technologiesSlice';
 
 export const store = configureStore({
   reducer: {
-    projects: projectsSlice,
-    descriptions: descriptionstSlice,
-  },
+    projectList: projectsSlice,
+    technologyList: technologiesSlice,
+    project: projectSlice
+  }
 })
 
 export type AppDispatch = typeof store.dispatch;

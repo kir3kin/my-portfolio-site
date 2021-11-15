@@ -1,0 +1,78 @@
+@mixin tech-basic() {
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 50%;
+	margin: 0.5rem;
+	padding: .3rem .8rem;
+}
+
+// === Tech input tags
+@mixin tech-sidebar-tag($color) {
+	color: $color;
+	border-color: $color;
+
+	input:checked + &,
+	&:hover {
+		color: $theme-color;
+		background-color: $color;
+	}
+
+	input:checked + & {
+		box-shadow: 0 0 5px 1px $color;
+	}
+}
+
+@mixin tech-sidebar-tags() {
+	@include tech-basic();
+	cursor: pointer;
+	transition: $tech-buttons;
+
+	@include tech-sidebar-tag($tech-tag-default);
+	@each $name, $color in $tech-tags-colors {
+		&--#{$name} {
+			@include tech-sidebar-tag($color)
+		}
+	}
+}
+
+// === Project description tech tags
+@mixin tech-desc-tag($color) {
+	background-color: $color;
+	border-color: $color;
+	letter-spacing: .1rem;
+}
+
+@mixin tech-desc-tags() {
+	@include tech-basic();
+	color: $theme-color;
+
+	@include tech-desc-tag($tech-tag-default);
+	@each $name, $color in $tech-tags-colors {
+		&--#{$name} {
+			@include tech-desc-tag($color)
+		}
+	}
+}
+
+@mixin project-page-links-hover($color) {
+	& {
+		transition: $project-links;
+		text-decoration: underline;
+
+		&:hover {
+			color: $color;
+			text-decoration: none;
+			text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+		}
+	}
+}
+
+@mixin text-hide() {
+	& {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
+

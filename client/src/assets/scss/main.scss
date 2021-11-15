@@ -1,7 +1,43 @@
-@import './utils/_vars';
-@import './utils/_mixins';
-@import '~reset-scss';
-@import './fonts';
+html {
+	font-size: 62.5%;
+}
 
-/*** Blocks ***/
-@import './blocks/website';
+body {
+	font-family: $font-family;
+	font-size: 1.4rem;
+	line-height: 1.4;
+	color: $text-color;
+	background-color: $theme-color;
+}
+
+.wrapper {
+	min-width: 100%;
+	min-height: 100vh;
+	display: flex;
+	background-image: url('../images/bg/main-bg.jpg');
+	background-repeat: repeat;
+	padding: 2rem;
+}
+
+.container {
+	position: relative;
+	width: $website-width;
+	display: flex;
+	justify-content: center;
+	margin: auto;
+
+	border: 1.5rem solid $theme-border-color ;
+	padding: 3rem;
+	background-image: url('../images/bg/concrete_wall_2.png');
+	background-repeat: repeat;
+}
+
+.header--stylish {
+	color: $text-color;
+	text-shadow: 2px 2px 1px rgba(0,0,0,.2);
+}
+
+.page-404 {
+	padding: 7rem 0 8rem;
+	font-size: 5rem;
+}

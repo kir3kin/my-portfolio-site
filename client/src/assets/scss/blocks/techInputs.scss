@@ -1,0 +1,14 @@
+.tech {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	flex-flow: wrap;
+
+	&__input {
+		display: none;
+	}
+
+	&__label {
+		@include tech-sidebar-tags();
+	}
+}

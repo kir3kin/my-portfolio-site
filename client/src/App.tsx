@@ -1,15 +1,18 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+// import { Navbar } from './components/Navbar'
+
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import './assets/scss/common.scss'
 import { ProjectsPage } from './pages/ProjectsPage'
-import { AboutPage } from './pages/AboutPage'
-import { Navbar } from './components/Navbar'
+import { Page404 } from './pages/Page404'
+import { ProjectPage } from './pages/ProjectPage'
 
 export const App: React.FC = () => (
 	<BrowserRouter>
-		{/* <Navbar /> */}
-		<Switch>
-			<Route component={ProjectsPage} path="/" exact />
-			{/* <Route component={AboutPage} path="/about" /> */}
-		</Switch>
+		<Routes>
+			<Route path="*" element={ <Page404 /> } />
+			<Route path="/" element={ <ProjectsPage /> } />
+			<Route path="/project/:id" element={ <ProjectPage /> } />
+		</Routes>
 	</BrowserRouter>
 )

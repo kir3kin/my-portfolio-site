@@ -1,0 +1,18 @@
+@import '~reset-scss';
+@import './utils/vars';
+@import './utils/mixins';
+@import './utils/fonts';
+
+@import './main';
+
+// Pages
+@import './pages/ProjectsPage';
+@import './pages/ProjectPage';
+// Components
+@import './components/sidebar';
+@import './components/projects';
+@import './components/loader';
+// Blocks
+@import './blocks/techInputs';
+@import './blocks/comeBack';
+

@@ -1,0 +1,143 @@
+.project {
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	padding-bottom: 2rem;
+
+	// top page part
+	&__about {
+		display: flex;
+	}
+
+	// bottom page part
+	&__info{
+		margin: 3rem -3.1rem 0 -3rem;
+		padding: 4rem 2rem 0;
+		border-top: 1.5rem solid $theme-border-color;
+	}
+
+	&__img {
+		border: .5rem solid $text-color;
+		overflow: hidden;
+		min-width: 60rem;
+		// width: $project-img-w-xl;
+		height: $project-img-h-xl;
+	}
+
+	&__img img {
+		cursor: zoom-in;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__desc {
+		width: 100%;
+		padding: 2rem 0 2rem 3rem;
+	}
+
+	&__info {
+		margin-top: 3rem;
+	}
+}
+
+// === top page part
+.description {
+	overflow: hidden;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	justify-content: center;
+
+	& * {
+		max-width: 100%;
+	}
+
+	&__header {
+		font-size: 4rem;
+		text-transform: uppercase;
+	}
+
+	&__links {
+		display: flex;
+		flex-flow: column;
+		text-align: center;
+		font-size: 2rem;
+	}
+	
+	&__link {
+		display: inline-block;
+		margin: 1rem;
+		letter-spacing: 1px;
+		@include project-page-links-hover($project-page-links);
+	}
+
+	&__summary {
+		padding: 1rem;
+		width: 100%;
+		font-size: 1.8rem;
+		text-align: center;
+		border: .5rem solid $text-color;
+	}
+}
+
+.techs-list {
+	width: 100%;
+	display: flex;
+	flex-flow: wrap;
+	justify-content: space-around;
+	padding: 1rem 2rem;
+	margin-top: 1rem;
+
+	&__item {
+		@include tech-desc-tags();
+	}
+}
+
+// === bottom page part
+.info-list {
+	display: flex;
+	flex-flow: wrap;
+	justify-content: center;
+
+	&__item {
+		width: 30%;
+		text-align: center;
+		padding: 2rem 1.5rem;
+		border: .5rem solid $text-color;
+		margin: 1rem;
+	}
+
+	&__header {
+		font-size: 2rem;
+		padding-bottom: 1rem;
+		@include text-hide();
+	}
+
+	&__links {
+		width: 100%;
+		display: flex;
+		flex-flow: wrap;
+		justify-content: center;
+	}
+
+	&__links div {
+		min-width: 50%;
+		padding: 0.5rem;
+	}
+
+	&__links a {
+		font-size: 1.7rem;
+		@include project-page-links-hover(darkblue);
+	}
+
+	&__desc{
+		margin-top: 1rem;
+	
+		& li {
+			font-size: 1.5rem;
+			color: #37474f ;
+			text-shadow: 0px 0px 1px rgba(0,0,0,.3);
+		}
+	}
+}
+
