@@ -1,0 +1,11 @@
+{
+	"HTTP_PORT": 5080,
+	"HTTPS_PORT": 5443,
+	"jwtSecret": "kir3kin server",
+
+	"DB_NAME": "kir3kin_projects",
+	"DB_USER": "root",
+	"DB_PASSWORD": "",
+	"DB_HOST": "localhost",
+	"DB_PORT": 3306
+}
