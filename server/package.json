@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "3.0.0",
-  "description": "kir3kin.com server",
+  "description": "kir3kin.site",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -17,8 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
-    "apollo-server-core": "^3.5.0",
-    "apollo-server-express": "^3.5.0",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
@@ -27,8 +25,8 @@
     "graphql": "^15.5.1",
     "graphql-scalars": "^1.13.1",
     "mysql2": "^2.3.3-rc.0",
-    "promise-mysql": "^5.0.4",
-    "sequelize": "^6.9.0"
+    "sequelize": "^6.9.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "concurrently": "^6.4.0",
