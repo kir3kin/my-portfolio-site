@@ -30,7 +30,7 @@ export class ProjectsAPI {
 		return projects
 	}
 
-	static fetchProject = async (id) => {
+	static fetchProject = async (id: string) => {
 		const { data: { data: { project } } }: iProjectQuery = await axios({
 			...axiosParams,
 			data: {

@@ -16,12 +16,22 @@ body {
 	display: flex;
 	background-image: url('../images/bg/main-bg.jpg');
 	background-repeat: repeat;
-	padding: 2rem;
+	background-size: cover;
+	padding: 3rem;
+
+	@include breakpoint($md-bp) {
+		padding: 1rem;
+	}
+
+	@include breakpoint($sm-bp) {
+		padding: 0;
+		background-image: none;
+	}
 }
 
 .container {
 	position: relative;
-	width: $website-width;
+	width: $website-lg-width;
 	display: flex;
 	justify-content: center;
 	margin: auto;
@@ -30,14 +40,44 @@ body {
 	padding: 3rem;
 	background-image: url('../images/bg/concrete_wall_2.png');
 	background-repeat: repeat;
+
+	@include breakpoint($lg-bp) {
+		width: $website-md-width;
+		padding: 2rem;
+	}
+
+	@include breakpoint($md-bp) {
+		width: $website-sm-width;
+		flex-flow: column;
+	}
+
+	@include breakpoint($sm-bp) {
+		padding: 1rem;
+		min-height: 100vh;
+	}
+
+
 }
 
 .header--stylish {
 	color: $text-color;
 	text-shadow: 2px 2px 1px rgba(0,0,0,.2);
-}
+	text-align: center;
+	position: relative;
 
-.page-404 {
-	padding: 7rem 0 8rem;
-	font-size: 5rem;
+	span {
+		position: absolute;
+		color: $tech-tag-default;
+		font-size: 1.6rem;
+		bottom: -2rem;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		text-shadow: none;
+	}
+
+	@include breakpoint($sm-bp) {
+		span {
+			display: none;
+		}
+	}
 }

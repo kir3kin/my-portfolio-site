@@ -1,7 +1,7 @@
 import { Method } from "axios";
 
 import { iProject, ShortProjectData } from "./project.interface"
-import { Technology } from "./technology.interface";
+import { ChosensType, Technology } from "./technology.interface";
 
 export interface iProjectsQuery {
 	data: { data: { projects: [ShortProjectData] } }
@@ -22,3 +22,6 @@ export type AxiosParamsType = {
 		[key: string]: string
 	}
 }
+
+export type getLocalDataType = (name: string) => ChosensType
+export type setLocalStorageDataType = ( name: string, data?: any ) => void

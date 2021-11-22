@@ -1,5 +1,5 @@
 import React from "react"
-import { Info } from "../interfaces/project.interface"
+import { Info } from "../../interfaces/project.interface"
 
 interface iProjectInfo {
 	info: Info
@@ -11,7 +11,12 @@ export const ProjectInfo: React.FC<iProjectInfo> = ({ info }) => (
 		{info.descriptions.length  >= 1 && (
 			<div className="info-list__links">
 				{info.descriptions.map(desc => <div key={desc.id}>
-						<a href={desc.link}>{desc.title}</a>
+						<a
+							target="_blank"
+							href={desc.link}
+						>
+							{desc.title}
+						</a>
 						{desc.children.length >= 1  && (
 							<ul className="info-list__desc">
 								{desc.children.map(child => <li key={child.id}>{child.text}</li>)}

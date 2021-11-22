@@ -2,14 +2,39 @@
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-
-	// outline: 1px solid #aaa;
-	padding: 1rem 3rem 3rem 0;
-
+	padding: 0 3rem 3rem 0;
 	border-right: .5rem solid $text-color;
+	position: relative;
 
 	&__header {
 		margin-bottom: 2rem;
-		font-size: 4rem;
+		font-size: $header-lg-size;
+	}
+
+	@include breakpoint($lg-bp) {
+		padding-top: 0;
+		padding-right: 2rem;
+
+		&__header {
+			font-size: $header-md-size;
+		}
+	}
+
+	@include breakpoint($md-bp) {
+		border-right: none;
+		border-bottom: .5rem solid $text-color;
+		padding-right: 0;
+		padding-bottom: 2rem;
+		margin-bottom: 2rem;
+		
+		&__header {
+			font-size: $header-sm-size;
+		}
+	}
+	
+	@include breakpoint($sm-bp) {
+		&__header {
+			margin-bottom: 0;
+		}
 	}
 }

@@ -1,9 +1,11 @@
+// ============== techs tags [START] ============== \\
 @mixin tech-basic() {
-	border-width: 2px;
+	border-width: 2.5px;
 	border-style: solid;
 	border-radius: 50%;
 	margin: 0.5rem;
-	padding: .3rem .8rem;
+	padding: .4rem .8rem .3rem;
+	font-weight: bold;
 }
 
 // === Tech input tags
@@ -11,10 +13,12 @@
 	color: $color;
 	border-color: $color;
 
+
 	input:checked + &,
 	&:hover {
 		color: $theme-color;
 		background-color: $color;
+		font-weight: normal;
 	}
 
 	input:checked + & {
@@ -45,6 +49,7 @@
 @mixin tech-desc-tags() {
 	@include tech-basic();
 	color: $theme-color;
+	font-weight: normal;
 
 	@include tech-desc-tag($tech-tag-default);
 	@each $name, $color in $tech-tags-colors {
@@ -53,7 +58,9 @@
 		}
 	}
 }
+// ============== techs tags [END] ============== \\
 
+// ============== additional ============== \\
 @mixin project-page-links-hover($color) {
 	& {
 		transition: $project-links;
@@ -66,7 +73,7 @@
 		}
 	}
 }
-
+// text truncation
 @mixin text-hide() {
 	& {
 		overflow: hidden;
@@ -75,4 +82,9 @@
 	}
 }
 
-
+// ============== RWD ============== \\
+@mixin breakpoint($bp) {
+	@media (max-width: $bp) {
+		@content;
+	}
+}

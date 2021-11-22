@@ -1,7 +1,9 @@
 {
-  "name": "server",
-  "version": "3.0.0",
-  "description": "kir3kin.site",
+  "name": "kir3kin_server",
+  "version": "3.1.0",
+  "description": "Portfolio <kir3kin.site>",
+  "keywords": ["graphql", "kir3kin", "portfolio", "React.js", "TypeScript", "Node.js", "Express.js"],
+  "author": "Ihor Akhabanin <i.akhabanin@gmail.com>",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -12,8 +14,6 @@
     "client:build": "npm run build --prefix ../client",
     "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",

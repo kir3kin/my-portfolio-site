@@ -8,12 +8,13 @@ export const typeDefs = `
 		id: ID!
 		title: String!
 		summary: String!
+		description: String
 		image: String
 		link: String!
 		github: String!
 		template: String
 		inWorking: Boolean!
-		isHide: Boolean!
+		isHiden: Boolean!
 		createdAt: Date!
 		updatedAt: Date!
 		infos: [Info!]
@@ -50,6 +51,7 @@ export const typeDefs = `
 		technologyTypeId: ID!
 		title: String!
 		techType: techType!
+		isHiden: Boolean!
 	}
 
 	type techType {

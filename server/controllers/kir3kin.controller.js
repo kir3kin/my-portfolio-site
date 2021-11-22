@@ -10,10 +10,21 @@ import {
 	ProjectTechnology,
 	ProjectAuthor
 } from '../db/models/models.js'
+import ApiError from '../error/API.error.js'
 
 export class Kir3kinController {
 	// Query:
-	static getProjects = async () => await Projects.findAll()
+	static getProjects = async () => {
+		// ApiError
+		try {
+			const projects = await Projects.findAll()
+			return projects
+		} catch (e) {
+			console.log('e.message:', e.message)
+		}
+	}
+
+
 	static getProject = async (id) => await Projects.findOne({ where: { id } })
 	static getTechnologies = async () => await Technologies.findAll()
 	static getTechTypes = async () => await TechnologyTypes.findAll()

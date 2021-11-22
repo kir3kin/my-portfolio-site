@@ -1,40 +1,86 @@
-/* Container size */
-$website-width: 1200px;
+/* === Media break points === */
+$lg-bp: 1260px;
+$md-bp: 992px;
+$sm-bp: 760px;
+$xs-bp: 575px;
+
+/* === Container size === */
+$website-lg-width: 1200px;
+$website-md-width: 900px;
+$website-sm-width: 100%;
+
+/* === Project card's sizes === */
+$project-card-w-lg: 22rem;
+$project-card-h-lg: 17rem;
+$project-card-w-md: 24rem;
+$project-card-h-md: 18rem;
+$project-card-w-sm: 30rem;
+$project-card-h-sm: 22rem;
+$project-card-w-xs: 100%;
+$project-card-h-xs: auto;
 
 
-/* Project card's sizes */
-$project-card-w-xl: 25rem;
-$project-card-h-xl: 20rem;
-$project-img-w-xl: 60rem;
-$project-img-h-xl: 37rem;
 
-/* Font family */
+$project-img-w-lg: 60rem;
+$project-img-h-lg: 30rem;
+$project-img-w-md: 100%;
+$project-img-h-md: auto;
+
+
+
+/* === Font sizes === */
+$header-lg-size: 4rem;
+$header-md-size: 3.4rem;
+$header-sm-size: 3rem;
+
+$desclink-lg-size: 2.5rem;
+$desclink-sm-size: 2.1rem;
+
+$techs-sm-size: 1.6rem;
+
+$e404-title-lg-size: 5rem;
+$e404-subtitle-lg-size: 4rem;
+$e404-title-xs-size: 3.5rem;
+$e404-subtitle-xs-size: 3rem;
+
+
+/* === Font family === */
 $font-family: 'Acme', Arial, Helvetica, sans-serif;
 
 
-/* colors */
+/* === Common colors === */
 $theme-color: #fff;
 $theme-border-color: #212121;
 $text-color: #5d4037;
 $project-page-links: darkblue;
-$page-notfoud-color: #ff3d00;
+$error-color: #ff3d00;
 
-/* Fonts sizes */
-
-
-// Transition time
+/* === Transition time === */
 $tech-buttons: .2s linear;
 $project-card: .3s ease-in-out;
 $project-links: .2s linear;
 
-// Technologies colors
+
+
+/* === Technologies colors === */
 $tech-tag-default: #aaa;
 
+// !!! According to [tech type name] in db !!!
 $tech-tags-colors: (
-	'library': #5DD2F3,
 	'language': #1a237e,
-	'database': #69f0ae,
+	'framework': #8512F3,
+	'library': #0091ea   ,
+	'code-editor': #b71c1c,
+	'database': #00bfa5,
 	'jre': #004d40,
 	'state-container': #6a1b9a,
-	'code-editor': #b71c1c
+	'orm': #2F3E68,
+	'css-preprocessor': #C76494,
+	'control-system': #E94E31,
+	'css-methodology': #392F2F,
+	'approach': #8ACD55,
+	'app-builder': #827717 ,
+	'os': white,
+	'api': #3D46C6,
+	'query-language': #DE33A6,
 );

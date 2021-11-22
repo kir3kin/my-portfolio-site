@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { Navigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { Loader } from "../components/Loader"
-import { ProjectDesc } from "../components/ProjectDesc"
-import { LoadingStatus } from "../interfaces/loading.interface"
-import { iProject } from "../interfaces/project.interface"
+import { ComeBack } from "../blocks/ComeBack"
+import { LoadingError } from "../blocks/LoadingError"
+import { Loader } from "../blocks/Loader"
+import { ProjectDesc } from "../components/Project/ProjectDesc"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { getProject, selectProjectData, selectProjectStatus } from "../redux/reducers/projectSlice"
+import { getProject, selectProjectInfo } from "../redux/reducers/projectSlice"
 import { HOME_LINK } from "../utils/default"
 
 export const ProjectPage: React.FC = () => {
@@ -17,14 +17,14 @@ export const ProjectPage: React.FC = () => {
 		dispatch(getProject(projectId))
 	}, [dispatch])
 	
-	const project: iProject | null = useAppSelector(selectProjectData)
-	const status = useAppSelector(selectProjectStatus)
+	const { project, status } = useAppSelector(selectProjectInfo)
 
 	return (
 		<div className="wrapper">
 			<div className="container">
+			<ComeBack />
 			{status === 'loading' && <Loader />}
-			{status === 'failed' && <p>Error</p>}
+			{status === 'failed' && <LoadingError name="Project page" />}
 			{status === 'loaded' && (
 				project === null ? (
 					<Navigate to={HOME_LINK} />

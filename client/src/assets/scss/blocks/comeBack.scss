@@ -1,23 +1,41 @@
 .come_back {
 	position: absolute;
-	top: 1rem;
-	right: 1rem;
-
+	top: 3rem;
+	right: 3rem;
 	font-size: 1.4rem;
-	
 	padding: .5rem 1rem;
 	cursor: pointer;
-	border: .5rem solid $theme-border-color;
-	text-shadow: 1px 1px 2px rgba(255,255,255,.9);
+	border: .5rem solid $text-color;
+	text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+	font-weight: bold;
 	
 	transition: .2s ease-in-out;
-	color: $theme-color;
-	background-color: $text-color;
+	color: $text-color;
 
 	&:hover {
-		color: $project-page-links;
-		background-color: lighten($text-color, 30%);
+		color: $theme-color;
 		box-shadow: 1px 1px 5px 2px rgba(0,0,0,.3);
+		text-shadow: 1px 1px 1px rgba($theme-color, .3);
+		font-weight: normal;
+		background-color: $text-color;
+	}
+
+	@include breakpoint($lg-bp) {
+		top: 2rem;
+		right: 2rem;
+	}
+
+	@include breakpoint($sm-bp) {
+		top: 1rem;
+		right: 1rem;
+	}
+
+	@include breakpoint($xs-bp) {
+		content: 'X';
+		font-size: 1.6rem;
+		font-weight: normal;
+		padding: .2rem .5rem;
+		// border-width: .3rem;
 	}
 }
 

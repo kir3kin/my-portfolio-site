@@ -13,12 +13,13 @@ export const Projects = sequelize.define('projects', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	title: { type: DataTypes.STRING },
 	summary: { type: DataTypes.STRING },
+	description: { type: DataTypes.TEXT },
 	image: { type: DataTypes.STRING },
 	link: { type: DataTypes.STRING },
 	github: { type: DataTypes.STRING },
 	template: { type: DataTypes.STRING },
 	inWorking: { type: DataTypes.BOOLEAN },
-	isHide: { type: DataTypes.BOOLEAN }
+	isHiden: { type: DataTypes.BOOLEAN }
 })
 
 export const Info = sequelize.define('project_infos', {
@@ -60,7 +61,8 @@ export const ProjectAuthor = sequelize.define('project_authors', {
 
 export const Technologies = sequelize.define('technologies', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-	title: { type: DataTypes.STRING }
+	title: { type: DataTypes.STRING },
+	isHiden: { type: DataTypes.BOOLEAN }
 }, {
 	timestamps: false
 })

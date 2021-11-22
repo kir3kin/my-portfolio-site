@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LoadingStatus } from '../../interfaces/loading.interface'
-import { Technology } from '../../interfaces/technology.interface';
+import { ChosensType, Technology } from '../../interfaces/technology.interface';
 import { ProjectsAPI } from '../API/projectsAPI';
 import { RootState } from '../store'
-
 
 interface iTechnologyListState {
   technologies: Technology[],
   status: LoadingStatus,
-  chosens: string[]
+  chosens: ChosensType
 }
 
 const initialState: iTechnologyListState = {
@@ -26,12 +25,16 @@ export const technologiesSlice = createSlice({
   name: 'projectList',
   initialState,
   reducers: {
+    setDefaultChosen: (state, action: PayloadAction<string[]>) => {
+      state.chosens = action.payload
+    },
     toggleTech: (state, action: PayloadAction<string>) => {
       const temp = state.chosens.findIndex(chosen => chosen === action.payload)
 
-      if (temp >= 0) {
+      if (temp >= 0)
         state.chosens = state.chosens.filter(chosen => chosen !== action.payload)
-      } else state.chosens.push(action.payload)
+      else
+        state.chosens.push(action.payload)
     }
   },
   extraReducers: (builder) => {
@@ -49,11 +52,20 @@ export const technologiesSlice = createSlice({
   },
 })
 
-export const { toggleTech } = technologiesSlice.actions
+export const { toggleTech, setDefaultChosen } = technologiesSlice.actions
+
+// select only visible techs
+export const selectTechnologyList = (state: RootState) => ({
+  techs: state.technologyList.technologies
+  .filter(tech => !tech.isHiden)// get only visible techs
+  .sort((tech1, tech2) => {// sort by Tech Type
+    return Number(tech1.techType.id) - Number(tech2.techType.id)
+  }),
+  status: state.technologyList.status
+})
+
+// select all techs
+export const selectFullTechnologyList = (state: RootState) => state.technologyList.technologies
 export const selectChosen = (state: RootState) => state.technologyList.chosens
-
-
-export const selectTechnologyList = (state: RootState) => state.technologyList.technologies
-export const selectTechnologyListStatus = (state: RootState) => state.technologyList.status
 
 export default technologiesSlice.reducer

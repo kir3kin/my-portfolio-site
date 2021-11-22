@@ -1,7 +1,7 @@
 import React from 'react'
 // import { Navbar } from './components/Navbar'
 
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './assets/scss/common.scss'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { Page404 } from './pages/Page404'

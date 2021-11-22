@@ -9,5 +9,5 @@ export const kir3kinRouter = graphqlHTTP({
 		typeDefs,
 		resolvers
 	}),
-	// graphiql: true
+	graphiql: true
 })

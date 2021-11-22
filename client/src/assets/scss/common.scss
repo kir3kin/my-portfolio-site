@@ -1,18 +1,24 @@
+// Fundamental settings
 @import '~reset-scss';
 @import './utils/vars';
 @import './utils/mixins';
 @import './utils/fonts';
 
+// !!! respective media queries are inside of each file !!! \\
+// General settings
 @import './main';
 
 // Pages
-@import './pages/ProjectsPage';
 @import './pages/ProjectPage';
+@import './pages/ProjectsPage';
+@import './pages/Page404';
 // Components
 @import './components/sidebar';
-@import './components/projects';
-@import './components/loader';
+@import './components/projectList';
+@import './components/techList';
+@import './components/modalImage';
 // Blocks
-@import './blocks/techInputs';
+@import './blocks/loader';
 @import './blocks/comeBack';
-
+@import './blocks/loadingError';
+@import './blocks/componentNotfound';

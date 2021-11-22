@@ -1,0 +1,29 @@
+.tech {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	flex-flow: wrap;
+	padding-top: 1rem;
+	overflow: hidden;
+
+	&__input {
+		display: none;
+	}
+
+	&__label {
+		@include tech-sidebar-tags();
+	}
+
+	@include breakpoint($md-bp) {
+		justify-content: center;
+
+		&__label {
+			margin: .6rem;
+			font-size: $techs-sm-size;
+		}
+	}
+
+	@include breakpoint($sm-bp) {
+		display: none;
+	}
+}

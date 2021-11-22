@@ -1,0 +1,81 @@
+@import '../utils/vars';
+@import '../utils/mixins';
+
+.simple-burger {
+	margin: 0;
+	position: absolute;
+	display: none;
+	background-color: transparent;
+	padding: 4px;
+	border: 3px solid $text-color;
+	border-radius: .5rem;
+
+	top: 0;
+	right: 0;
+	z-index: 1;
+
+	input {
+		display: none;
+	}
+
+	label {
+		width: 5rem;
+		height: 32px;
+		display: block;
+		overflow: hidden;
+		background-color: transparent;
+		position: relative;
+		border-top: 7px solid $text-color;
+		border-bottom: 7px solid $text-color;
+
+		&::after {
+			display: block;
+			position: absolute;
+			content: '';
+			height: 0;
+			width: 100%;
+			border-bottom: 7px solid $text-color;
+			z-index: 4;
+			left: 0;
+			top: 5px;
+		}
+		
+	}
+
+	&--open {
+		background: $text-color;
+		
+		label {
+			border-color: $theme-color;
+			background-color: $text-color;
+			
+			&::after {
+				border-color: $theme-color;
+			}
+		}
+	}
+
+	@include breakpoint($sm-bp) {
+		display: block;
+
+		&--open ~ .tech {
+			display: flex;
+		}
+	}
+
+	@include breakpoint($xs-bp) {
+		top: 2px;
+
+		label {
+			width: 3rem;
+			height: 24px;
+			border-top-width: 5px;
+			border-bottom-width: 5px;
+
+			&::after {
+				border-width: 5px;
+				top: 5px;
+			}
+		}
+	}
+}

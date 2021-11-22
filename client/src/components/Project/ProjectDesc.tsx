@@ -1,8 +1,8 @@
-import React from "react"
-import { iProject } from "../interfaces/project.interface"
-import { DEFAULT_PROJECT_IMG, PROJECT_IMAGE_EXTENTION, PROJECT_IMAGE_FOLDER } from "../utils/default"
-import { getNormalName } from "../utils/technology"
-import { ComeBack } from "./ComeBack"
+import React, { useState } from "react"
+import { iProject } from "../../interfaces/project.interface"
+import { DEFAULT_PROJECT_IMG, PROJECT_IMAGE_EXTENTION, PROJECT_IMAGE_FOLDER } from "../../utils/default"
+import { getNormalName } from "../../utils/functions"
+import { ModalImage } from "./ModalImage"
 import { ProjectInfo } from "./ProjectInfo"
 
 interface iProjectDesc {
@@ -10,18 +10,32 @@ interface iProjectDesc {
 }
 
 export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
-
-	// console.log('project:', project)
-	const projectImage = project.image ? require('../assets/images/projects/'+ project.image + PROJECT_IMAGE_EXTENTION).default : DEFAULT_PROJECT_IMG
-	// const projectImage = project.image ? require(`../assets/images/projects/${project.image}.jpg`).default : DEFAULT_PROJECT_IMG
+	const [modal, setModal] = useState<boolean>(false)
+	type thumbType = (image: string, defaultImage?: string) => string
 	
+	const getImageThumb: thumbType = (image, defaultImage = DEFAULT_PROJECT_IMG) => {
+		let temp: string
+		if (!image) return defaultImage
+		try {
+			temp = require(`../../assets/images/projects/${image}`).default
+		} catch(e) {
+			return defaultImage
+		}
+		return temp
+	}
+
+	const projectImage = getImageThumb(project.image)
+	const toggleModal = () => { setModal(!modal) }
+
 	return (
-		
 		<main className="project">
-			<ComeBack />
 			<div className="project__about">
 				<div className="project__img">
-					<img src={projectImage} alt={project.title.toLowerCase()} />
+					<img
+						src={projectImage}
+						alt={project.title.toLowerCase()}
+						onClick={toggleModal}
+					/>
 				</div>
 				<div className="project__desc description">
 					<h1
@@ -34,6 +48,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 						<div>
 							<a
 								href={project.github}
+								target="_blank"
 								className="description__link"
 								title="Project's Repository"
 							>
@@ -41,6 +56,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 							</a>
 							<a
 								href={project.link}
+								target="_blank"
 								className="description__link"
 								title="Project's Website"
 							>
@@ -48,6 +64,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 							</a>
 							{project.template && (
 								<a
+									target="_blank"
 									href={project.template}
 									title="Project's Template"
 									className="description__link"
@@ -62,7 +79,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 						className="description__summary"
 						title="Project's Description"
 					>
-						<p>{project.summary}</p>
+						<p>{project.description ? project.description : project.summary}</p>
 					</div>
 					
 					{project.technologies.length >= 1 && (
@@ -89,6 +106,12 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 						/>
 					})}
 				</ul>
+			)}
+			{project.image && modal && (
+				<ModalImage
+					image={projectImage}
+					toggle={toggleModal}
+				/>
 			)}
 		</main>
 	)

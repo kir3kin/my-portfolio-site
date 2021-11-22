@@ -5,7 +5,6 @@ import { Technology } from '../../interfaces/technology.interface';
 import { ProjectsAPI } from '../API/projectsAPI';
 import { RootState } from '../store'
 
-
 interface iProjectListState {
   projects: ShortProjectData[],
   technologies: Technology[],
@@ -18,6 +17,7 @@ const initialState: iProjectListState = {
   status: "empty"
 }
 
+// async function
 export const getProjects = createAsyncThunk(
   'projectList/fetchProjects',
   async () => await ProjectsAPI.fetchProjects()
@@ -39,28 +39,40 @@ export const projectsSlice = createSlice({
       .addCase(getProjects.rejected, (state) => {
         state.status = 'failed'
       })
-  },
+  }
 })
 
+// actions
 export const {} = projectsSlice.actions
+
+// selectors
+type techsCheckType = (
+  project: ShortProjectData,
+  techs: string[]
+) => boolean
+
+const projectHaveAllTechs: techsCheckType = (project, techs) => {
+  return techs.every(tech => {// does project have all techs?
+    return project.technologies.find(techItem => {
+      return techItem.id === tech
+    })
+  })
+}
 
 export const makeSelectProjectsByTechs = () => {
   return createSelector(
-    (state: RootState) => state.technologyList.chosens,
-    (state: RootState) => state.projectList.projects,
-    (chosens, projectList) => {
-      return projectList.filter(project => {
-        return chosens.every(chosen => {
-          return project.technologies.find(techItem => {
-            return techItem.id === chosen
-          })
-        })
-      })
-    }
+    (state: RootState) => state.technologyList.chosens,// chosen technologies
+    (state: RootState) => state.projectList.projects,// all projects
+    (state: RootState) => state.projectList.status,// projects load status
+    (chosens, projectList, projectStatus) => ({
+      projects: projectList.filter(project => {// 
+        return project.isHiden ?
+          false : // if project hiden
+          projectHaveAllTechs(project, chosens)
+      }),
+      status: projectStatus
+    })
   )
 }
-
-export const selectProjectList = (state: RootState) => state.projectList.projects
-export const selectProjectListStatus = (state: RootState) => state.projectList.status
 
 export default projectsSlice.reducer

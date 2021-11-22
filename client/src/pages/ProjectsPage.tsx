@@ -1,47 +1,39 @@
-import React, { useCallback, useEffect, useMemo } from "react"
-import { ProjectList } from "../components/ProjectList"
+import React, { useEffect, useMemo } from "react"
+import { ProjectList } from "../components/Project/ProjectList"
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { getProjects, selectProjectList, selectProjectListStatus, makeSelectProjectsByTechs } from "../redux/reducers/projectsSlice"
-import { getTechnologies, selectChosen, selectTechnologyList, selectTechnologyListStatus } from "../redux/reducers/technologiesSlice"
-import { TechInputs } from "../components/TechInputs"
+import { getProjects, makeSelectProjectsByTechs } from "../redux/reducers/projectsSlice"
+import { getTechnologies, selectTechnologyList, setDefaultChosen } from "../redux/reducers/technologiesSlice"
+import { TechList } from "../components/Tech/TechList"
+import LocalStorageAPI from "../services/localStorage.api"
 
 export const ProjectsPage: React.FC = () => {
 	const dispatch = useAppDispatch()
+
 	useEffect(() => {
-			dispatch(getProjects())
-			dispatch(getTechnologies())
+		const localChosens = LocalStorageAPI.getLocalStorageData('chosens')
+		if (localChosens.length > 0) dispatch(setDefaultChosen(localChosens))
+
+		dispatch(getProjects())
+		dispatch(getTechnologies())
 	}, [dispatch])
 
-	// const some = useAppSelector(makeSelectProjectsByTechs)
 	const selectProjectsByTechs = useMemo(makeSelectProjectsByTechs, [])
+	const { techs, status: tecsStatus } = useAppSelector(selectTechnologyList)
+	const { projects, status: projectsStatus } = useAppSelector(selectProjectsByTechs)
 
-	const commonStore = {
-		
-		projectList: useAppSelector(selectProjectsByTechs),
-		technologyList: useAppSelector(selectTechnologyList),
-		projectsStatus: useAppSelector(selectProjectListStatus),
-		technologiesStatus: useAppSelector(selectTechnologyListStatus)
-	}
-	
 	return (
 		<div className="wrapper">
 			<div className="container">
 				<aside className="sidebar">
-					<TechInputs
-						techs={commonStore.technologyList}
-						status={commonStore.technologiesStatus}
+					<TechList
+						techs={techs}
+						status={tecsStatus}
 					/>
 				</aside>
-				<main className="projects">
-					<h1 className="projects__header header--stylish">Projects</h1>
-
-					{(commonStore.projectList.length >= 1) ? (
-						<ProjectList
-							projects={commonStore.projectList}
-							status={commonStore.projectsStatus}
-						/>
-					) : (<p className="projects__notfoud">No projects are found!</p>)}
-				</main>
+				<ProjectList
+					projects={projects}
+					status={projectsStatus}
+				/>
 			</div>
 		</div>
 	)

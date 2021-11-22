@@ -40,7 +40,9 @@ export const projectSlice = createSlice({
 
 export const {} = projectSlice.actions
 
-export const selectProjectData = (state: RootState) => state.project.data
-export const selectProjectStatus = (state: RootState) => state.project.status
+export const selectProjectInfo = (state: RootState) => ({
+  project: state.project.data?.isHiden ? null : state.project.data,
+  status: state.project.status
+})
 
 export default projectSlice.reducer

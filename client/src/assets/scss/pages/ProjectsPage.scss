@@ -1,7 +1,23 @@
 .projects {
 	width: 75%;
+
+	@include breakpoint($lg-bp) {
+		width: 70%;
+	}
+
+	@include breakpoint($md-bp) {
+		width: 100%;
+	}
 }
 
 .sidebar {
 	width: 25%;
+
+	@include breakpoint($lg-bp) {
+		width: 30%;
+	}
+
+	@include breakpoint($md-bp) {
+		width: 100%;
+	}
 }

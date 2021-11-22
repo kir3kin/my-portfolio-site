@@ -1,0 +1,17 @@
+.error {
+	text-align: center;
+	padding: 1rem;
+	color: $error-color;
+	display: flex;
+	flex-flow: column;
+
+	&__title {
+		@include text-hide();
+		font-size: 1.8rem;
+		font-weight: bold;
+	}
+
+	&__message {
+		font-size: 1.6rem;
+	}
+}

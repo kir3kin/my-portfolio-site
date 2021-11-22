@@ -6,12 +6,13 @@ export interface ShortProjectData {
 	title: string
 	summary: string
 	image?: string
-	inWorking: Boolean
-	isHide: Boolean
+	inWorking: boolean
+	isHiden: boolean
 	technologies?: Technology[]
 }
 
 export interface iProject extends ShortProjectData {
+	description?: string
 	link: string
 	github: string
 	template?: string

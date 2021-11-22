@@ -1,0 +1,32 @@
+
+.page-404 {
+	padding: 7rem 0 8rem;
+	text-align: center;
+
+	&__title {
+		font-size: $e404-title-lg-size;
+		text-transform: capitalize;
+	}
+	
+	&__subtitle {
+		font-size: $e404-subtitle-lg-size;
+		color: $error-color;
+		text-transform: uppercase;
+		display: inline-block;
+		padding: 0.5rem 2rem;
+		border: .5rem solid $error-color;
+		margin-top: 2rem;
+	}
+
+	@include breakpoint($xs-bp) {
+		padding: 3rem 0 3.5rem;
+
+		&__title {
+			font-size: $e404-title-xs-size;
+		}
+		
+		&__subtitle {
+			font-size: $e404-subtitle-xs-size;
+		}
+	}
+}

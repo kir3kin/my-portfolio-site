@@ -1,8 +1,10 @@
-import React, { useState } from "react"
-import { Technology } from "../interfaces/technology.interface"
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { selectChosen, toggleTech } from "../redux/reducers/technologiesSlice"
-import { getNormalName } from "../utils/technology"
+import React from "react"
+import { Technology } from "../../interfaces/technology.interface"
+import { useAppDispatch } from "../../redux/hooks"
+import { toggleTech } from "../../redux/reducers/technologiesSlice"
+import LocalStorageAPI from "../../services/localStorage.api"
+import { storageName } from "../../utils/default"
+import { getNormalName } from "../../utils/functions"
 
 interface iTechItem {
 	item: Technology,
@@ -11,13 +13,16 @@ interface iTechItem {
 
 export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 	const dispatch = useAppDispatch()
-	// const chosens = useAppSelector(selectChosen)
 
 		// console.log('hi') 12  MEMOrize it
-	const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		dispatch(toggleTech(event.target.value))
+
+	const changeHandler = (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
+		const id = event.target.value
+		// LocalStorageAPI.toggleLocalStorageData('chosens', id)
+		dispatch(toggleTech(id))
 	}
-	// console.log('chosens:', chosens)
 	
 	const chosen: boolean = (chosens.length >= 1) && (
 		!!(chosens.find(chosenId => chosenId === item.id))

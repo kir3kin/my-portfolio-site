@@ -5,7 +5,7 @@ export const PROJECTS_QUERY: string = `query {
 		summary
 		image
 		inWorking
-		isHide
+		isHiden
 		technologies {
 			id
 			title
@@ -31,12 +31,13 @@ export const PROJECT_QUERY: string = `query Project($id: ID!) {
 		id
 		title
 		summary
+		description
 		image
 		link
 		github
 		template
 		inWorking
-		isHide
+		isHiden
 		createdAt
 		updatedAt
 		infos {
@@ -55,6 +56,7 @@ export const PROJECT_QUERY: string = `query Project($id: ID!) {
 		technologies {
 			id
 			title
+			isHiden
 			techType {
 				id
 				title
@@ -80,6 +82,7 @@ export const TECHNOLOGIES_QUERY: string =`query {
 	technologies {
 		id
 		title
+		isHiden
 		techType {
 			id
 			title

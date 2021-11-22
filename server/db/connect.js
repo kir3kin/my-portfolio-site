@@ -8,7 +8,9 @@ export const sequelize = new Sequelize(
 	{
 		dialect: 'mysql',
 		host: config.get('DB_HOST'),
-		port: config.get('DB_PORT')
+		port: config.get('DB_PORT'),
+		logging: false
+	
 	}
 )
 
