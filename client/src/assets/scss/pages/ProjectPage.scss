@@ -166,11 +166,14 @@
 	justify-content: center;
 
 	&__item {
-		width: 30%;
+		width: 45%;
 		text-align: center;
 		padding: 2rem 1.5rem;
 		border: .5rem solid $text-color;
 		margin: 1rem;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
 	}
 
 	&__header {
@@ -212,9 +215,6 @@
 		&__item {
 			width: 45%;
 			padding: 1rem;
-			display: flex;
-			flex-flow: column;
-			justify-content: center;
 		}
 	}
 
@@ -239,9 +239,6 @@
 			width: 100%;
 			padding: 1rem;
 			margin: 0;
-			display: flex;
-			flex-flow: column;
-			justify-content: center;
 		}
 
 		&__item:not(:last-child) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { iProject } from "../../interfaces/project.interface"
-import { DEFAULT_PROJECT_IMG, PROJECT_IMAGE_EXTENTION, PROJECT_IMAGE_FOLDER } from "../../utils/default"
+import { DEFAULT_PROJECT_IMG } from "../../utils/default"
 import { getNormalName } from "../../utils/functions"
 import { ModalImage } from "./ModalImage"
 import { ProjectInfo } from "./ProjectInfo"
