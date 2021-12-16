@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { iProject } from '../../interfaces/project.interface'
+
+import { iProject } from '@interfaces/project.interface'
+import { LoadingStatus } from '@interfaces/loading.interface'
+
 import { RootState } from '../store'
-import { LoadingStatus } from '../../interfaces/loading.interface'
 import { ProjectsAPI } from '../API/projectsAPI'
 
 interface iProjectState {

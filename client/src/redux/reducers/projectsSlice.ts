@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit'
-import { ShortProjectData } from '../../interfaces/project.interface';
-import { LoadingStatus } from '../../interfaces/loading.interface'
-import { Technology } from '../../interfaces/technology.interface';
-import { ProjectsAPI } from '../API/projectsAPI';
+
+import { ShortProjectData } from '@interfaces/project.interface'
+import { LoadingStatus } from '@interfaces/loading.interface'
+import { Technology } from '@interfaces/technology.interface'
+
+import { ProjectsAPI } from '../API/projectsAPI'
 import { RootState } from '../store'
 
 interface iProjectListState {

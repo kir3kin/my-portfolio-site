@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo } from "react"
 
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { getProjects, makeSelectProjectsByTechs } from "../redux/reducers/projectsSlice"
-import { getTechnologies, selectTechnologyList, setDefaultChosen } from "../redux/reducers/technologiesSlice"
+import { useAppDispatch, useAppSelector } from "@redux/hooks"
+import { getProjects, makeSelectProjectsByTechs } from "@redux/reducers/projectsSlice"
 
-import { TechList } from "../components/Tech/TechList"
-import { ProjectList } from "../components/Project/ProjectList"
+import { getTechnologies, selectTechnologyList, setDefaultChosen } from "@redux/reducers/technologiesSlice"
 
-import LocalStorageAPI from "../services/localStorage.api"
+import { TechList } from "@components/Tech/TechList"
+import { ProjectList } from "@components/Project/ProjectList"
+
+import LocalStorageAPI from "@services/localStorage.api"
 
 export const ProjectsPage: React.FC = () => {
 	const dispatch = useAppDispatch()

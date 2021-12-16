@@ -1,11 +1,11 @@
 import React from "react"
-import { Technology } from "../../interfaces/technology.interface"
-import { useAppDispatch } from "../../redux/hooks"
-import { toggleTech } from "../../redux/reducers/technologiesSlice"
 
-import LocalStorageAPI from "../../services/localStorage.api"
-import { storageName } from "../../utils/default"
-import { getNormalName } from "../../utils/functions"
+import { useAppDispatch } from "@redux/hooks"
+import { toggleTech } from "@redux/reducers/technologiesSlice"
+
+import { Technology } from "@interfaces/technology.interface"
+
+import { getNormalName } from "@services/normaName"
 
 interface iTechItem {
 	item: Technology,
@@ -18,9 +18,9 @@ export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 		// console.log('hi') 12  MEMOrize it
 
 	const changeHandler = (
-		event: React.ChangeEvent<HTMLInputElement>
+		e: React.ChangeEvent<HTMLInputElement>
 	) => {
-		const id = event.target.value
+		const id = e.target.value
 		dispatch(toggleTech(id))
 	}
 	
@@ -40,7 +40,10 @@ export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 				onTouchStart={(e) => {e.preventDefault()}}
 			/>
 			<label
-				className={`tech__label tech__label--${getNormalName(item.techType.title)}`}
+				className={`
+					tech__label
+					tech__label--${getNormalName(item.techType.title)}
+				`}
 				htmlFor={`tech-${item.id}`}
 			>
 				{item.title}

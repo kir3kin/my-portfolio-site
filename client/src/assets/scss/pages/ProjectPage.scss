@@ -1,3 +1,7 @@
+// Bsic settings
+@import '@scss-utils/vars';
+@import '@scss-utils//mixins';
+
 .project {
 	width: 100%;
 	display: flex;
@@ -104,6 +108,7 @@
 		display: inline-block;
 		margin: 1rem;
 		letter-spacing: 1px;
+		color: $text-color;
 		@include project-page-links-hover($project-page-links);
 	}
 
@@ -196,6 +201,7 @@
 
 	&__links a {
 		font-size: 1.7rem;
+		color: $text-color;
 		@include project-page-links-hover(darkblue);
 	}
 

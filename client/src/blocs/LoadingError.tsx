@@ -1,12 +1,12 @@
 import React from "react"
 
-import { Messages } from "../utils/messages"
+import { Messages } from "@utils/messages"
 
-interface iLoadingError {
+export const LoadingError: React.FC<{
 	name?: string
-}
-
-export const LoadingError: React.FC<iLoadingError> = ({ name }) => (
+}> = ({
+	name
+}) => (
 	<div className="error error__loading">
 		{name && (
 			<p className="error__title">{`${name}`}</p>

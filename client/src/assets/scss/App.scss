@@ -1,31 +1,27 @@
-// Fundamental settings
+// Bsic settings
 @import '~reset-css';
 @import '@scss-utils/vars';
 @import '@scss-utils//mixins';
 @import '@scss-utils/fonts';
 
-// !!! respective media queries are inside of each file !!! \\
 // General settings
 @import './Common';
 
-// Pages@
+// ::: Pages
 @import './pages/ProjectPage';
 @import './pages/ProjectsPage';
 @import './pages/Page404';
-// Components
-@import './components/sidebar';
-@import './components/projectList';
-@import './components/techList';
-@import './components/modalImage';
-// Blocks
-@import './blocks/loader';
-@import './blocks/comeBack';
-@import './blocks/loadingError';
-@import './blocks/componentNotfound';
-@import './blocks/simpleBurger';
+@import './pages/AuthPage';
 
+// ::: Components
+@import './components/Sidebar';
+@import './components/ProjectList';
+@import './components/TechList';
+@import './components/ModalImage';
 
-
-// admin
-
-@import './pages/AuthPage'
+// ::: Blocks
+@import './blocks/Loader';
+@import './blocks/ComeBack';
+@import './blocks/LoadingError';
+@import './blocks/NotFound';
+@import './blocks/SimpleBurger';

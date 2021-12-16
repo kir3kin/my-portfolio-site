@@ -1,8 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+
 import projectsSlice from './reducers/projectsSlice'
 import projectSlice from './reducers/projectSlice'
-import technologiesSlice from './reducers/technologiesSlice';
-import { localStorageMiddleware } from '../services/localStorage.api';
+import technologiesSlice from './reducers/technologiesSlice'
+
+import { localStorageMiddleware } from '@services/localStorage.api'
 
 export const store = configureStore({
   reducer: {

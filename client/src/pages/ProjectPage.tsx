@@ -1,16 +1,16 @@
 import React, { useEffect } from "react"
 import { Navigate, useParams } from "react-router-dom"
 
-import { ComeBack } from "../blocs/ComeBack"
-import { LoadingError } from "../blocs/LoadingError"
-import { Loader } from "../blocs/Loader"
+import { useAppDispatch, useAppSelector } from "@redux/hooks"
+import { getProject, selectProjectInfo } from "@redux/reducers/projectSlice"
 
-import { ProjectDesc } from "../components/Project/ProjectDesc"
+import { ProjectDesc } from "@components/Project/ProjectDesc"
 
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { getProject, selectProjectInfo } from "../redux/reducers/projectSlice"
+import { ComeBack } from "@blocs/ComeBack"
+import { LoadingError } from "@blocs/LoadingError"
+import { Loader } from "@blocs/Loader"
 
-import { HOME_LINK } from "../utils/default"
+import { HOME_LINK } from "@utils/default"
 
 export const ProjectPage: React.FC = () => {
 	const { id: projectId } = useParams<string>()

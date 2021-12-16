@@ -6,9 +6,7 @@ const MinimazierCssPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
 // const CompressionPlugin = require("compression-webpack-plugin");
 
-
 const isProd = process.env.NODE_ENV === 'production'
-
 
 const cssLoaders = extra => {
 	const loaders = [
@@ -28,7 +26,6 @@ const fileLoader = folder => ({
 	}
 })
 
-
 module.exports = {
 	mode: isProd ? 'production' : 'development',
 	context: path.resolve(__dirname, 'src'),
@@ -42,12 +39,19 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.ts', '.tsx', '.scss', '.js'],
+		roots: [path.resolve(__dirname, 'src')],
 		alias: {
-			'@fonts': path.resolve(__dirname, 'src/assets/fonts'),
-			'@scss': path.resolve(__dirname, 'src/assets/scss'),
-			'@scss-media': path.resolve(__dirname, 'src/assets/scss/media'),
-			'@scss-utils': path.resolve(__dirname, 'src/assets/scss/utils'),
-			'@images': path.resolve(__dirname, 'src/assets/images')
+			'@fonts': '/assets/fonts',
+			'@scss': '/assets/scss',
+			'@scss-media': '/assets/scss/media',
+			'@scss-utils': '/assets/scss/utils',
+			'@images': '/assets/images',
+			"@utils": '/utils',
+			"@services": '/services',
+			"@interfaces": '/interfaces',
+			"@blocs": '/blocs',
+			"@components": '/components',
+			"@redux": '/redux',
 		}
 	},
 	devtool: isProd ? false : 'inline-source-map',

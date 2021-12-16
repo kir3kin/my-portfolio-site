@@ -1,10 +1,8 @@
 import React from "react"
 
-interface iNotfound {
+export const NotFound: React.FC<{
 	name?: string
-}
-
-export const ComponentNotfound: React.FC<iNotfound> = ({
+}> = ({
 	name = 'items'
 }) =>  (
 	<div className="notfound">

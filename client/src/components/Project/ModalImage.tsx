@@ -1,11 +1,9 @@
 import React from "react"
 
-interface iModalImage  {
+export const ModalImage: React.FC<{
 	image: string,
 	toggle: () => void
-}
-
-export const ModalImage: React.FC<iModalImage> = ({
+}> = ({
 	image, toggle
 }) => (
 	<div className="simple-modal">

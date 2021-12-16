@@ -1,30 +1,26 @@
 import React, { useState } from "react"
-import { iProject } from "../../interfaces/project.interface"
-import { DEFAULT_PROJECT_IMG } from "../../utils/default"
-import { getNormalName } from "../../utils/functions"
+
 import { ModalImage } from "./ModalImage"
 import { ProjectInfo } from "./ProjectInfo"
 
-interface iProjectDesc {
+import { iProject } from "@interfaces/project.interface"
+
+import { getProjectImage } from "@services/projectImages"
+import { getNormalName } from "@services/normaName"
+
+import { DEFAULT_IMAGES } from "@utils/default"
+
+export const ProjectDesc: React.FC<{
 	project: iProject
-}
-
-export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
+}> = ({
+	project
+}) => {
 	const [modal, setModal] = useState<boolean>(false)
-	type thumbType = (image: string | undefined, defaultImage?: string) => string
 	
-	const getImageThumb: thumbType = (image, defaultImage = DEFAULT_PROJECT_IMG) => {
-		let temp: string
-		if (!image) return defaultImage
-		try {
-			temp = require(`../../assets/images/projects/${image}`).default
-		} catch(e) {
-			return defaultImage
-		}
-		return temp
-	}
+	const projectImage = getProjectImage(project.image, DEFAULT_IMAGES.project, false)
 
-	const projectImage = getImageThumb(project.image)
+	console.log('DEFAULT_IMAGES:', DEFAULT_IMAGES)
+
 	const toggleModal = () => { setModal(!modal) }
 
 	return (
@@ -74,7 +70,6 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 							)}
 						</div>
 					</div>
-
 					<div
 						className="description__summary"
 						title="Project's Description"
@@ -84,14 +79,17 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 					
 					{project.technologies && project.technologies.length >= 1 && (
 						<ul className="description__techs techs-list">
-							{project.technologies.map(tech => {
-								return <li
+							{project.technologies.map(tech => (
+								<li
 									key={tech.id}
-									className={`techs-list__item techs-list__item--${getNormalName(tech.techType.title)}`}
+									className={`
+										techs-list__item
+										techs-list__item--${getNormalName(tech.techType.title)}
+									`}
 								>
 									{tech.title}
 								</li>
-							})}
+							))}
 						</ul>
 					)}
 
@@ -99,12 +97,12 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 			</div>
 			{project.infos && project.infos.length >= 1 && (
 				<ul className="project__info info-list">
-					{project.infos.map(info => {
-						return <ProjectInfo
+					{project.infos.map(info => (
+						<ProjectInfo
 							key={info.id}
 							info={info}
 						/>
-					})}
+				))}
 				</ul>
 			)}
 			{project.image && modal && (

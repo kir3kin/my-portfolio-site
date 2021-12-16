@@ -1,3 +1,7 @@
+// Bsic settings
+@import '@scss-utils/vars';
+@import '@scss-utils//mixins';
+
 .simple-modal {
 	position: fixed;
 	outline: 1px solid #000000;

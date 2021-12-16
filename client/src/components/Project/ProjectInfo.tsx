@@ -1,5 +1,6 @@
 import React from "react"
-import { Info } from "../../interfaces/project.interface"
+
+import { Info } from "@interfaces/project.interface"
 
 interface iProjectInfo {
 	info: Info

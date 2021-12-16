@@ -2,10 +2,11 @@ import React, { useState } from "react"
 
 export const SimpleBurger: React.FC = () => {
 	const [burger, setBurger] = useState<boolean>(false)
+
 	const burgerClasses = ['simple-burger']
 	const openBurger = 'simple-burger--open'
 
-	const burgerHandler = () => {
+	const burgerToggle = () => {
 		setBurger(!burger)
 	}
 
@@ -16,7 +17,7 @@ export const SimpleBurger: React.FC = () => {
 			<input
 				type="checkbox"
 				id="tech-burger"
-				onChange={burgerHandler}
+				onChange={burgerToggle}
 			/>
 			<label htmlFor="tech-burger"></label>
 		</div>

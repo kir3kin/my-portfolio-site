@@ -1,5 +1,6 @@
 import React from "react"
-import { ComeBack } from "../blocs/ComeBack"
+
+import { ComeBack } from "@blocs/ComeBack"
 
 export const Page404: React.FC = () => {
 

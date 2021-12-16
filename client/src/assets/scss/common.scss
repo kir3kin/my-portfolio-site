@@ -14,7 +14,6 @@ body {
 	box-sizing: border-box;
 }
 
-
 .wrapper {
 	width: 100%;
 	min-height: 100vh;
@@ -24,7 +23,6 @@ body {
 	align-items: center;
 	background-image: url('@images/bg/brick-wall-dark.png');
 	background-color: #1e7ca8;
-	// background-image: url('@images/bg/main-page-bg.png');
 	background-repeat: repeat;
 
 	@include breakpoint($md-bp) {

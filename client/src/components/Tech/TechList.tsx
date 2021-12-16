@@ -1,14 +1,18 @@
 import React from "react"
-import { LoadingStatus } from "../../interfaces/loading.interface"
-import { Technology } from "../../interfaces/technology.interface"
-import { useAppSelector } from "../../redux/hooks"
-import { selectChosen } from "../../redux/reducers/technologiesSlice"
-import { Loader } from "../../blocs/Loader"
+
+import { useAppSelector } from "@redux/hooks"
+import { selectChosen } from "@redux/reducers/technologiesSlice"
+
+import { LoadingStatus } from "@interfaces/loading.interface"
+import { Technology } from "@interfaces/technology.interface"
+
 import { TechItem } from "./TechItem"
-import { LoadingError } from "../../blocs/LoadingError"
-import { ComponentNotfound } from "../../blocs/ComponentNotfound"
-import { Messages } from "../../utils/messages"
-import { SimpleBurger } from "../../blocs/SimpleBurger"
+import { Loader } from "@blocs/Loader"
+import { LoadingError } from "@blocs/LoadingError"
+import { NotFound } from "@blocs/NotFound"
+import { SimpleBurger } from "@blocs/SimpleBurger"
+
+import { Messages } from "@utils/messages"
 
 interface iTechList {
 	techs: Technology[],
@@ -43,7 +47,7 @@ export const TechList: React.FC<iTechList> = ({
 						))}
 					</form>
 				) : (
-					<ComponentNotfound name="techs" />
+					<NotFound name="techs" />
 				)}
 			</div>
 		)}

@@ -12,7 +12,7 @@
   ],
   "author": "Ihor Akhabanin <i.akhabanin@gmail.com>",
   "private": true,
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack",
     "client:watch": "cross-env NODE_ENV=development webpack --watch",

@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { LoadingStatus } from '../../interfaces/loading.interface'
-import { ChosensType, Technology } from '../../interfaces/technology.interface';
-import { ProjectsAPI } from '../API/projectsAPI';
+
+import { LoadingStatus } from '@interfaces/loading.interface'
+import { ChosensType, Technology } from '@interfaces/technology.interface'
+
+import { ProjectsAPI } from '../API/projectsAPI'
 import { RootState } from '../store'
 
 interface iTechnologyListState {

@@ -22,6 +22,3 @@ export type AxiosParamsType = {
 		[key: string]: string
 	}
 }
-
-export type getLocalDataType = (name: string) => ChosensType
-export type setLocalStorageDataType = ( name: string, data?: any ) => void

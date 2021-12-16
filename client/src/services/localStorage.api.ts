@@ -1,13 +1,10 @@
-import { PayloadAction } from "@reduxjs/toolkit"
 import { Middleware } from "redux"
+import { PayloadAction } from "@reduxjs/toolkit"
 
-import {
-	getLocalDataType,
-	setLocalStorageDataType
-} from "../interfaces/api.interface"
-import { ChosensType } from "../interfaces/technology.interface"
+import { ChosensType } from "@interfaces/technology.interface"
+import { getLocalDataType, setLocalStorageDataType } from "@interfaces/services.interface"
 
-import { storageName } from "../utils/default"
+import { storageName } from "@utils/default"
 
 
 export default class LocalStorageAPI {

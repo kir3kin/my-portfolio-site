@@ -1,11 +1,15 @@
 import React from "react"
-import { LoadingStatus } from "../../interfaces/loading.interface"
-import { ShortProjectData } from "../../interfaces/project.interface"
-import { ComponentNotfound } from "../../blocs/ComponentNotfound"
-import { LoadingError } from "../../blocs/LoadingError"
-import { Loader } from "../../blocs/Loader"
-import { ProjectCard } from "../Project/ProjectCard"
-import { Messages } from "../../utils/messages"
+
+import { LoadingStatus } from "@interfaces/loading.interface"
+import { ShortProjectData } from "@interfaces/project.interface"
+
+import { ProjectCard } from "./ProjectCard"
+
+import { Loader } from "@blocs/Loader"
+import { NotFound } from "@blocs/NotFound"
+import { LoadingError } from "@blocs/LoadingError"
+
+import { Messages } from "@utils/messages"
 
 interface iProjectList {
 	projects: ShortProjectData[],
@@ -36,7 +40,7 @@ export const ProjectList: React.FC<iProjectList> = ({
 						})}
 					</ul>
 				) : (
-					<ComponentNotfound name="projects" />
+					<NotFound name="projects" />
 				)}
 			</>
 		)}

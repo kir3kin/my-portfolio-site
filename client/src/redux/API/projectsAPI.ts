@@ -1,16 +1,17 @@
 import axios from 'axios'
-import { SERVER_LINK } from '../../utils/default'
+import { SERVER_LINK } from '@utils/default'
 import {
 	PROJECTS_QUERY,
 	PROJECT_QUERY,
 	TECHNOLOGIES_QUERY
 } from './queries'
+
 import {
 	AxiosParamsType,
 	iProjectQuery,
 	iProjectsQuery,
 	iTechnologyQuery
-} from '../../interfaces/api.interface';
+} from '@interfaces/api.interface';
 
 const axiosParams: AxiosParamsType = {
 	url: SERVER_LINK,
