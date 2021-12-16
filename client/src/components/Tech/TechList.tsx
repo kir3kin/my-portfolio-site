@@ -3,12 +3,12 @@ import { LoadingStatus } from "../../interfaces/loading.interface"
 import { Technology } from "../../interfaces/technology.interface"
 import { useAppSelector } from "../../redux/hooks"
 import { selectChosen } from "../../redux/reducers/technologiesSlice"
-import { Loader } from "../../blocks/Loader"
+import { Loader } from "../../blocs/Loader"
 import { TechItem } from "./TechItem"
-import { LoadingError } from "../../blocks/LoadingError"
-import { ComponentNotfound } from "../../blocks/ComponentNotfound"
+import { LoadingError } from "../../blocs/LoadingError"
+import { ComponentNotfound } from "../../blocs/ComponentNotfound"
 import { Messages } from "../../utils/messages"
-import { SimpleBurger } from "../../blocks/SimpleBurger"
+import { SimpleBurger } from "../../blocs/SimpleBurger"
 
 interface iTechList {
 	techs: Technology[],

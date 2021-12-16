@@ -53,9 +53,11 @@ type techsCheckType = (
 
 const projectHaveAllTechs: techsCheckType = (project, techs) => {
   return techs.every(tech => {// does project have all techs?
-    return project.technologies.find(techItem => {
-      return techItem.id === tech
-    })
+    if (project.technologies) {
+      return project.technologies.find(techItem => {
+        return techItem.id === tech
+      })
+    } else return false
   })
 }
 

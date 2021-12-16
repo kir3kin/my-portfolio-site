@@ -2,6 +2,7 @@ import React from "react"
 import { Technology } from "../../interfaces/technology.interface"
 import { useAppDispatch } from "../../redux/hooks"
 import { toggleTech } from "../../redux/reducers/technologiesSlice"
+
 import LocalStorageAPI from "../../services/localStorage.api"
 import { storageName } from "../../utils/default"
 import { getNormalName } from "../../utils/functions"

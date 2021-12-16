@@ -1,10 +1,12 @@
 import { PayloadAction } from "@reduxjs/toolkit"
 import { Middleware } from "redux"
+
 import {
 	getLocalDataType,
 	setLocalStorageDataType
 } from "../interfaces/api.interface"
 import { ChosensType } from "../interfaces/technology.interface"
+
 import { storageName } from "../utils/default"
 
 
@@ -21,7 +23,9 @@ export default class LocalStorageAPI {
 	}
 
 	static getLocalStorageData: getLocalDataType = (name) => {
-		const storage = JSON.parse(localStorage.getItem(storageName))
+		const temp = localStorage.getItem(storageName)
+		const storage = temp ? JSON.parse(temp) : ''
+
 		if (!storage || !storage[name]) {
 			LocalStorageAPI.setLocalStorageData(name)
 			return LocalStorageAPI.defaultValue

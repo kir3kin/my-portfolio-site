@@ -1,12 +1,15 @@
 import React, { useEffect } from "react"
-import { Navigate } from "react-router-dom"
-import { useParams } from "react-router-dom"
-import { ComeBack } from "../blocks/ComeBack"
-import { LoadingError } from "../blocks/LoadingError"
-import { Loader } from "../blocks/Loader"
+import { Navigate, useParams } from "react-router-dom"
+
+import { ComeBack } from "../blocs/ComeBack"
+import { LoadingError } from "../blocs/LoadingError"
+import { Loader } from "../blocs/Loader"
+
 import { ProjectDesc } from "../components/Project/ProjectDesc"
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { getProject, selectProjectInfo } from "../redux/reducers/projectSlice"
+
 import { HOME_LINK } from "../utils/default"
 
 export const ProjectPage: React.FC = () => {
@@ -14,7 +17,7 @@ export const ProjectPage: React.FC = () => {
 	const dispatch = useAppDispatch()
 	
 	useEffect(() => {
-		dispatch(getProject(projectId))
+		if (projectId) dispatch(getProject(projectId))
 	}, [dispatch])
 	
 	const { project, status } = useAppSelector(selectProjectInfo)

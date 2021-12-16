@@ -8,7 +8,7 @@ import { Page404 } from './pages/Page404'
 import { ProjectPage } from './pages/ProjectPage'
 import { AdminPage } from './pages/AdminPage'
 
-import './assets/scss/App.scss'
+import '@scss/App'
 
 export const App: React.FC = () => (
 	<BrowserRouter>

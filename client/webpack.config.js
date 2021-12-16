@@ -4,7 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MinimazierCssPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
-const CompressionPlugin = require("compression-webpack-plugin");
+// const CompressionPlugin = require("compression-webpack-plugin");
+
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -40,7 +41,7 @@ module.exports = {
 		clean: true
 	},
 	resolve: {
-		extensions: ['.js', '.scss', '.ts', '.tsx'],
+		extensions: ['.ts', '.tsx', '.scss', '.js'],
 		alias: {
 			'@fonts': path.resolve(__dirname, 'src/assets/fonts'),
 			'@scss': path.resolve(__dirname, 'src/assets/scss'),
@@ -51,6 +52,7 @@ module.exports = {
 	},
 	devtool: isProd ? false : 'inline-source-map',
 	devServer: {
+		historyApiFallback: true,
 		port: 3644,
 		open: true
 	},
@@ -67,7 +69,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			template: './index.html',
+			template: './template/index.html',
 			minify: {
 				collapseWhitespace: isProd
 			}

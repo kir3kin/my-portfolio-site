@@ -1,9 +1,12 @@
 import React, { useEffect, useMemo } from "react"
-import { ProjectList } from "../components/Project/ProjectList"
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { getProjects, makeSelectProjectsByTechs } from "../redux/reducers/projectsSlice"
 import { getTechnologies, selectTechnologyList, setDefaultChosen } from "../redux/reducers/technologiesSlice"
+
 import { TechList } from "../components/Tech/TechList"
+import { ProjectList } from "../components/Project/ProjectList"
+
 import LocalStorageAPI from "../services/localStorage.api"
 
 export const ProjectsPage: React.FC = () => {

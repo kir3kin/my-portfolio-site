@@ -1,8 +1,8 @@
 // Fundamental settings
 @import '~reset-css';
-@import './utils/vars';
-@import './utils/mixins';
-@import './utils/fonts';
+@import '@scss-utils/vars';
+@import '@scss-utils//mixins';
+@import '@scss-utils/fonts';
 
 // !!! respective media queries are inside of each file !!! \\
 // General settings
@@ -22,6 +22,7 @@
 @import './blocks/comeBack';
 @import './blocks/loadingError';
 @import './blocks/componentNotfound';
+@import './blocks/simpleBurger';
 
 
 

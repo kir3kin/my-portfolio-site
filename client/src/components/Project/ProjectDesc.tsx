@@ -11,7 +11,7 @@ interface iProjectDesc {
 
 export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 	const [modal, setModal] = useState<boolean>(false)
-	type thumbType = (image: string, defaultImage?: string) => string
+	type thumbType = (image: string | undefined, defaultImage?: string) => string
 	
 	const getImageThumb: thumbType = (image, defaultImage = DEFAULT_PROJECT_IMG) => {
 		let temp: string
@@ -82,7 +82,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 						<p>{project.description ? project.description : project.summary}</p>
 					</div>
 					
-					{project.technologies.length >= 1 && (
+					{project.technologies && project.technologies.length >= 1 && (
 						<ul className="description__techs techs-list">
 							{project.technologies.map(tech => {
 								return <li
@@ -97,7 +97,7 @@ export const ProjectDesc: React.FC<iProjectDesc> = ({ project }) => {
 
 				</div>
 			</div>
-			{project.infos.length >= 1 && (
+			{project.infos && project.infos.length >= 1 && (
 				<ul className="project__info info-list">
 					{project.infos.map(info => {
 						return <ProjectInfo

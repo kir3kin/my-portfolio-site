@@ -1,19 +1,25 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { ShortProjectData } from "../../interfaces/project.interface"
+
 import { DEFAULT_CARD_THUMB } from "../../utils/default"
 
 interface iProjectCard {
 	project: ShortProjectData
 }
 
-export const ProjectCard: React.FC<iProjectCard> = ({ project }) => {
-	type thumbType = (image: string, defaultImage?: string) => string
+export const ProjectCard: React.FC<iProjectCard> = ({
+	project
+}) => {
+
+	
+	type thumbType = (image: string | undefined, defaultImage?: string) => string
+
 	const getImageThumb: thumbType = (image, defaultImage = DEFAULT_CARD_THUMB) => {
 		let temp: string
 		if (!image) return defaultImage
 		try {
-			temp = require(`../../assets/images/projects/thumbs/thumb.${image}`).default
+			temp = require(`@images/projects/thumbs/thumb.${image}`)
 		} catch(e) {
 			return defaultImage
 		}
@@ -21,6 +27,8 @@ export const ProjectCard: React.FC<iProjectCard> = ({ project }) => {
 	}
 
 	const projectImage = getImageThumb(project.image)
+
+	
 
 	return (
 		<li>

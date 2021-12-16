@@ -1,9 +1,9 @@
 import React from "react"
 import { LoadingStatus } from "../../interfaces/loading.interface"
 import { ShortProjectData } from "../../interfaces/project.interface"
-import { ComponentNotfound } from "../../blocks/ComponentNotfound"
-import { LoadingError } from "../../blocks/LoadingError"
-import { Loader } from "../../blocks/Loader"
+import { ComponentNotfound } from "../../blocs/ComponentNotfound"
+import { LoadingError } from "../../blocs/LoadingError"
+import { Loader } from "../../blocs/Loader"
 import { ProjectCard } from "../Project/ProjectCard"
 import { Messages } from "../../utils/messages"
 
