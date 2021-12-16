@@ -210,8 +210,6 @@
 	}
 
 	@include breakpoint($lg-bp) {
-		justify-content: space-between;
-
 		&__item {
 			width: 45%;
 			padding: 1rem;

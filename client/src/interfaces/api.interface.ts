@@ -1,4 +1,4 @@
-import { Method } from "axios";
+import { Method } from "axios"
 
 import { iProject, ShortProjectData } from "./project.interface"
 import { ChosensType, Technology } from "./technology.interface";

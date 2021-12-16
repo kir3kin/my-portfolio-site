@@ -20,7 +20,6 @@ export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		const id = event.target.value
-		// LocalStorageAPI.toggleLocalStorageData('chosens', id)
 		dispatch(toggleTech(id))
 	}
 	
@@ -37,6 +36,7 @@ export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 				value={`${item.id}`}
 				checked={chosen}
 				onChange={changeHandler}
+				onTouchStart={(e) => {e.preventDefault()}}
 			/>
 			<label
 				className={`tech__label tech__label--${getNormalName(item.techType.title)}`}

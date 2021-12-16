@@ -1,8 +1,10 @@
 {
 	"HTTP_PORT": 5080,
 	"HTTPS_PORT": 5443,
-	"jwtSecret": "kir3kin server",
 
+	"jwtSecret": "kir3kin portfolio adminpanel",
+	"jwtTokenLife": "24h",
+	
 	"DB_NAME": "kir3kin_projects",
 	"DB_USER": "root",
 	"DB_PASSWORD": "",

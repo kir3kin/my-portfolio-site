@@ -1,4 +1,6 @@
-export const typeDefs = `
+import { gql } from "apollo-server-core"
+
+export const typeDefs = gql`
 	scalar Date
 
 	"""
@@ -79,6 +81,13 @@ export const typeDefs = `
 	}
 
 	"""
+	User Auth
+	"""
+	type Auth {
+		token: String
+	}
+
+	"""
 	Main Queries
 	"""
 	type Query {
@@ -86,6 +95,10 @@ export const typeDefs = `
 		project(id: ID!): Project
 		technologies: [Technology!]!
 		techTypes: [techType!]!
+	}
+
+	type Mutation {
+		login(email: String!, password: String): Auth
 	}
 `
 

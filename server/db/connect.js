@@ -10,7 +10,6 @@ export const sequelize = new Sequelize(
 		host: config.get('DB_HOST'),
 		port: config.get('DB_PORT'),
 		logging: false
-	
 	}
 )
 

@@ -1,11 +1,20 @@
 {
   "name": "kir3kin_server",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Portfolio <kir3kin.site>",
-  "keywords": ["graphql", "kir3kin", "portfolio", "React.js", "TypeScript", "Node.js", "Express.js"],
+  "keywords": [
+    "graphql",
+    "kir3kin",
+    "portfolio",
+    "React.js",
+    "TypeScript",
+    "Node.js",
+    "Express.js"
+  ],
   "author": "Ihor Akhabanin <i.akhabanin@gmail.com>",
   "main": "server.js",
   "type": "module",
+  "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production node server.js",
     "server": "nodemon server.js",
@@ -17,13 +26,18 @@
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/schema": "^8.3.1",
+    "apollo-server-express": "^3.5.0",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
+    "express-jwt": "^6.1.0",
     "graphql": "^15.5.1",
+    "graphql-middleware": "^6.1.12",
     "graphql-scalars": "^1.13.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3-rc.0",
     "sequelize": "^6.9.0",
     "uuid": "^8.3.2"

@@ -10,9 +10,41 @@ import {
 	ProjectTechnology,
 	ProjectAuthor
 } from '../db/models/models.js'
-import ApiError from '../error/API.error.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import config from 'config'
+import { ERROR_MESSAGES } from '../utils/const.js'
+
+
+const generateJwt = (id, email, role) => {
+	return jwt.sign(
+		{ id, email, role },
+		config.get('jwtSecret'),
+		{ expiresIn: config.get('jwtTokenLife') }
+	)
+}
 
 export class Kir3kinController {
+	// Mutation: 
+	static login = async(email, password) => {
+		// console.log('context:', context.user)
+
+		const user = await Users.findOne({ where: { email }})
+
+		if (!user) throw new Error(ERROR_MESSAGES.login)
+		
+		const valid = password === user.password
+		// const valid = await bcrypt.compare(password, user.password)
+		
+		if (!valid) throw new Error(ERROR_MESSAGES.login)
+
+		const role = await Roles.findOne({ where: { id: user.roleId } })
+		if (!role) throw new Error(ERROR_MESSAGES.permission)
+
+		return { token: generateJwt(user.id, user.email, role.title) }
+	}
+
+
 	// Query:
 	static getProjects = async () => {
 		// ApiError
@@ -23,7 +55,6 @@ export class Kir3kinController {
 			console.log('e.message:', e.message)
 		}
 	}
-
 
 	static getProject = async (id) => await Projects.findOne({ where: { id } })
 	static getTechnologies = async () => await Technologies.findAll()

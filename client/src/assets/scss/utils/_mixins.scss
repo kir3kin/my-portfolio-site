@@ -12,7 +12,17 @@
 @mixin tech-sidebar-tag($color) {
 	color: $color;
 	border-color: $color;
+	// pointer-events: none;
 
+	&:active {
+		background-color: white;
+	}
+	&:visited {
+		background-color: white;
+	}
+	&:focus {
+		background-color: white;
+	}
 
 	input:checked + &,
 	&:hover {
@@ -23,6 +33,14 @@
 
 	input:checked + & {
 		box-shadow: 0 0 5px 1px $color;
+	}
+
+	@include breakpoint($lg-bp) {
+		&:hover {
+			color: $color;
+			background-color: transparent;
+			font-weight: bold;
+		}
 	}
 }
 
