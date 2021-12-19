@@ -27,7 +27,7 @@ export const TechList: React.FC<iTechList> = ({
 	return (<>
 		{status === 'loading' && <Loader />}
 		{status === 'failed' && <LoadingError name="Technology filter" />}
-		{status === 'loaded' && (
+		{status === 'idle' && (
 			<div>
 				<SimpleBurger />
 				<h2

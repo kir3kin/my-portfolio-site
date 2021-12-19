@@ -5,7 +5,7 @@ export interface Technology {
 	isHiden: boolean
 }
 
-interface techType {
+export interface techType {
 	id: string
 	title: string
 }

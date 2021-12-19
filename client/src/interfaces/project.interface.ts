@@ -1,5 +1,5 @@
 import { Technology } from "./technology.interface";
-import { User } from "./user.interface";
+import { User } from "./auth.interface";
 
 export interface ShortProjectData {
 	id: string

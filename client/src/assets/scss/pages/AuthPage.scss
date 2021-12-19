@@ -1,11 +1,11 @@
 // Bsic settings
 @import '@scss-utils/vars';
-@import '@scss-utils//mixins';
+@import '@scss-utils/mixins';
+@import '@scss-utils/dev_mixins';
 
 .auth {
 	width: 100%;
 	height: 100vh;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -15,5 +15,47 @@
 	&__form {
 		width: 40rem;
 		height: auto;
+		padding: 3rem;
+		background-color: $theme-color;
+		border: .5rem solid $theme-border-color;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+
+		&__alert {
+			font-size: $error-title;
+			color: $error-color;
+			margin-bottom: 2rem;
+		}
+
+		&__item {
+			margin-bottom: 2rem;
+			width: 100%;
+
+			input {
+				width: 100%;
+				padding: 1rem 1.3rem;
+				font-size: $techs-sm-size;
+				line-height: $techs-sm-size;
+			}
+		}
+
+		&__button {
+			padding: 1rem 1.2rem;
+			font-weight: 700;
+			background: $theme-color;
+			border: .3rem solid $text-color;
+			text-transform: uppercase;
+			color: $text-color;
+			cursor: pointer;
+
+			transition: .3s ease-in-out;
+
+			&:hover {
+				background-color: $text-color;
+				color: $theme-color;
+			}
+		}
 	}
 }

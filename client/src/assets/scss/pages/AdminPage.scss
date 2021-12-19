@@ -1,0 +1,66 @@
+.admin-page {
+	.container {
+		display: block;
+	}
+
+	&__header {
+		font-size: $header-lg-size;
+		text-transform: uppercase;
+	}
+
+	&__wrapper {
+		display: flex;
+		flex-flow: row;
+		gap: 2rem;
+	}
+
+	&__item {
+		outline: 1px solid $theme-border-color;
+		padding: 1rem;
+
+
+		&__title {
+			font-size: $item-title-size-lg;
+			text-transform: uppercase;
+		}
+
+		&__list {
+
+			li {
+				a {
+					font-size: $item-list-size-lg;
+					text-decoration: none;
+					color: $text-color;
+
+					&:hover {
+						color: $project-page-links;
+					}
+				}
+
+				&::before {
+					content: '—';
+					margin: 0 .5rem 0 1rem;
+				}
+			}
+		}
+
+		&__button {
+			display: block;
+			color: $text-color;
+			border: 3px solid $text-color;
+			padding: 1rem 1.3rem;
+			margin: 1rem auto 0;
+			text-align: center;
+			text-decoration: none;
+
+			@include text-truncation();
+
+			&:hover {
+				color: $theme-color;
+				background-color: $text-color;
+			}
+		}
+
+	}
+
+}

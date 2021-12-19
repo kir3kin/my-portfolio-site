@@ -84,8 +84,18 @@ export const typeDefs = gql`
 	User Auth
 	"""
 	type Auth {
-		token: String
+		token: String!
 	}
+
+	type ValidToken {
+		isValid: Boolean
+	}
+
+	input LoginInput {
+		email: String!
+		password: String!
+	}
+
 
 	"""
 	Main Queries
@@ -95,10 +105,11 @@ export const typeDefs = gql`
 		project(id: ID!): Project
 		technologies: [Technology!]!
 		techTypes: [techType!]!
-	}
 
-	type Mutation {
-		login(email: String!, password: String): Auth
+		users: [User!]!
+
+		login(input: LoginInput!): Auth
+		checkToken(token: String!): ValidToken!
 	}
 `
 

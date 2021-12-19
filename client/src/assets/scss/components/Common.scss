@@ -12,6 +12,7 @@ body {
 
 * {
 	box-sizing: border-box;
+	word-break: break-word;
 }
 
 .wrapper {
@@ -41,7 +42,7 @@ body {
 	display: flex;
 	justify-content: center;
 	margin: auto;
-
+	overflow: hidden;
 	border: 1.5rem solid $theme-border-color ;
 	padding: 3rem;
 	background-image: url('@images/bg/concrete_wall_2.png');

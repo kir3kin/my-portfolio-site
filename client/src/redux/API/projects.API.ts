@@ -1,20 +1,22 @@
 import axios from 'axios'
-import { SERVER_LINK } from '@utils/default'
+import { SERVER_LINKS } from '@utils/default'
 import {
 	PROJECTS_QUERY,
 	PROJECT_QUERY,
-	TECHNOLOGIES_QUERY
-} from './queries'
+	TECHNOLOGIES_QUERY,
+	TECHTYPES_QUERY
+} from './queries/projects.queris'
 
 import {
 	AxiosParamsType,
 	iProjectQuery,
 	iProjectsQuery,
-	iTechnologyQuery
+	iTechnologyQuery,
+	iTechTypesQuery
 } from '@interfaces/api.interface';
 
 const axiosParams: AxiosParamsType = {
-	url: SERVER_LINK,
+	url: SERVER_LINKS.public,
 	method: 'POST',
 	headers: {
 		'Content-Type': 'application/json',
@@ -48,6 +50,14 @@ export class ProjectsAPI {
 			data: { query: TECHNOLOGIES_QUERY }
 		})
 		return technologies
+	}
+
+	static fetchTechTypes = async () => {
+		const { data: { data: { techs } } }: iTechTypesQuery = await axios({
+			...axiosParams,
+			data: { query: TECHTYPES_QUERY }
+		})
+		return techs
 	}
 
 }

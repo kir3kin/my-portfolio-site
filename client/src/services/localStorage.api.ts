@@ -1,42 +1,32 @@
-import { Middleware } from "redux"
-import { PayloadAction } from "@reduxjs/toolkit"
-
 import { ChosensType } from "@interfaces/technology.interface"
-import { getLocalDataType, setLocalStorageDataType } from "@interfaces/services.interface"
+import { LocaLStorages } from "@interfaces/services.interface"
 
-import { storageName } from "@utils/default"
+import { LOCAL_STORAGE } from "@utils/default"
 
+export default class lsAPI {
+	static defaultValue: ChosensType | string = ''
 
-export default class LocalStorageAPI {
-
-	static defaultValue: ChosensType = []
-
-	static setLocalStorageData: setLocalStorageDataType = (
-		name, data = LocalStorageAPI.defaultValue
-	) => {
-		localStorage.setItem(storageName, JSON.stringify({
-			[name]: data
-		}))
+	static setStorageData = (
+		{ storage, field } : LocaLStorages,
+		data = this.defaultValue
+	): void => {
+		localStorage.setItem(
+			LOCAL_STORAGE[storage],
+			JSON.stringify({
+				[field]: data
+			})
+		)
 	}
 
-	static getLocalStorageData: getLocalDataType = (name) => {
-		const temp = localStorage.getItem(storageName)
-		const storage = temp ? JSON.parse(temp) : ''
+	static getStorageData = (
+		requestedData : LocaLStorages
+	): ChosensType | string => {
+		const temp = localStorage.getItem(LOCAL_STORAGE[requestedData.storage])
+		const storageData = temp ? JSON.parse(temp) : ''
 
-		if (!storage || !storage[name]) {
-			LocalStorageAPI.setLocalStorageData(name)
-			return LocalStorageAPI.defaultValue
-		} else return storage[name]
+		if (!storageData || !storageData[requestedData.field]) {
+			this.setStorageData(requestedData)
+			return this.defaultValue
+		} else return storageData[requestedData.field]
 	}
-}
-
-export const localStorageMiddleware: Middleware = (store) => (next) => (action: PayloadAction) => {
-	const result = next(action)
-
-	if (action.type === 'projectList/toggleTech' ) {
-		const chosens: ChosensType = store.getState().technologyList.chosens
-		LocalStorageAPI.setLocalStorageData('chosens', chosens)
-	}
-	
-  return result
 }

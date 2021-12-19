@@ -3,24 +3,37 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LoadingStatus } from '@interfaces/loading.interface'
 import { ChosensType, Technology } from '@interfaces/technology.interface'
 
-import { ProjectsAPI } from '../API/projectsAPI'
+import { ProjectsAPI } from '../API/projects.API'
 import { RootState } from '../store'
 
-interface iTechnologyListState {
+
+
+const initialState: {
   technologies: Technology[],
   status: LoadingStatus,
-  chosens: ChosensType
-}
-
-const initialState: iTechnologyListState = {
+  chosens: ChosensType,
+  techTypes: {
+    data: [],
+    status: LoadingStatus
+  }
+} = {
   technologies: [],
-  status: "empty",
-  chosens: []
+  status: 'idle',
+  chosens: [],
+  techTypes: {
+    data: [],
+    status: 'idle'
+  }
 }
 
 export const getTechnologies = createAsyncThunk(
   'technologyList/fetchTechnologies',
   async () => await ProjectsAPI.fetchTechnologies()
+)
+
+export const getTechTypes = createAsyncThunk(
+  'technologyList/fetchTechTypes',
+  async () => await ProjectsAPI.fetchTechTypes()
 )
 
 export const technologiesSlice = createSlice({
@@ -45,7 +58,7 @@ export const technologiesSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(getTechnologies.fulfilled, (state, action) => {
-        state.status = 'loaded'
+        state.status = 'idle'
         state.technologies = action.payload
       })
       .addCase(getTechnologies.rejected, (state) => {
@@ -55,6 +68,7 @@ export const technologiesSlice = createSlice({
 })
 
 export const { toggleTech, setDefaultChosen } = technologiesSlice.actions
+
 
 // select only visible techs
 export const selectTechnologyList = (state: RootState) => ({
@@ -69,5 +83,10 @@ export const selectTechnologyList = (state: RootState) => ({
 // select all techs
 export const selectFullTechnologyList = (state: RootState) => state.technologyList.technologies
 export const selectChosen = (state: RootState) => state.technologyList.chosens
+
+export const selectTechsData = (state: RootState) => ({
+  techs: state.technologyList.technologies,
+  status: state.technologyList.status
+})
 
 export default technologiesSlice.reducer

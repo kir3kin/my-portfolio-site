@@ -24,18 +24,12 @@ const generateJwt = (id, email, role) => {
 	)
 }
 
-export class Kir3kinController {
-	// Mutation: 
+export class Kir3kinController { 
 	static login = async(email, password) => {
-		// console.log('context:', context.user)
-
 		const user = await Users.findOne({ where: { email }})
-
 		if (!user) throw new Error(ERROR_MESSAGES.login)
 		
-		const valid = password === user.password
-		// const valid = await bcrypt.compare(password, user.password)
-		
+		const valid = await bcrypt.compare(password, user.password)
 		if (!valid) throw new Error(ERROR_MESSAGES.login)
 
 		const role = await Roles.findOne({ where: { id: user.roleId } })
@@ -44,8 +38,27 @@ export class Kir3kinController {
 		return { token: generateJwt(user.id, user.email, role.title) }
 	}
 
+	static checkToken = async(token) => {
+		let decoded
+		const tokenInfo = {
+			isValid: false
+		}
 
-	// Query:
+		try {
+			decoded = jwt.verify(token, config.get('jwtSecret'))
+		} catch(e) {
+			return tokenInfo
+		}
+
+		if (decoded.role === 'ADMIN') tokenInfo.isValid = true 
+		return { ...tokenInfo }
+	}
+
+	static getUsers = async () => {
+		const users = await Users.findAll()
+		return users
+	}
+
 	static getProjects = async () => {
 		// ApiError
 		try {
@@ -94,7 +107,7 @@ export class Kir3kinController {
 	
 	// Technology:
 	static getType = async (id) => await TechnologyTypes.findOne({ where: { id } })
-	
+
 	// User:
 	static getRole = async (id) => await Roles.findOne({ where: { id } })
 }

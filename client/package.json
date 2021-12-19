@@ -1,14 +1,15 @@
 {
   "name": "kir3kin_client",
-  "version": "3.3.1",
-  "description": "Portfolio <kir3kin.site>",
+  "version": "3.3.2",
+  "description": "Portfolio <https://kir3kin.site>",
   "keywords": [
-    "graphql",
     "kir3kin",
     "portfolio",
     "react.js",
-    "typeScript",
-    "webpack"
+    "redux",
+    "typescript",
+    "webpack",
+    "graphql"
   ],
   "author": "Ihor Akhabanin <i.akhabanin@gmail.com>",
   "private": true,
@@ -59,6 +60,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.6",
     "@types/react-transition-group": "^4.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

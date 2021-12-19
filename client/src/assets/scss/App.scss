@@ -1,17 +1,19 @@
 // Bsic settings
 @import '~reset-css';
 @import '@scss-utils/vars';
-@import '@scss-utils//mixins';
+@import '@scss-utils/mixins';
+@import '@scss-utils/dev_mixins';
 @import '@scss-utils/fonts';
 
 // General settings
-@import './Common';
+@import './components/Common';
 
 // ::: Pages
 @import './pages/ProjectPage';
 @import './pages/ProjectsPage';
 @import './pages/Page404';
 @import './pages/AuthPage';
+@import './pages/AdminPage';
 
 // ::: Components
 @import './components/Sidebar';

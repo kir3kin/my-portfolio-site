@@ -13,8 +13,6 @@ export default async (resolve, root, args, context, info) => {
 	
 		const decoded = jwt.verify(token, config.get('jwtSecret'))
 
-		// console.log('decoded:', decoded)
-
 		if (decoded.role !== 'ADMIN') throw new Error(ERROR_MESSAGES.permission)
 
 		context.user = decoded

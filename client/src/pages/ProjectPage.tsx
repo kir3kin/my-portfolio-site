@@ -23,18 +23,20 @@ export const ProjectPage: React.FC = () => {
 	const { project, status } = useAppSelector(selectProjectInfo)
 
 	return (
-		<div className="wrapper">
-			<div className="container">
-			<ComeBack />
-			{status === 'loading' && <Loader />}
-			{status === 'failed' && <LoadingError name="Project page" />}
-			{status === 'loaded' && (
-				project === null ? (
-					<Navigate to={HOME_LINK} />
-				) : (
-					<ProjectDesc project={project} />
-				)
-			)}
+		<div className="projects-page">
+			<div className="wrapper">
+				<div className="container">
+				<ComeBack />
+				{status === 'loading' && <Loader />}
+				{status === 'failed' && <LoadingError name="Project page" />}
+				{status === 'idle' && (
+					project === null ? (
+						<Navigate to={HOME_LINK} />
+					) : (
+						<ProjectDesc project={project} />
+					)
+				)}
+				</div>
 			</div>
 		</div>
 	)

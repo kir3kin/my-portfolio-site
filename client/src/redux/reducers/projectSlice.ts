@@ -4,16 +4,15 @@ import { iProject } from '@interfaces/project.interface'
 import { LoadingStatus } from '@interfaces/loading.interface'
 
 import { RootState } from '../store'
-import { ProjectsAPI } from '../API/projectsAPI'
+import { ProjectsAPI } from '../API/projects.API'
 
-interface iProjectState {
+
+const initialState: {
   data: iProject | null,
   status: LoadingStatus
-}
-
-const initialState: iProjectState = {
+} = {
   data: null,
-  status: "empty"
+  status: 'idle'
 }
 
 export const getProject = createAsyncThunk(
@@ -31,7 +30,7 @@ export const projectSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(getProject.fulfilled, (state, action) => {
-        state.status = 'loaded'
+        state.status = 'idle'
         state.data = action.payload
       })
       .addCase(getProject.rejected, (state) => {

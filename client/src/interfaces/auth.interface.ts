@@ -13,3 +13,8 @@ interface Role {
 	id: string
 	title: string
 }
+
+export interface iLoginInput {
+	email: string,
+	password: string
+}

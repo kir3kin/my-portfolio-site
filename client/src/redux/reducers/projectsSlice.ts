@@ -4,19 +4,18 @@ import { ShortProjectData } from '@interfaces/project.interface'
 import { LoadingStatus } from '@interfaces/loading.interface'
 import { Technology } from '@interfaces/technology.interface'
 
-import { ProjectsAPI } from '../API/projectsAPI'
+import { ProjectsAPI } from '../API/projects.API'
 import { RootState } from '../store'
 
-interface iProjectListState {
+
+const initialState: {
   projects: ShortProjectData[],
   technologies: Technology[],
   status: LoadingStatus
-}
-
-const initialState: iProjectListState = {
+} = {
   projects: [],
   technologies: [],
-  status: "empty"
+  status: 'idle'
 }
 
 // async function
@@ -35,7 +34,7 @@ export const projectsSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(getProjects.fulfilled, (state, action) => {
-        state.status = 'loaded'
+        state.status = 'idle'
         state.projects = action.payload
       })
       .addCase(getProjects.rejected, (state) => {
@@ -78,5 +77,10 @@ export const makeSelectProjectsByTechs = () => {
     })
   )
 }
+
+export const selectProjectsData = (state: RootState) => ({
+  projects: state.projectList.projects,
+  status: state.projectList.status
+})
 
 export default projectsSlice.reducer

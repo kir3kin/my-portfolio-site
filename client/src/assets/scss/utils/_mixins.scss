@@ -1,3 +1,18 @@
+@mixin text-truncation() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin multiline-text-truncation($line-number) {
+	display: -webkit-box;
+	-webkit-line-clamp: $line-number;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: normal;
+}
+
 // ============== techs tags [START] ============== \\
 @mixin tech-basic() {
 	border-width: 2.5px;

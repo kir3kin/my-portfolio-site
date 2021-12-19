@@ -28,6 +28,10 @@ $project-img-h-md: auto;
 
 
 /* === Font sizes === */
+$error-title: 2rem;
+
+
+
 $header-lg-size: 4rem;
 $header-md-size: 3.4rem;
 $header-sm-size: 3rem;
@@ -83,3 +87,9 @@ $tech-tags-colors: (
 	'api': #3D46C6,
 	'query-language': #DE33A6,
 );
+
+
+// ***** ADMIN PANEL **** \\
+$header-size-lg: 4rem;
+$item-title-size-lg: 2.5rem;
+$item-list-size-lg: 2rem;

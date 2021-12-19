@@ -89,3 +89,10 @@ export const TECHNOLOGIES_QUERY: string =`query {
 		}
 	}
 }`
+
+export const TECHTYPES_QUERY: string =`query {
+	techTypes {
+		id
+		title
+	}
+}`

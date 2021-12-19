@@ -22,7 +22,7 @@ export const ProjectList: React.FC<iProjectList> = ({
 	<main className="projects">
 		{status === 'loading' && <Loader />}
 		{status === 'failed' && <LoadingError name="Project list" />}
-		{status === 'loaded' && (
+		{status === 'idle' && (
 			<>
 				<h1
 					className="projects__header header--stylish"

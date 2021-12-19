@@ -7,7 +7,14 @@ export const resolvers = {
 		projects: async () => await Kir3kinController.getProjects(),
 		project: async (_, { id }) => await Kir3kinController.getProject(id),
 		technologies: async () => await Kir3kinController.getTechnologies(),
-		techTypes: async () => await Kir3kinController.getTechTypes()
+		techTypes: async () => await Kir3kinController.getTechTypes(),
+		users: async() => await Kir3kinController.getUsers(),
+		techTypes: async() => await Kir3kinController.getTechTypes(),
+		login: async(_, { input }) => {
+			const { email, password } = input
+			return await Kir3kinController.login(email, password)
+		},
+		checkToken: async(_, { token }) => await Kir3kinController.checkToken(token)
 	},
 	Project: {
 		infos: async (project) => {
@@ -27,8 +34,5 @@ export const resolvers = {
 	},
 	User: {
 		role: async(user) => await Kir3kinController.getRole(user.roleId)
-	},
-	Mutation: {
-		login: async(_, { email, password }) => await Kir3kinController.login(email, password)
 	}
 }
