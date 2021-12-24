@@ -39,3 +39,6 @@ interface DescChild {
 	id: string
 	text: string
 }
+
+
+export type EditListType = 'project' | 'user' | 'technology' | 'techType'

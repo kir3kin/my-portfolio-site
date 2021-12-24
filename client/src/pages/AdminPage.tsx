@@ -12,6 +12,7 @@ import { Loader } from "@blocs/Loader"
 
 import { AuthPage } from "./AuthPage"
 
+
 export const AdminPage: React.FC = () => {
 	const dispatch = useAppDispatch()
 	const { isAuth, status } = useAppSelector(selectUserInfo)

@@ -20,8 +20,8 @@ export const localStorageMiddleware: Middleware = (store) => (next) => (action: 
 		)
 	}
 
-	if (action.type === 'user/login/fulfilled') {
-		const token: string = store.getState().user.token
+	if (action.type === 'auth/userLogin/fulfilled') {
+		const token: string = store.getState().auth.token
 		lsAPI.setStorageData(
 			{
 				storage: StorageType.USER,

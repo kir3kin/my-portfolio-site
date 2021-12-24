@@ -10,14 +10,23 @@ import { ProjectsAPI } from '../API/projects.API'
 const initialState: {
   data: iProject | null,
   status: LoadingStatus
+  error: string | undefined
 } = {
   data: null,
-  status: 'idle'
+  status: 'idle',
+  error: undefined
 }
 
 export const getProject = createAsyncThunk(
   'project/fetchProjectById',
   async (id: string) => await ProjectsAPI.fetchProject(id)
+)
+
+export const updateProjectData = createAsyncThunk(
+  'project/updateData',
+  async (id: string, data: any) => {
+    await ProjectsAPI.updateProjectData(id, data)
+  }
 )
 
 export const projectSlice = createSlice({
@@ -34,6 +43,16 @@ export const projectSlice = createSlice({
         state.data = action.payload
       })
       .addCase(getProject.rejected, (state) => {
+        state.status = 'failed'
+      })
+      .addCase(updateProjectData.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(updateProjectData.fulfilled, (state, action) => {
+        state.status = 'idle'
+      })
+      .addCase(updateProjectData.rejected, (state, { error }) => {
+        state.error = error.message
         state.status = 'failed'
       })
   },

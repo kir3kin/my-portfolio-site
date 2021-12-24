@@ -3,6 +3,7 @@ import { getProjects, selectProjectsData } from "@redux/reducers/projectsSlice"
 import { getTechnologies, selectTechsData } from "@redux/reducers/technologiesSlice"
 import { getUsers, selectUsersData } from "@redux/reducers/usersSlice"
 import React, { useEffect } from "react"
+import { EditList } from "./EditList"
 
 export const Dashboard: React.FC = () => {
 	const dispatch = useAppDispatch()
@@ -14,13 +15,14 @@ export const Dashboard: React.FC = () => {
 
 	useEffect(() => {
 		dispatch(getProjects())
-		dispatch(getTechnologies())
-		dispatch(getUsers())
+		// dispatch(getTechnologies())
+		// dispatch(getUsers())
 	}, [dispatch])
 
-	console.log('projects:', projects)
-	console.log('techs:', techs)
-	console.log('users:', users)
+	// console.log('projects:', projects)
+	// console.log('techs:', techs)
+	// console.log('users:', users)
+
 
 
 	return (
@@ -29,38 +31,8 @@ export const Dashboard: React.FC = () => {
 				<div className="container">
 					<h1 className="admin-page__header header--stylish">Admin panel</h1>
 					<div className="admin-page__wrapper">
-						<div className="admin-page__item">
-							<h2 className="admin-page__item__title">Projects:</h2>
-							<ul className="admin-page__item__list">
-								<li>
-									<a href="/edit-project/:id">REST API</a>
-								</li>
-								<li>
-									<a href="/edit-project/:id">Gulp</a>
-								</li>
-								<li>
-									<a href="/edit-project/:id">WHS</a>
-								</li>
-							</ul>
-							<a
-								className="admin-page__item__button"
-								href="/create-project/project"
-							>Create new</a>
-						</div>
-						<div className="admin-page__item">
-							<h2 className="admin-page__item__title">Projects:</h2>
-							<ul className="admin-page__item__list">
-								<li>
-									<a href="/edit-project/:id">REST API</a>
-								</li>
-								<li>
-									<a href="/edit-project/:id">Gulp</a>
-								</li>
-								<li>
-									<a href="/edit-project/:id">WHS</a>
-								</li>
-							</ul>
-						</div>
+						<EditList type="project" list={projects} />
+						{/* <EditList type="technology" list={techs} /> */}
 					</div>
 				</div>
 			</div>

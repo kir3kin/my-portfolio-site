@@ -44,6 +44,22 @@ export class ProjectsAPI {
 		return project
 	}
 
+
+
+	static updateProjectData = async (id: string, data: any) => {
+		
+
+
+	}
+
+
+
+
+
+
+
+
+
 	static fetchTechnologies = async () => {
 		const { data: { data: { technologies } } }: iTechnologyQuery = await axios({
 			...axiosParams,

@@ -6,8 +6,6 @@ import { ChosensType, Technology } from '@interfaces/technology.interface'
 import { ProjectsAPI } from '../API/projects.API'
 import { RootState } from '../store'
 
-
-
 const initialState: {
   technologies: Technology[],
   status: LoadingStatus,

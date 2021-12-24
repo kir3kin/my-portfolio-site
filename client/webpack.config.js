@@ -35,6 +35,7 @@ module.exports = {
 	output: {
 		filename: 'assets/js/[name].[fullhash].js',
 		path: path.resolve(__dirname, 'build'),
+		publicPath: '/',
 		clean: true
 	},
 	resolve: {

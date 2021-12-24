@@ -1,0 +1,171 @@
+// Bsic settings
+@import '@scss-utils/vars';
+@import '@scss-utils/mixins';
+@import '@scss-utils/dev_mixins';
+
+
+.edit-project {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+
+
+	&__header {
+		font-size: $header-size-lg;
+		text-align: center;
+	}
+
+	&__field {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+
+		width: 100%;
+		margin-bottom: 1.5rem;
+
+		label {
+			width: 10%;
+			font-size: $item-list-size-lg;
+			padding-right: 1rem;
+		}
+
+		input,
+		textarea {
+			font-size: 1.6rem;
+			max-width: 90%;
+			min-width: 90%;
+			min-height: 4rem;
+			width: 90%;
+			padding: 1rem;
+		}
+	}
+
+	&__img {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		gap: 2rem;
+		margin-bottom: 1rem;
+
+		&__wrapper {
+			width: 40%;
+			img {
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		&__content {
+			width: 60%;
+
+			label {
+				font-size: 1.6rem;
+				font-weight: normal;
+				display: block;
+				
+				height: 4.5rem;
+				width: 100%;
+				
+				border: 1px solid $text-color;
+				border-radius: .3rem;
+				background-color: $theme-color;
+				
+				padding: 1rem 1rem 1rem 12rem;
+				position: relative;
+				cursor: pointer;
+
+				@include text-truncation();
+
+				&::before {
+					content: 'Change image';
+					display: block;
+					background-color: darken($theme-color, 20%);
+					position: absolute;
+					height: 100%;
+					color: #000;
+
+					line-height: 4.5rem;
+					padding: 0 1rem;
+
+					border-right: 1px solid $text-color;
+					border-radius: .3rem 0 0 .3rem;
+
+					top: 0;
+					left: 0;
+
+					transition: .2s linear;
+				}
+
+				&:hover::before {
+					background-color: darken($theme-color, 10%);
+				}
+			}
+	
+			input {
+				display: none;
+			}
+		}
+	}
+
+	&__button {
+		
+
+
+		button {
+			cursor: pointer;
+			display: block;
+			margin: 3rem auto 0;
+			padding: 1rem 1.5rem;
+			width: auto;
+			background-color: $theme-color;
+			border: 3px solid $text-color;
+			border-radius: .5rem;
+			color: $text-color;
+			font-size: 2rem;
+			font-weight: 500;
+			transition: .2s ease-in-out;
+
+			&:hover {
+				background-color: $text-color;
+				color: $theme-color;
+			}
+		}
+	}
+
+
+
+	&__techs {
+		border: 2px solid $theme-border-color;
+		padding: 1rem 1.3rem 1.5rem;
+
+		&__header {
+			font-size: 2rem;
+			text-align: center;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__tech-list {
+		display: flex;
+		flex-flow: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 2rem;
+
+		&__item {
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+
+			label {
+				font-size: 1.6rem;
+				margin-right: 0.5rem;
+			}
+
+			label, input {
+				cursor: pointer;
+			}
+		}
+	}
+
+}

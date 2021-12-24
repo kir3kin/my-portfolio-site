@@ -16,7 +16,7 @@ const initialState: {
 
 
 export const getUsers = createAsyncThunk(
-  'users/getUsers',
+  'users/fetchUsers',
   async () => await UsersAPI.fetchUsers()
 )
 
