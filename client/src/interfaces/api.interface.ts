@@ -27,6 +27,14 @@ export interface iLoginData {
 	login: { token: string }
 }
 
+export interface iCreateDescData {
+	createDescription: { id: string }
+}
+
+export interface iCreateInfoData {
+	createInfo: { id: string }
+}
+
 export interface iCheckTokenData {
 	checkToken: { isValid: boolean }
 }

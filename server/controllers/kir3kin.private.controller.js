@@ -25,7 +25,6 @@ const generateJwt = (id, email, role) => {
 }
 
 export class Kir3kinController {
-	// Mutation: 
 	
 	// Query:
 	static getProjects = async () => {
@@ -135,6 +134,30 @@ export class Kir3kinController {
 		const role = Role.create({ title })
 		return role
 	}
+
+
+	// Mutations:
+	static createInfoDescription = async (id, input) => {
+		const { title, link } = input
+		const newDesc = await Description.create({
+			projectInfoId: id,
+			title,
+			link
+		})
+
+		return newDesc
+	}
+
+	static createProjectInfo = async (id, input) => {
+		const { title } = input
+		const newInfo = await Info.create({
+			projectId: id,
+			title,
+		})
+
+		return newInfo
+	}
+
 }
 
 // [START:] Project data \\

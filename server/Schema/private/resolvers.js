@@ -36,7 +36,11 @@ export const resolvers = {
 		updateTechType: async (_, { id, input }) => await Kir3kinController.updateTechnologyType(id, input),
 		deleteTechType: async (_, { id }) => await Kir3kinController.deleteTechnologyType(id),
 
-		check: async (_, { input }, { user }) => await Kir3kinController.check(input, user)
+		createDescription: async (_, { projectInfoId: id, input }) => await Kir3kinController.createInfoDescription(id, input),
+
+		createInfo: async (_, { projectId: id, input }) => await Kir3kinController.createProjectInfo(id, input),
+
+		// check: async (_, { input }, { user }) => await Kir3kinController.check(input, user)
 
 
 	}

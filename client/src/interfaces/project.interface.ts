@@ -28,7 +28,7 @@ export interface Info {
 	descriptions?: Description[]
 }
 
-interface Description {
+export interface Description {
 	id: string
 	title: string
 	link: string
@@ -42,3 +42,15 @@ interface DescChild {
 
 
 export type EditListType = 'project' | 'user' | 'technology' | 'techType'
+
+
+
+
+export interface iDescInput {
+	title: string,
+	link: string
+}
+
+export interface iInfoInput {
+	title: string
+}

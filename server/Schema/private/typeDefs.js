@@ -88,7 +88,7 @@ export const typeDefs = gql`
 	====== Inputs ======
 	"""
 	
-	#	====== Projects Table
+	#	====== Projects Table ======
 	input ProjectInput {
 		title: String! 
 		summary: String!
@@ -122,7 +122,7 @@ export const typeDefs = gql`
 	}
 
 
-	# ====== Projects Technologies
+	# ====== Projects Technologies ======
 	# technologyTypeId: ID!
 	input TechnologyInput {
 		title: String!
@@ -133,7 +133,7 @@ export const typeDefs = gql`
 		title: String!
 	}
 
-	# ====== User Auth
+	# ====== User Auth ======
 	input UserInput {
 		roleId: ID!
 		alias: String!
@@ -148,7 +148,7 @@ export const typeDefs = gql`
 	# todo: extend type Queries
 
 	"""
-	====== Main Queries
+	====== Main Queries ======
 	"""
 	type Query {
 		projects: [Project!]!
@@ -160,7 +160,7 @@ export const typeDefs = gql`
 	# todo: extend type Mutation
 
 	"""
-	====== Main Mutations
+	====== Main Mutations ======
 	"""
 	type Mutation {
 		check(input: RoleInput!): Role
@@ -173,9 +173,16 @@ export const typeDefs = gql`
 		updateInfo(id: ID!, input: InfoInput!): Info
 		deleteInfo(id: ID!) : Info
 
+
+
+
+		
 		createDescription(projectInfoId: ID!, input: DescriptionInput!): Description
 		updateDescription(id: ID!, input: DescriptionInput!): Description
 		deleteDescription(id: ID!) : Description
+
+
+
 
 		createDescChild(descriptionId: ID!, input: DescChildInput!): DescChild
 		updateDescChild(id: ID!, input: DescChildInput!): DescChild

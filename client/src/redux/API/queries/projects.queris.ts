@@ -1,3 +1,5 @@
+import { gql } from "@apollo/client"
+
 export const PROJECTS_QUERY: string = `query {
 	projects{
 		id

@@ -17,8 +17,8 @@ export class AuthAPI {
 	}: iLoginInput) => {
 		
 		const { data: { login: { token } } } = await client.query<
-		iLoginData,
-		{ input: iLoginInput }
+			iLoginData,
+			{ input: iLoginInput }
 		>({
 			query: LOGIN_QUERY,
 			variables: { input: { email, password } }
@@ -28,8 +28,8 @@ export class AuthAPI {
 
 	static checkToken = async(token: string) => {
 		const { data: { checkToken: { isValid } } } = await client.query<
-		iCheckTokenData,
-		{ token: string }
+			iCheckTokenData,
+			{ token: string }
 		>({
 			query: CHECK_QUERY,
 			variables: { token }
