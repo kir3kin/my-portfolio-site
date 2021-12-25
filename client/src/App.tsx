@@ -12,6 +12,9 @@ import { EditProjectPage } from './pages/Admin/EditProjectPage'
 
 import '@scss/App'
 
+// TODO:
+// ? separate public & private Routes
+
 export const App: React.FC = () => (
 	<BrowserRouter>
 		<Routes>

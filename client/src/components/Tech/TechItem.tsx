@@ -15,7 +15,7 @@ interface iTechItem {
 export const TechItem: React.FC<iTechItem> = ({ item, chosens }) => {
 	const dispatch = useAppDispatch()
 
-		// console.log('hi') 12  MEMOrize it
+	// TODO: console.log('hi') 12  MEMOrize it
 
 	const changeHandler = (
 		e: React.ChangeEvent<HTMLInputElement>

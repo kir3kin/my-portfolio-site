@@ -1,30 +1,15 @@
-import { Method } from "axios"
-
 import { Technology, techType } from "./technology.interface";
 import { iProject, ShortProjectData } from "./project.interface"
 import { User } from "./auth.interface";
 
-export interface iProjectsQuery {
-	data: { data: { projects: [ShortProjectData] } }
+
+// ====== Projects ======
+export interface iProjectsData {
+	projects: [ShortProjectData]
 }
 
-export interface iProjectQuery {
-	data: { data: { project: iProject } }
-}
-
-export interface iTechnologyQuery {
-	data: { data: { technologies: [Technology] } }
-}
-export interface iTechTypesQuery {
-	data: { data: { techs: [techType] } }
-}
-
-export interface iUsersQuery {
-	data: { data: { users: [User] } }
-}
-
-export interface iLoginData {
-	login: { token: string }
+export interface iProjectData {
+	project: iProject
 }
 
 export interface iCreateDescData {
@@ -35,14 +20,25 @@ export interface iCreateInfoData {
 	createInfo: { id: string }
 }
 
-export interface iCheckTokenData {
-	checkToken: { isValid: boolean }
+// ====== Technologies ======
+export interface iTechnologiesData {
+	technologies: [Technology]
 }
 
-export type AxiosParamsType = {
-	url: string,
-	method: Method,
-	headers: {
-		[key: string]: string
-	}
+export interface iTechTypesData {
+	techs: [techType]
+}
+
+// ====== Users ======
+export interface iUsersData {
+	users: [User]
+}
+
+// ====== Auth ======
+export interface iLoginData {
+	login: { token: string }
+}
+
+export interface iCheckTokenData {
+	checkToken: { isValid: boolean }
 }

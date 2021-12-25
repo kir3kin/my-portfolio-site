@@ -3,8 +3,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { LoadingStatus } from '@interfaces/loading.interface'
 import { ChosensType, Technology } from '@interfaces/technology.interface'
 
-import { ProjectsAPI } from '../API/projects.API'
 import { RootState } from '../store'
+import { TechsAPI } from '@redux/API/techs.API'
 
 const initialState: {
   technologies: Technology[],
@@ -26,12 +26,12 @@ const initialState: {
 
 export const getTechnologies = createAsyncThunk(
   'technologyList/fetchTechnologies',
-  async () => await ProjectsAPI.fetchTechnologies()
+  async () => await TechsAPI.fetchTechnologies()
 )
 
 export const getTechTypes = createAsyncThunk(
   'technologyList/fetchTechTypes',
-  async () => await ProjectsAPI.fetchTechTypes()
+  async () => await TechsAPI.fetchTechTypes()
 )
 
 export const technologiesSlice = createSlice({

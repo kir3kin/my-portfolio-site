@@ -44,8 +44,6 @@ interface DescChild {
 export type EditListType = 'project' | 'user' | 'technology' | 'techType'
 
 
-
-
 export interface iDescInput {
 	title: string,
 	link: string

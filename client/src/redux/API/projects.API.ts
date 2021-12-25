@@ -1,101 +1,54 @@
-import axios from 'axios'
-import { SERVER_LINKS } from '@utils/default'
+import { ApolloAPI } from './apollo.API'
+
 import {
 	PROJECTS_QUERY,
-	PROJECT_QUERY,
-	TECHNOLOGIES_QUERY,
-	TECHTYPES_QUERY
+	PROJECT_QUERY
 } from './queries/projects.queris'
 
 import {
-	AxiosParamsType,
-	iCreateDescData,
-	iCreateInfoData,
-	iProjectQuery,
-	iProjectsQuery,
-	iTechnologyQuery,
-	iTechTypesQuery
-} from '@interfaces/api.interface'
-
-import { setContext } from '@apollo/client/link/context'
-import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
-
-
-import lsAPI from '@services/localStorage.api'
-import { StorageType } from '@interfaces/services.interface'
-import { iDescInput, iInfoInput } from '@interfaces/project.interface'
-
-import {
-	CREATE_DESC_MUTATION, CREATE_INFO_MUTATION
+	CREATE_DESC_MUTATION,
+	CREATE_INFO_MUTATION
 } from './mutations/projects.mutations'
 
-const axiosParams: AxiosParamsType = {
-	url: SERVER_LINKS.public,
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json',
-		'Accept': 'application/json'
-	},
-}
+import {
+	iCreateDescData,
+	iCreateInfoData,
+	iProjectData,
+	iProjectsData,
+} from '@interfaces/api.interface'
+
+import {
+	iDescInput,
+	iInfoInput
+} from '@interfaces/project.interface'
 
 
-const httpLink = createHttpLink({
-  uri: SERVER_LINKS.private
-})
-
-const authLink = setContext((_, { headers }) => {
-  const token = lsAPI.getStorageData({
-		storage: StorageType.USER,
-		field: 'token'
-	})
-
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    }
-  }
-})
-
-const privateClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-	link: authLink.concat(httpLink),
-	cache: new InMemoryCache()
-})
-
-
-
-
-export class ProjectsAPI {
+export class ProjectsAPI extends ApolloAPI {
 	static fetchProjects = async () => {
-		const { data: { data: { projects } } }: iProjectsQuery = await axios({
-			...axiosParams,
-			data: { query: PROJECTS_QUERY }
+		const { data: { projects } } = await this.publicClient.query<
+			iProjectsData
+		>({
+			query: PROJECTS_QUERY
 		})
 		return projects
 	}
 
 	static fetchProject = async (id: string) => {
-		const { data: { data: { project } } }: iProjectQuery = await axios({
-			...axiosParams,
-			data: {
-				query: PROJECT_QUERY,
-				variables: { id }
-			}
+		const { data: { project } } = await this.publicClient.query<
+			iProjectData
+		>({
+			query: PROJECT_QUERY,
+			variables: { id }
 		})
 		return project
 	}
 
-
-
+	// TODO
 	static updateProjectData = async (id: string, data: any) => {
-		
-
-
 	}
 
-
 	static createDesc = async (id: string, input: iDescInput) => {
-		const { data } = await privateClient.mutate<
+		const { data } = await this.privateClient.mutate<
 			iCreateDescData,
 			{ id: string, input: iDescInput }
 		>({
@@ -106,7 +59,7 @@ export class ProjectsAPI {
 	}
 
 	static createInfo = async (id: string, input: iInfoInput) => {
-		const { data } = await privateClient.mutate<
+		const { data } = await this.privateClient.mutate<
 			iCreateInfoData,
 			{ id: string, input: iInfoInput }
 		>({
@@ -115,29 +68,4 @@ export class ProjectsAPI {
 		})
 		return data ? data.createInfo.id : ''
 	}
-
-
-
-
-
-
-
-
-
-	static fetchTechnologies = async () => {
-		const { data: { data: { technologies } } }: iTechnologyQuery = await axios({
-			...axiosParams,
-			data: { query: TECHNOLOGIES_QUERY }
-		})
-		return technologies
-	}
-
-	static fetchTechTypes = async () => {
-		const { data: { data: { techs } } }: iTechTypesQuery = await axios({
-			...axiosParams,
-			data: { query: TECHTYPES_QUERY }
-		})
-		return techs
-	}
-
 }

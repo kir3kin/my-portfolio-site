@@ -1,10 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-
-import { AppDispatch, RootState } from '../store'
-import { iLoginInput, User } from '@interfaces/auth.interface'
-import { LoadingStatus } from '@interfaces/loading.interface'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { UsersAPI } from '@redux/API/users.API'
+
+import { RootState } from '../store'
+import { User } from '@interfaces/auth.interface'
+import { LoadingStatus } from '@interfaces/loading.interface'
 
 const initialState: {
 	status: LoadingStatus,
@@ -14,11 +13,11 @@ const initialState: {
 	data: []
 }
 
-
 export const getUsers = createAsyncThunk(
   'users/fetchUsers',
   async () => await UsersAPI.fetchUsers()
 )
+
 
 export const usersSlice = createSlice({
   name: 'users',
@@ -41,7 +40,6 @@ export const usersSlice = createSlice({
 })
 
 export const { } = usersSlice.actions
-
 
 export const selectUsersData = (state: RootState) => ({
 	users: state.users.data,

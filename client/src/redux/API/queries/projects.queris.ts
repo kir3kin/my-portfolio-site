@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
-export const PROJECTS_QUERY: string = `query {
-	projects{
+export const PROJECTS_QUERY = gql`query {
+	projects {
 		id
 		title
 		summary
@@ -19,17 +19,8 @@ export const PROJECTS_QUERY: string = `query {
 	}
 }`
 
-export const createContactQuery = `mutation CreateContact($input: ContactInput) {
-	createContact(input: $input) {
-		_id
-		name
-		email
-	}
-}`
-
-
-export const PROJECT_QUERY: string = `query Project($id: ID!) {
-	project(id: $id){
+export const PROJECT_QUERY = gql`query Project($id: ID!) {
+	project(id: $id) {
 		id
 		title
 		summary
@@ -76,25 +67,5 @@ export const PROJECT_QUERY: string = `query Project($id: ID!) {
 				title
 			}
 		}
-	}
-}`
-
-
-export const TECHNOLOGIES_QUERY: string =`query {
-	technologies {
-		id
-		title
-		isHiden
-		techType {
-			id
-			title
-		}
-	}
-}`
-
-export const TECHTYPES_QUERY: string =`query {
-	techTypes {
-		id
-		title
 	}
 }`

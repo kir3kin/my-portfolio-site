@@ -1,35 +1,24 @@
-import axios from "axios"
+import { ApolloAPI } from './apollo.API'
 
-import { AxiosParamsType, iTechnologyQuery, iTechTypesQuery } from "@interfaces/api.interface"
+import { iTechnologiesData, iTechTypesData } from "@interfaces/api.interface"
 
-import { TECHNOLOGIES_QUERY, TECHTYPES_QUERY } from "./queries/projects.queris"
+import { TECHNOLOGIES_QUERY, TECHTYPES_QUERY } from "./queries/tech.queries"
 
-import { SERVER_LINKS } from "@utils/default"
-
-const axiosParams: AxiosParamsType = {
-	url: SERVER_LINKS.public,
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json',
-		'Accept': 'application/json'
-	},
-}
-
-
-export class TechsAPI {
-
+export class TechsAPI extends ApolloAPI {
 	static fetchTechnologies = async () => {
-		const { data: { data: { technologies } } }: iTechnologyQuery = await axios({
-			...axiosParams,
-			data: { query: TECHNOLOGIES_QUERY }
+		const { data: { technologies } } = await this.publicClient.query<
+			iTechnologiesData
+		>({
+			query: TECHNOLOGIES_QUERY
 		})
 		return technologies
 	}
 
 	static fetchTechTypes = async () => {
-		const { data: { data: { techs } } }: iTechTypesQuery = await axios({
-			...axiosParams,
-			data: { query: TECHTYPES_QUERY }
+		const { data: { techs } } = await this.publicClient.query<
+			iTechTypesData
+		>({
+			query: TECHTYPES_QUERY
 		})
 		return techs
 	}

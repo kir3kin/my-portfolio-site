@@ -1,22 +1,16 @@
+import { ApolloAPI } from './apollo.API'
+
+import { LOGIN_QUERY, CHECK_QUERY } from './queries/auth.queries'
+
 import { iLoginInput } from '@interfaces/auth.interface'
 import { iCheckTokenData, iLoginData } from '@interfaces/api.interface'
 
-import { SERVER_LINKS } from '@utils/default'
-import { LOGIN_QUERY, CHECK_QUERY } from './queries/auth.queries'
-import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
-
-const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-	uri: SERVER_LINKS.public,
-	cache: new InMemoryCache()
-})
-
-export class AuthAPI {
+export class AuthAPI extends ApolloAPI {
 	static logIn = async ({
 		email,
 		password
 	}: iLoginInput) => {
-		
-		const { data: { login: { token } } } = await client.query<
+		const { data: { login: { token } } } = await this.publicClient.query<
 			iLoginData,
 			{ input: iLoginInput }
 		>({
@@ -27,7 +21,7 @@ export class AuthAPI {
 	}
 
 	static checkToken = async(token: string) => {
-		const { data: { checkToken: { isValid } } } = await client.query<
+		const { data: { checkToken: { isValid } } } = await this.publicClient.query<
 			iCheckTokenData,
 			{ token: string }
 		>({

@@ -7,7 +7,6 @@ import { Technology } from '@interfaces/technology.interface'
 import { ProjectsAPI } from '../API/projects.API'
 import { RootState } from '../store'
 
-
 const initialState: {
   projects: ShortProjectData[],
   technologies: Technology[],
@@ -18,7 +17,7 @@ const initialState: {
   status: 'idle'
 }
 
-// async function
+
 export const getProjects = createAsyncThunk(
   'projectList/fetchProjects',
   async () => await ProjectsAPI.fetchProjects()
