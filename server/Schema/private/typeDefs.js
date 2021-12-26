@@ -27,14 +27,15 @@ export const typeDefs = gql`
 	type Info {
 		id: ID!
 		title: String!
-		descriptions: [Description!]!
+		descriptions: [Description!]
 	}
-
+	
 	type Description {
 		id: ID!
 		title: String!
 		link: String!
-		children: [DescChild]!
+		projectInfoId: ID!
+		children: [DescChild!]
 	}
 
 	type DescChild {
@@ -169,11 +170,10 @@ export const typeDefs = gql`
 		updateProject(id: ID!, input: ProjectInput!): Project
 		deleteProject(id: ID!) : Project
 
+		
 		createInfo(projectId: ID!, input: InfoInput!): Info
 		updateInfo(id: ID!, input: InfoInput!): Info
-		deleteInfo(id: ID!) : Info
-
-
+		deleteInfo(id: ID!): Info
 
 
 		

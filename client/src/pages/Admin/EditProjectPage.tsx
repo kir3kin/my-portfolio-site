@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { getProject, selectProjectInfo } from "@redux/reducers/projectSlice"
 
-import { ProjectForm } from "@components/Admin/ProjectForm"
+import { ProjectForm } from "@components/Admin/Project/ProjectForm"
 
 import { Loader } from "@blocs/Loader"
 import { LoadingError } from "@blocs/LoadingError"

@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 
 import { Description } from "@interfaces/project.interface"
+import { deleteDesc, updateDesc } from "@redux/reducers/projectSlice"
+import { useAppDispatch } from "@redux/hooks"
+
 
 export const InfoItem: React.FC<{
 	pId: string,
@@ -8,36 +11,43 @@ export const InfoItem: React.FC<{
 }> = ({
 	pId, item
 }) => {
-	const [formItem, setFormItem] = useState<Description>(item)
-	const [isChanged, setIsChanged] = useState<{
-		title: boolean,
-		link: boolean
-	}>({
-		title: false,
-		link: false
-	})
 
+	const dispatch = useAppDispatch()
+	const [formItem, setFormItem] = useState<Description>(item)
+	const [isChanged, setIsChanged] = useState<boolean>(false)
+
+
+	// ====== [START:] Handlers ====== \\
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormItem(prev => ({
 			...prev, [e.target.name]: e.target.value
 		}))
 
-		setIsChanged(prev => ({
-			...prev,
-			[e.target.name]: true
-		}))
+		setIsChanged(true)
 	}
+
+	const updateDescHandler = () => {
+		dispatch(updateDesc({
+			id: formItem.id,
+			input: { 
+				title: formItem.title,
+				link: formItem.link
+			}
+		}))
+		setIsChanged(false)
+	}
+
+	const deleteDescHandler = () => {
+		dispatch(deleteDesc(formItem.id))
+	}
+	// ====== [END:] Handlers ====== \\
 
 	return (
 		<li className="desc-list__item">
 			<div className="desc-list__item__title">
 				<label htmlFor={`desc-${pId}-item-${formItem.id}-title`}>
 					Item title
-					{isChanged.title && (
-						<span className="info__accept"></span>
-					)}
 				</label>
-			
 				<input
 					type="text"
 					name={`title`}
@@ -49,9 +59,6 @@ export const InfoItem: React.FC<{
 			<div className="desc-list__item__link">
 				<label htmlFor={`desc-${pId}-item-${formItem.id}-link`}>
 					Item link
-					{isChanged.link && (
-						<span className="info__accept"></span>
-					)}
 				</label>
 				<input
 					type="text"
@@ -61,6 +68,20 @@ export const InfoItem: React.FC<{
 					onChange={changeHandler}
 				/>
 			</div>
+			<div className="buttons">
+				<button
+					type="button"
+					className="button button--add"
+					disabled={!isChanged}
+					onClick={updateDescHandler}
+				></button>
+				<button
+					type="button"
+					className="button button--remove"
+					onClick={deleteDescHandler}
+				>x</button>
+			</div>
+
 			{/* <div className="desc-list__item__description">
 				<label htmlFor="desc-1-item-1-description"></label>
 				<textarea

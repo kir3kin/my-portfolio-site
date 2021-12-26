@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-import { iDescInput, iInfoInput, iProject } from '@interfaces/project.interface'
+import { Description, iDescInput, iInfoInput, Info, iProject } from '@interfaces/project.interface'
 import { LoadingStatus } from '@interfaces/loading.interface'
 
 import { RootState } from '../store'
@@ -29,8 +29,38 @@ export const updateProjectData = createAsyncThunk(
   }
 )
 
+// ====== Project's Info
+export const createInfo = createAsyncThunk<
+  Info | null, {id: string, input: iInfoInput}
+>(
+  'project/createInfo',
+  async (data) => {
+    const { id, input } = data
+    return await ProjectsAPI.createInfo(id, input)
+  }
+)
+
+export const updateInfo = createAsyncThunk<
+  Info | null, {id: string, input: iInfoInput}
+>(
+  'project/updateInfo',
+  async (data) => {
+    const { id, input } = data
+    return await ProjectsAPI.updateInfo(id, input)
+  }
+)
+
+export const deleteInfo = createAsyncThunk<
+  string, string
+>(
+  'project/deleteInfo',
+  async (id) => await ProjectsAPI.deleteInfo(id)
+)
+
+
+// ====== Info's Description
 export const createDesc = createAsyncThunk<
-  string, {id: string, input: iDescInput}
+  Description | null, {id: string, input: iDescInput}
 >(
   'project/createDesc',
   async (data) => {
@@ -39,15 +69,23 @@ export const createDesc = createAsyncThunk<
   }
 )
 
-export const createInfo = createAsyncThunk<
-  string, {id: string, input: iInfoInput}
+export const updateDesc = createAsyncThunk<
+  Description | null, {id: string, input: iDescInput}
 >(
-  'project/createInfo',
+  'project/updateDesc',
   async (data) => {
-    const {id, input} = data
-    return await ProjectsAPI.createInfo(id, input)
+    const { id, input } = data
+    return await ProjectsAPI.updateDesc(id, input)
   }
 )
+
+export const deleteDesc = createAsyncThunk<
+  Description | null, string
+>(
+  'project/deleteDesc',
+  async (id) => await ProjectsAPI.deleteDesc(id)
+)
+
 
 export const projectSlice = createSlice({
   name: 'project',
@@ -75,12 +113,71 @@ export const projectSlice = createSlice({
         state.error = error.message
         state.status = 'failed'
       })
-      .addCase(createDesc.rejected, (state, { error }) => {
-        state.error = error.message
+      .addCase(createDesc.fulfilled, (state, action) => {
+        const newDesc = action.payload ? action.payload : null
+        if (state.data?.infos && newDesc) {
+          state.data.infos.map((info, i, a) => {
+            if (info.id === newDesc.projectInfoId) {
+              if (info.descriptions) {
+                a[i].descriptions = [ newDesc, ...info.descriptions ]
+              } else {
+                a[i].descriptions = [ newDesc ]
+              }
+            }
+          })
+        }
       })
-      .addCase(createInfo.rejected, (state, { error }) => {
-        state.error = error.message
+      .addCase(updateDesc.fulfilled, (state, action) => {
+        const updDesc = action.payload ? action.payload : null
+        if (state.data?.infos && updDesc) {
+          state.data.infos.map(info => {
+            if (info.id === updDesc.projectInfoId) {
+              info.descriptions?.map((desc, i, a) => {
+                if (desc.id === updDesc.id) {
+                  a[i] = updDesc
+                }
+              })
+            }
+          })
+        }
       })
+      .addCase(deleteDesc.fulfilled, (state, action) => {
+        const delDesc = action.payload ? action.payload : null
+        if (state.data?.infos && delDesc) {
+          state.data.infos.map((info, i, a) => {
+            if (info.id === delDesc.projectInfoId) {
+              if (info.descriptions) {
+                a[i].descriptions = info.descriptions.filter(desc => desc.id !== delDesc.id)
+              }
+            }
+          })
+        }
+      })
+      .addCase(createInfo.fulfilled, (state, action) => {
+        const infos = state.data?.infos ? state.data.infos : []
+        const newInfo = action.payload ? action.payload : ''
+        
+        if (state.data && newInfo) {
+          state.data = {
+            ...state.data, infos: [ newInfo, ...infos ]
+          }
+        }
+      })
+      .addCase(updateInfo.fulfilled, (state, action) => {
+        state.data?.infos?.map((info, i, a) => {
+          if (info.id === action.payload?.id) {
+            a[i] = action.payload
+          }
+        })
+      })
+      .addCase(deleteInfo.fulfilled, (state, action) => {
+        if (state.data?.infos) {
+          state.data.infos = state.data?.infos?.filter(info => info.id !== action.payload)
+        }
+      })
+      // .addCase(createDesc.rejected, (state, { error }) => {
+      //   state.error = error.message
+      // })
   },
 })
 

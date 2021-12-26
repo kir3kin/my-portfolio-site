@@ -30,6 +30,7 @@ export interface Info {
 
 export interface Description {
 	id: string
+	projectInfoId?: string
 	title: string
 	link: string
 	children?: DescChild[]

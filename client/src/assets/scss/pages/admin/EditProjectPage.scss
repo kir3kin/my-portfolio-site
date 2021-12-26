@@ -242,10 +242,7 @@
 		flex-flow: row;
 		justify-content: center;
 		align-items: center;
-		
-		label {
-			margin-right: 1.5rem;
-		}
+		gap: 1.5rem;
 
 		input {
 			padding: 0.5rem 0.7rem;
@@ -266,9 +263,10 @@
 		margin-bottom: 1rem;
 		display: flex;
 		gap: 1.5rem;
+		align-items: flex-end;
 
-		> div {
-			width: 50%;
+		&__link, &__title {
+			width: 100%;
 		}
 
 		label {
@@ -289,25 +287,57 @@
 	}
 }
 
-.info__accept {
-	margin-left: 1rem;
+.buttons {
+	width: auto;
+	display: flex;
+	flex-flow: row;
+	gap: 1rem;
+}
+
+.button {
+	margin-bottom: 0.2rem;
 	display: block;
+	min-width: 2.5rem;
+	min-height: 2.5rem;
 	width: 2.5rem;
 	height: 2.5rem;
-
-	cursor: pointer;
+	border: 1px solid #000;
 	transition: .2s linear;
 
-	background-color: #fff;
-	background-image: url('@images/icons/checkmark.svg');
+	cursor: pointer;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: 70%;
 
-	&:hover {
-		background-color: darkblue;
+	&--add {
+		background-color: green;
+		background-image: url('@images/icons/checkmark.png');
+
+		&:hover {
+			background-color: lighten(green, 20%);
+
+		}
 	}
 
+	&--remove {
+		color: #fff;
+		font-size: 1.5rem;
+		line-height: 1.5rem;
+		font-weight: 600;
+		text-align: center;
+		vertical-align: middle;
+
+		background-color: darkred;
+
+		&:hover {
+			background-color: lighten(darkred, 20%);
+		}
+	}
+
+	&:disabled {
+		background-color: gray;
+		cursor: auto;
+	}
 }
 
 

@@ -43,6 +43,7 @@ export class Kir3kinController {
 
 	// Project:
 	static getInfos = async (projectId) => await Info.findAll({ where: { projectId } })
+
 	static getProjectTechnologies = async (projectId) => {
 		const project = await Projects.findOne({ where: { id: projectId } })
 		// if (!project) error_handler()
@@ -136,7 +137,30 @@ export class Kir3kinController {
 	}
 
 
-	// Mutations:
+	// ============ Mutations ============ \\
+
+	// ====== Project's Info
+	static createProjectInfo = async (id, input) => {
+		const { title } = input
+		const newInfo = await Info.create({
+			projectId: id,
+			title,
+		})
+		return newInfo
+	}
+
+	static updateProjectInfo = async (id, input) => {
+		const { title } = input
+		const info = await Info.findOne({ where: { id } })
+		return await info.update({ title })
+	}
+
+	static deleteProjectInfo = async (id) => {
+		const info = await Info.findOne({ where: { id } })
+		return await info.destroy()
+	}
+
+	// ====== Project's Description
 	static createInfoDescription = async (id, input) => {
 		const { title, link } = input
 		const newDesc = await Description.create({
@@ -144,21 +168,32 @@ export class Kir3kinController {
 			title,
 			link
 		})
-
 		return newDesc
 	}
 
-	static createProjectInfo = async (id, input) => {
-		const { title } = input
-		const newInfo = await Info.create({
-			projectId: id,
-			title,
-		})
-
-		return newInfo
+	static updateInfoDescription = async (id, input) => {
+		const { title, link } = input
+		const desc = await Description.findOne({ where: { id } })
+		return await desc.update({ title, link })
 	}
 
+	static deleteInfoDescription = async (id) => {
+		const desc = await Description.findOne({ where: { id } })
+		return await desc.destroy()
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // [START:] Project data \\
 const createProjectAuthor = (projectId, userId) => {
