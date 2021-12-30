@@ -37,9 +37,11 @@
     "graphql": "^15.5.1",
     "graphql-middleware": "^6.1.12",
     "graphql-scalars": "^1.13.1",
+    "graphql-upload": "^13.0.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3-rc.0",
     "sequelize": "^6.9.0",
+    "sharp": "^0.29.3",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

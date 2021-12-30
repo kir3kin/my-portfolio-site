@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 
 import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { getTechnologies, selectTechnologyList } from "@redux/reducers/technologiesSlice"
+import { updateTechs } from "@redux/reducers/projectSlice"
 
 import { Technology } from "@interfaces/technology.interface"
 
@@ -9,15 +10,17 @@ import { getChosenTechs } from "@services/getChosenTechs"
 
 
 export const TechList: React.FC<{
-	projectTechs: Technology[] | undefined
+	projectTechs: Technology[] | undefined,
+	projectId: string
 }> = ({
-	projectTechs
+	projectTechs, projectId
 }) => {
 	const dispatch = useAppDispatch()
 	const { techs } = useAppSelector(selectTechnologyList)
 
 	const defalultTechs = getChosenTechs(projectTechs)
-	const [chosenTechs, setChosenTechs] = useState<Number[]>(defalultTechs)
+	const [chosenTechs, setChosenTechs] = useState<number[]>(defalultTechs)
+	const [isChanged, setIsChanged] = useState<boolean>(false)
 
 	useEffect(() => {
 		dispatch(getTechnologies())
@@ -29,13 +32,33 @@ export const TechList: React.FC<{
 
 		if (res) setChosenTechs(prev => prev.filter(prevId => prevId !== number))
 		else setChosenTechs(prev => ([ ...prev, number ]))
+
+		setIsChanged(true)
+	}
+
+	const updateTechnologies = () => {
+		dispatch(updateTechs({
+			projectId,
+			techIds: chosenTechs
+		}))
+
+		setIsChanged(false)
 	}
 
 	return (
 		<>
 			{techs && techs.length > 0 && (
 				<div className="edit-project__techs">
-					<h3 className="edit-project__techs__header">Technologies:</h3>
+
+					<div className="edit-project__techs__header">
+						<h3>Technologies:</h3>
+						<button
+							type="button"
+							className="button button--add"
+							disabled={!isChanged}
+							onClick={updateTechnologies}
+						></button>
+					</div>
 
 					<div className="edit-project__tech-list">
 						{techs.map(tech => {

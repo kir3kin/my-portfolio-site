@@ -6,31 +6,16 @@ import { InfoList } from "./InfoList"
 import { TechList } from "./TechList"
 import { ShortData } from "./ShortData"
 
-export const ProjectForm: React.FC<{ project: iProject }> = ({ project }) => {
+export const ProjectForm: React.FC<{ project: iProject }> = ({ project }) => (
+	<div className="edit-project">
 
-	// ====== [START:] Handlers ====== \\
-	const clickHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-		// e.preventDefault();
-	}
+		<h2 className="edit-project__header">Edit project</h2>
 
-	return (
-		<div className="edit-project">
+		<ShortData project={project} />
 
-			<h2 className="edit-project__header">Edit project</h2>
+		<TechList projectTechs={project.technologies} projectId={project.id} />
 
-			<ShortData project={project} />
+		<InfoList infos={project.infos} projectId={project.id} />
 
-			<TechList projectTechs={project.technologies} />
-
-			<InfoList infos={project.infos} projectId={project.id} />
-
-			{/* <div className="edit-project__button">
-				<button
-					type="button"
-					onClick={clickHandler}
-				>Apply</button>
-			</div> */}
-
-		</div>
-	)
-}
+	</div>
+)

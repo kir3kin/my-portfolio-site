@@ -19,7 +19,8 @@ export const Projects = sequelize.define('projects', {
 	github: { type: DataTypes.STRING },
 	template: { type: DataTypes.STRING },
 	inWorking: { type: DataTypes.BOOLEAN },
-	isHiden: { type: DataTypes.BOOLEAN }
+	isHidden: { type: DataTypes.BOOLEAN },
+	showOrder: { type: DataTypes.STRING }
 })
 
 export const Info = sequelize.define('project_infos', {
@@ -62,7 +63,7 @@ export const ProjectAuthor = sequelize.define('project_authors', {
 export const Technologies = sequelize.define('technologies', {
 	id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 	title: { type: DataTypes.STRING },
-	isHiden: { type: DataTypes.BOOLEAN }
+	isHidden: { type: DataTypes.BOOLEAN }
 }, {
 	timestamps: false
 })

@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
-import { getProjectImage } from "@services/projectImages"
-import { uploadImage } from "@services/uploadImage"
+import { useAppDispatch } from "@redux/hooks"
+import { updateProjectData } from "@redux/reducers/projectSlice"
 
-import { iProject } from "@interfaces/project.interface"
+import { getServerProjectImage } from "@services/projectImages"
+import { uploadPreview } from "@services/uploadPreview"
 
-import { DEFAULT_IMAGES } from "@utils/default"
-
+import { iProject, iShortDataInput } from "@interfaces/project.interface"
 
 export const ShortData: React.FC<{
 	project: iProject
@@ -14,20 +14,21 @@ export const ShortData: React.FC<{
 	project
 }) => {
 	// ====== [START:] Default Values ====== \\
-	const defaultImage: {
-		name: string, 
-		value: File | null
-	} = {
-		name: project.image ? project.image : 'Upload image',
-		value: null
-	}
+	const defaultImage: File | string = project.image ? project.image : 'Upload image'
 
-	const projectImage = getProjectImage(project.image, DEFAULT_IMAGES.project, false)
+	const projectImage = getServerProjectImage(project.image)
 	// ====== [END:] Default Values ====== \\
 	
-	const [image, setImage] = useState(defaultImage)
+	const dispatch = useAppDispatch()
+	const [image, setImage] = useState<File | string>(defaultImage)
 	const [preview, setPreview] = useState<string>(projectImage)
-	const [shortData, setShortData] = useState(project)
+	const [shortData, setShortData] = useState<iProject>(project)
+	const [isChanged, setIsChanged] = useState<boolean>(false)
+
+	useEffect(() => {
+		setShortData(project)
+	}, [project])
+
 
 	// ====== [START:] Handlers ====== \\
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,40 +36,71 @@ export const ShortData: React.FC<{
 			...prev,
 			[e.target.name]: e.target.value
 		}))
+		setIsChanged(true)
 	}
 
 	const imageChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.currentTarget.files ? e.currentTarget.files[0] : null
 
-		const imageData = {
-			value: file,
-			name: file ? file.name : defaultImage.name
-		}
+		const imageData = file ? file : defaultImage
+		
 		setImage(imageData)
 		setShortData(prev => ({
-			...prev, image: imageData.name
+			...prev, image: (typeof imageData === 'string') ? imageData : imageData.name
 		}))
+		setIsChanged(true)
 
 		if (file) {
-			const newImage = await uploadImage(file)
+			const newImage = await uploadPreview(file)
 			setPreview(newImage)
 		} else {
 			setPreview(projectImage)
 		}
 	}
+
+	
+	const changeSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setShortData(prev => ({
+			...prev, isHidden: Boolean(Number(e.target.value))
+		}))
+		setIsChanged(true)
+	}
+
+	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault()
+
+		const data: iShortDataInput = {
+			title: shortData.title,
+			summary: shortData.summary,
+			github: shortData.github,
+			link: shortData.link,
+			showOrder: shortData.showOrder,
+			isHidden: shortData.isHidden,
+		}
+
+		if (image instanceof File) data.image = image
+		if (shortData.description) data.description = shortData.description
+		if (shortData.template) data.template = shortData.template
+
+		dispatch(updateProjectData({
+			id: shortData.id,
+			input: data
+		}))
+		setIsChanged(false)
+	}
 	// ====== [END:] Handlers ====== \\
 
 	return (
-		<>
+		<form onSubmit={submitHandler}>
 			<div className="edit-project__img">
 				<div className="edit-project__img__wrapper">
-					<img src={preview} alt={project.title.toLocaleLowerCase()} />
+					<img src={preview} alt={shortData.title.toLocaleLowerCase()} />
 				</div>
 				<div className="edit-project__img__content">
 					<label
 						htmlFor="image"
 						className="field"
-					>{image.name}</label>
+					>{ (typeof image === 'string') ? image : image.name }</label>
 					<input
 						type="file"
 						name="image"
@@ -151,6 +183,38 @@ export const ShortData: React.FC<{
 					onChange={changeHandler}
 				/>
 			</div>
-		</>
+
+			<div className="edit-project__field">
+				<label htmlFor="order">Order:</label>
+				<input
+					placeholder="Enter order"
+					type="text"
+					name="showOrder"
+					id="order"
+					value={shortData.showOrder}
+					onChange={changeHandler}
+				/>
+			</div>
+
+			<div className="edit-project__field">
+				<label htmlFor="hide">Hide:</label>
+				<select
+					id="hide"
+					onChange={changeSelectHandler}
+					name="isHidden"
+					defaultValue={Number(shortData.isHidden)}
+				>
+					<option value={1}>Yes</option>
+					<option value={0}>No</option>
+				</select>
+			</div>
+
+			<div className="edit-project__button">
+				<button
+					type="submit"
+					disabled={!isChanged}
+				>Apply</button>
+			</div>
+		</form>
 	)
 }

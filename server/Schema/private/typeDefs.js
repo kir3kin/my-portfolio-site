@@ -2,6 +2,7 @@ import { gql } from "apollo-server-core"
 
 export const typeDefs = gql`
 	scalar Date
+	scalar Upload
 
 	"""
 	====== Projects Table
@@ -16,12 +17,13 @@ export const typeDefs = gql`
 		github: String!
 		template: String
 		inWorking: Boolean!
-		isHiden: Boolean!
+		isHidden: Boolean!
 		createdAt: Date!
 		updatedAt: Date!
 		infos: [Info!]
 		technologies: [Technology!]
 		author: User!
+		showOrder: String!
 	}
 
 	type Info {
@@ -50,7 +52,7 @@ export const typeDefs = gql`
 	type Technology {
 		id: ID!
 		title: String!
-		isHiden: Boolean!
+		isHidden: Boolean!
 		techType: TechType!
 	}
 
@@ -99,35 +101,43 @@ export const typeDefs = gql`
 		github: String!
 		template: String
 		inWorking: Boolean
-		isHiden: Boolean
+		isHidden: Boolean!
 		infos: [InfoInput!]
 		technologies: [ID!]
 	}
 
-	# projectId: ID!
 	input InfoInput {
 		title: String!
 		descriptions: [DescriptionInput!]
 	}
 
-	# projectInfoId: ID!
 	input DescriptionInput {
 		title: String!
 		link: String
 		children: [DescChildInput!]
 	}
 
-	# descriptionId: ID!
 	input DescChildInput {
 		text: String!
 	}
 
+	input ShortDataInput {
+		title: String!
+		summary: String!
+		github: String!
+		link: String!
+		showOrder: String!
+		image: Upload
+		description: String
+		template: String
+		isHidden: Boolean!
+	}
+
 
 	# ====== Projects Technologies ======
-	# technologyTypeId: ID!
 	input TechnologyInput {
 		title: String!
-		isHiden: Boolean!
+		isHidden: Boolean!
 	}
 
 	input TechTypeInput {
@@ -147,7 +157,6 @@ export const typeDefs = gql`
 	}
 
 	# todo: extend type Queries
-
 	"""
 	====== Main Queries ======
 	"""
@@ -158,28 +167,27 @@ export const typeDefs = gql`
 		techTypes: [TechType!]!
 	}
 
-	# todo: extend type Mutation
 
 	"""
 	====== Main Mutations ======
 	"""
 	type Mutation {
-		check(input: RoleInput!): Role
+		createProject(title: String!): Project
+		removeProject(id: ID!): Project
+		updateShortData(id: ID!, input: ShortDataInput!): Project
 
-		createProject(input: ProjectInput!): Project
 		updateProject(id: ID!, input: ProjectInput!): Project
 		deleteProject(id: ID!) : Project
-
 		
 		createInfo(projectId: ID!, input: InfoInput!): Info
 		updateInfo(id: ID!, input: InfoInput!): Info
 		deleteInfo(id: ID!): Info
-
-
 		
 		createDescription(projectInfoId: ID!, input: DescriptionInput!): Description
 		updateDescription(id: ID!, input: DescriptionInput!): Description
 		deleteDescription(id: ID!) : Description
+
+		updateProjectTechs(projectId: ID!, techIds: [ID!]!): [Technology!]
 
 
 
@@ -189,13 +197,10 @@ export const typeDefs = gql`
 		deleteDescChild(id: ID!) : DescChild
 
 
-
 		createTechnology(technologyTypeId: ID!, input: TechnologyInput!): Technology
 		updateTechnology(id: ID!, input: TechnologyInput!): Technology
 		deleteTechnology(id: ID!): Technology
 		
-
-
 
 		createTechType(input: TechTypeInput!): TechType
 		updateTechType(id: ID!, input: TechTypeInput!): TechType

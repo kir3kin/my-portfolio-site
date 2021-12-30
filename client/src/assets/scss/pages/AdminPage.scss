@@ -15,7 +15,7 @@
 
 	&__wrapper {
 		display: flex;
-		flex-flow: row;
+		flex-flow: column;
 		gap: 2rem;
 	}
 
@@ -23,11 +23,47 @@
 		outline: 1px solid $theme-border-color;
 		padding: 1rem;
 
-
 		&__title {
 			font-size: $item-title-size-lg;
 			text-transform: uppercase;
 		}
+
+		&__table {
+			width: 100%;
+			margin: 2rem auto;
+			outline: 2px solid black;
+
+			thead, tbody {
+				width: 100%;
+			}
+			
+			th {
+				background-color: #fff;
+				font-size: 1.8rem;
+				font-weight: 700;
+			}
+			
+			td {
+				padding: 0.5rem;
+				font-size: 1.6rem;
+				line-height: 3.5rem;
+
+				span:not(:last-child) {
+					margin-right: 1rem;
+				}
+
+				.buttons {
+					position: relative;
+					top: 0.6rem;
+				}
+			}
+			
+			th, td {
+				outline: 1px solid black;
+				text-align: center;
+			}
+		}
+
 
 		&__list {
 
@@ -63,6 +99,24 @@
 			&:hover {
 				color: $theme-color;
 				background-color: $text-color;
+			}
+		}
+
+
+		&__add-new {
+			display: flex;
+			flex-flow: row;
+			align-items: center;
+			justify-content: flex-start;
+			gap: 1.5rem;
+
+			> label {
+				font-size: 1.8rem;
+			}
+
+			> input {
+				font-size: 1.6rem;
+				padding: 0.3rem 0.5rem;
 			}
 		}
 

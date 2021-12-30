@@ -1,4 +1,4 @@
-export const uploadImage = async (file: File) => {
+export const uploadPreview = async (file: File) => {
 	return new Promise<string>((resolve, reject) => {
 		const reader = new FileReader()
 		reader.onload = () => {

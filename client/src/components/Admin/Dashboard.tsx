@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@redux/hooks"
-import { getProjects, selectProjectsData } from "@redux/reducers/projectsSlice"
+import { getProjects, getProjectsMainData, selectProjectsData, selectProjectsMainData } from "@redux/reducers/projectsSlice"
 import { getTechnologies, selectTechsData } from "@redux/reducers/technologiesSlice"
 import { getUsers, selectUsersData } from "@redux/reducers/usersSlice"
 import React, { useEffect } from "react"
@@ -8,13 +8,15 @@ import { EditList } from "./EditList"
 export const Dashboard: React.FC = () => {
 	const dispatch = useAppDispatch()
 	
-	const { projects, status: projectStatus } = useAppSelector(selectProjectsData)
+	const { projects, status: projectStatus } = useAppSelector(selectProjectsMainData)
 	const { techs, status: techsStatus } = useAppSelector(selectTechsData)
 	const { users, status: usersStatus } = useAppSelector(selectUsersData)
 
+	// console.log('projects:', projects)
+
 
 	useEffect(() => {
-		dispatch(getProjects())
+		dispatch(getProjectsMainData())
 		// dispatch(getTechnologies())
 		// dispatch(getUsers())
 	}, [dispatch])

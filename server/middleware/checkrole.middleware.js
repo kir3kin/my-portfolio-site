@@ -8,6 +8,7 @@ export default async (resolve, root, args, context, info) => {
 		return await resolve(root, args, context, info)
 	}
 	try {
+		if (!context.req.headers.authorization) throw new Error(ERROR_MESSAGES.auth)
 		const token = context.req.headers.authorization.split(' ')[1]
 		if (!token) throw new Error(ERROR_MESSAGES.auth)
 	

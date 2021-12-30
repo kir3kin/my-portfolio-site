@@ -10,19 +10,10 @@ import {
 	ProjectTechnology,
 	ProjectAuthor
 } from '../db/models/models.js'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import config from 'config'
+
 import { ERROR_MESSAGES } from '../utils/const.js'
+import { imageAPI } from '../utils/imageAPI.js'
 
-
-const generateJwt = (id, email, role) => {
-	return jwt.sign(
-		{ id, email, role },
-		config.get('jwtSecret'),
-		{ expiresIn: config.get('jwtTokenLife') }
-	)
-}
 
 export class Kir3kinController {
 	
@@ -44,9 +35,11 @@ export class Kir3kinController {
 	// Project:
 	static getInfos = async (projectId) => await Info.findAll({ where: { projectId } })
 
+
+
 	static getProjectTechnologies = async (projectId) => {
 		const project = await Projects.findOne({ where: { id: projectId } })
-		// if (!project) error_handler()
+		if (!project) throw new Error(ERROR_MESSAGES.project_id)
 
 		const projectTechnologies = await ProjectTechnology.findAll({ where : { projectId } })
 		
@@ -56,16 +49,15 @@ export class Kir3kinController {
 		return await Technologies.findAll({ where: { id: technologyIds } })
 	}
 
-	static getProjectAuthors = async (projectId) => {
+
+
+
+
+	static getProjectAuthor = async (projectId) => {
 		const project = await Projects.findOne({ where: { id: projectId } })
-		// if (!project) error_handler()
-
-		const projectAuthors = await ProjectAuthor.findAll({ where : { projectId } })
-		
-		const authorIds = []
-		projectAuthors.map(item => authorIds.push(item.userId))
-
-		return await Users.findAll({ where: { id: authorIds } })
+		if (!project) throw new Error(ERROR_MESSAGES.project_create)
+		const projectAuthor = await ProjectAuthor.findOne({ where : { projectId } })
+		return await Users.findOne({ where: { id: projectAuthor.userId } })
 	}
 
 	// Info:
@@ -84,17 +76,26 @@ export class Kir3kinController {
 
 
 	// Project:
-	static createProject = async (input, user) => {
-		const { title, summary, description, image, link, github, template, inWorking, isHiden, infos, technologies } = input
-		
-		const project = await Projects.create({
-			title, summary, description, image, link, github, template, inWorking, isHiden
-		})
-		if (!project) throw new Error(ERROR_MESSAGES.project_create)
+	static createProject = async (title, user) => {
+		const userData = await Users.findOne({ where: { id: user.id } })
+		if (!userData) throw new Error(ERROR_MESSAGES.project_create)
 
-		createProjectAuthor(project.id, user.id)
-		if (infos) createProjectInfo(infos, project.id)
-		if (technologies) createProjectTechs(technologies, project.id)
+		const project = await Projects.create({ title })
+		if (!project) throw new Error(ERROR_MESSAGES.project_create)
+		
+		await ProjectAuthor.create({ projectId: project.id, userId: userData.id })
+		
+		const returnProject = await Projects.findOne({ where: { id: project.id } })
+		if (!returnProject) throw new Error(ERROR_MESSAGES.project_create)
+		return returnProject
+	}
+
+
+	static removeProject = async id => {
+		const project = await Projects.findOne({ where: { id } })
+		if (!project) throw new Error(ERROR_MESSAGES.project_delete)
+
+		await project.destroy()
 
 		return project
 	}
@@ -125,8 +126,6 @@ export class Kir3kinController {
 		return techType
 	}
 
-
-
 	// test
 	static check = async (input, user) => {
 		const { title } = input
@@ -137,7 +136,70 @@ export class Kir3kinController {
 	}
 
 
+
+
 	// ============ Mutations ============ \\
+	// ====== Project's ShortData
+	static updateProjectShortData = async (id, input) => {
+		const { title, summary, github, link, showOrder, isHidden } = input
+
+		const description = input.description ? input.description : ''
+		const template = input.template ? input.template : ''
+
+		const project = await Projects.findOne({ where: { id } })
+		if (!project) throw new Error(ERROR_MESSAGES.project_id)
+
+		let image
+		if (input.image) {
+			try {
+				image = await imageAPI.create(input.image)
+				if (project.image) imageAPI.delete(project.image)
+			} catch (e) {
+				throw new Error(ERROR_MESSAGES.image)
+			}
+		} else image = project.image
+
+		await project.update({
+			title, summary, github, link, description, template, image, showOrder, updatedAt: Date.now(), isHidden
+		})
+
+		return project
+	}
+
+
+	// ====== Project's Techs
+	static updateProjectTechs = async (projectId, techIds) => {
+
+		const project = await Projects.findOne({ where: { id: projectId } })
+		if (!project) throw new Error(ERROR_MESSAGES.project_id)
+
+		const techToAdd = [ ...techIds ]
+		const currentProjectTechs = await ProjectTechnology.findAll({ where: { projectId } })
+
+		// remove non-relevant project techs
+		currentProjectTechs.map( async ctech => {
+			if (!techToAdd.find((techId, i, a) => {
+				const res = Number(techId) === Number(ctech.technologyId)
+				if (res) delete a[i]
+				return res
+			})) {
+				await ProjectTechnology.destroy({ where: { id: ctech.id } })
+			}
+		})
+
+		// add new project techs
+		techToAdd.map(async addTechId => {
+			await ProjectTechnology.create({ projectId, technologyId: addTechId })
+		})
+
+		project.update({
+			updatedAt: Date.now()
+		})
+
+		return await Technologies.findAll({ where: { id: techIds } })
+	}
+
+
 
 	// ====== Project's Info
 	static createProjectInfo = async (id, input) => {

@@ -16,12 +16,13 @@ export const typeDefs = gql`
 		github: String!
 		template: String
 		inWorking: Boolean!
-		isHiden: Boolean!
+		isHidden: Boolean!
 		createdAt: Date!
 		updatedAt: Date!
 		infos: [Info!]
 		technologies: [Technology!]
-		authors: [User!]!
+		author: User!
+		showOrder: String!
 	}
 
 	type Info {
@@ -53,7 +54,7 @@ export const typeDefs = gql`
 		technologyTypeId: ID!
 		title: String!
 		techType: techType!
-		isHiden: Boolean!
+		isHidden: Boolean!
 	}
 
 	type techType {

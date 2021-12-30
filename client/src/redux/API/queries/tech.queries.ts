@@ -5,7 +5,7 @@ export const TECHNOLOGIES_QUERY = gql`query {
 	technologies {
 		id
 		title
-		isHiden
+		isHidden
 		techType {
 			id
 			title

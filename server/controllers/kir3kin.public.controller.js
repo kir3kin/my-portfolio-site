@@ -60,13 +60,10 @@ export class Kir3kinController {
 	}
 
 	static getProjects = async () => {
-		// ApiError
-		try {
-			const projects = await Projects.findAll()
-			return projects
-		} catch (e) {
-			console.log('e.message:', e.message)
-		}
+		const projects = await Projects.findAll()
+
+		if (!projects) throw new Error(ERROR_MESSAGES.projects_getting)
+		return projects
 	}
 
 	static getProject = async (id) => await Projects.findOne({ where: { id } })
@@ -77,7 +74,7 @@ export class Kir3kinController {
 	static getInfos = async (projectId) => await Info.findAll({ where: { projectId } })
 	static getProjectTechnologies = async (projectId) => {
 		const project = await Projects.findOne({ where: { id: projectId } })
-		// if (!project) error_handler()
+		if (!project) throw new Error(ERROR_MESSAGES.project_create)
 
 		const projectTechnologies = await ProjectTechnology.findAll({ where : { projectId } })
 		
@@ -87,16 +84,11 @@ export class Kir3kinController {
 		return await Technologies.findAll({ where: { id: technologyIds } })
 	}
 
-	static getProjectAuthors = async (projectId) => {
+	static getProjectAuthor = async (projectId) => {
 		const project = await Projects.findOne({ where: { id: projectId } })
-		// if (!project) error_handler()
-
-		const projectAuthors = await ProjectAuthor.findAll({ where : { projectId } })
-		
-		const authorIds = []
-		projectAuthors.map(item => authorIds.push(item.userId))
-
-		return await Users.findAll({ where: { id: authorIds } })
+		if (!project) throw new Error(ERROR_MESSAGES.project_create)
+		const projectAuthor = await ProjectAuthor.findOne({ where : { projectId } })
+		return await Users.findOne({ where: { id: projectAuthor.userId } })
 	}
 
 	// Info:

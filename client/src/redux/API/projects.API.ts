@@ -1,6 +1,8 @@
 import { ApolloAPI } from './apollo.API'
 
+
 import {
+	PROJECTS_MAIN_DATA_QUERY,
 	PROJECTS_QUERY,
 	PROJECT_QUERY
 } from './queries/projects.queris'
@@ -8,28 +10,37 @@ import {
 import {
 	CREATE_DESC_MUTATION,
 	CREATE_INFO_MUTATION,
+	CREATE_PROJECT_MUTATION,
 	DELETE_DESC_MUTATION,
 	DELETE_INFO_MUTATION,
+	REMOVE_PROJECT_MUTATION,
 	UPDATE_DESC_MUTATION,
-	UPDATE_INFO_MUTATION
+	UPDATE_INFO_MUTATION,
+	UPDATE_SHORT_DATA_MUTATION,
+	UPDATE_TECHS_MUTATION,
 } from './mutations/projects.mutations'
 
 import {
 	iCreateDescData,
 	iCreateInfoData,
+	iCreateProjectData,
 	iDeleteDescData,
 	iDeleteInfoData,
 	iProjectData,
 	iProjectsData,
+	iProjectsMainData,
+	iRemoveProjectData,
 	iUpdateDescData,
+	iUpdatedProjectShortData,
 	iUpdateInfoData,
+	iUpdateTechsData,
 } from '@interfaces/api.interface'
 
 import {
 	iDescInput,
-	iInfoInput
+	iInfoInput,
+	iShortDataInput
 } from '@interfaces/project.interface'
-
 
 export class ProjectsAPI extends ApolloAPI {
 	static fetchProjects = async () => {
@@ -37,6 +48,15 @@ export class ProjectsAPI extends ApolloAPI {
 			iProjectsData
 		>({
 			query: PROJECTS_QUERY
+		})
+		return projects
+	}
+
+	static fetchProjectsMainData = async () => {
+		const { data: { projects } } = await this.publicClient.query<
+			iProjectsMainData
+		>({
+			query: PROJECTS_MAIN_DATA_QUERY
 		})
 		return projects
 	}
@@ -50,12 +70,57 @@ export class ProjectsAPI extends ApolloAPI {
 		})
 		return project
 	}
-	
 
-	// TODO
-	static updateProjectData = async (id: string, data: any) => {
+	static createProject = async (title: string) => {
+		const { data } = await this.privateClient.mutate<
+			iCreateProjectData
+		>({
+			mutation: CREATE_PROJECT_MUTATION,
+			variables: { title }
+		})
+		return data ? data.createProject : null
 	}
+
+	static removeProject = async (id: string) => {
+		const { data } = await this.privateClient.mutate<
+			iRemoveProjectData
+		>({
+			mutation: REMOVE_PROJECT_MUTATION,
+			variables: { id }
+		})
+
+		return data ? data.removeProject : null
+	}
+
+
+	// ====== Project's ShortData ====== \\
+	static updateProjectShortData = async (
+		id: string,
+		input: iShortDataInput
+	) => {
+
+		const { data } = await this.privateFormDataClient.mutate<
+			iUpdatedProjectShortData
+		>({
+			mutation: UPDATE_SHORT_DATA_MUTATION,
+			variables: { id, input }
+		})
+
+		return data ? data.updateShortData : null
+	}
+
+	// ====== Project's Techs ====== \\
+	static updateProjectTechs = async (projectId: string, techIds: number[]) => {
+		const { data } = await this.privateClient.mutate<
+			iUpdateTechsData
+		>({
+			mutation: UPDATE_TECHS_MUTATION,
+			variables: { projectId, techIds }
+		})
 	
+		return data ? data.updateProjectTechs : undefined
+	}
+
 
 	// ====== Project's Info ====== \\
 	static createInfo = async (id: string, input: iInfoInput) => {

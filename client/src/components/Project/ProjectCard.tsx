@@ -3,17 +3,15 @@ import { Link } from "react-router-dom"
 
 import { ShortProjectData } from "@interfaces/project.interface"
 
-import { getProjectImage } from "@services/projectImages"
+import { getServerProjectImage } from "@services/projectImages"
 
-import { DEFAULT_IMAGES } from "@utils/default"
 
 export const ProjectCard: React.FC<{
 	project: ShortProjectData
 }> = ({
 	project
 }) => {
-	
-	const projectImage = getProjectImage(project.image, DEFAULT_IMAGES.thumb, true)
+	const projectThumb = getServerProjectImage(project.image, true)
 
 	return (
 		<li>
@@ -23,7 +21,7 @@ export const ProjectCard: React.FC<{
 			>
 				<div className="project_card__img">
 					<img
-						src={projectImage}
+						src={projectThumb}
 						alt={project.title.toLowerCase()}
 					/>
 				</div>

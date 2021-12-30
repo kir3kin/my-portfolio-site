@@ -21,7 +21,7 @@ export const resolvers = {
 			return await Kir3kinController.getInfos(project.id)
 		},
 		technologies: async (project) => await Kir3kinController.getProjectTechnologies(project.id),
-		authors: async (project) => await Kir3kinController.getProjectAuthors(project.id)
+		author: async (project) => await Kir3kinController.getProjectAuthor(project.id)
 	},
 	Info: {
 		descriptions: async (info) => await Kir3kinController.getDescriptions(info.id)

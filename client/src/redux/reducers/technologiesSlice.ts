@@ -71,7 +71,7 @@ export const { toggleTech, setDefaultChosen } = technologiesSlice.actions
 // select only visible techs
 export const selectTechnologyList = (state: RootState) => ({
   techs: state.technologyList.technologies
-  .filter(tech => !tech.isHiden)// get only visible techs
+  .filter(tech => !tech.isHidden)// get only visible techs
   .sort((tech1, tech2) => {// sort by Tech Type
     return Number(tech1.techType.id) - Number(tech2.techType.id)
   }),

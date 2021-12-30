@@ -1,9 +1,7 @@
 export type ImageType = (
 	image: string | undefined,
-	defaultImage: string,
-	thumb: boolean
+	thumb?: boolean
 ) => string
-
 
 type filterStorageFields = 'chosens' | 'categories'
 type userStorageFields = 'token'

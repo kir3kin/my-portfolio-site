@@ -13,9 +13,11 @@ import { LaunchApolloServer } from '../utils/LaunchApolloServer.js'
 const router = new express.Router()
 
 const schemaWithMiddleware = applyMiddleware(privateSchema, checkroleMiddleware)
+LaunchApolloServer(schemaWithMiddleware, router, '/api/kir3kin/private', true)
 LaunchApolloServer(publicSchema, router, '/api/kir3kin/public')
-LaunchApolloServer(schemaWithMiddleware, router, '/api/kir3kin/private')
 
+
+router.use('/images', express.static(path.join(path.resolve(), 'images')))
 
 // Deploy react app
 if (process.env.NODE_ENV === 'production') {

@@ -10,7 +10,6 @@ import { ComeBack } from "@blocs/ComeBack"
 import { LoadingError } from "@blocs/LoadingError"
 import { Loader } from "@blocs/Loader"
 
-import { HOME_LINK } from "@utils/default"
 
 export const ProjectPage: React.FC = () => {
 	const { id: projectId } = useParams<string>()
@@ -31,7 +30,7 @@ export const ProjectPage: React.FC = () => {
 				{status === 'failed' && <LoadingError name="Project page" />}
 				{status === 'idle' && (
 					project === null ? (
-						<Navigate to={HOME_LINK} />
+						<Navigate to={String(process.env.LINK_HOME)} />
 					) : (
 						<ProjectDesc project={project} />
 					)

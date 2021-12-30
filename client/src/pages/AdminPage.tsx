@@ -5,7 +5,7 @@ import { checkAuth, selectUserInfo } from "@redux/reducers/authSlice"
 
 import { StorageType } from "@interfaces/services.interface"
 
-import lsAPI from "@services/localStorage.api"
+import lsAPI from "@services/localStorage.API"
 
 import { Dashboard } from "@components/Admin/Dashboard"
 import { Loader } from "@blocs/Loader"

@@ -5,9 +5,10 @@ export interface ShortProjectData {
 	id: string
 	title: string
 	summary: string
+	showOrder: string
 	image?: string
 	inWorking: boolean
-	isHiden: boolean
+	isHidden: boolean
 	technologies?: Technology[]
 }
 
@@ -19,8 +20,10 @@ export interface iProject extends ShortProjectData {
 	createdAt: Date
 	updatedAt: Date
 	infos?: Info[]
-	authors: User[]
+	author: User
 }
+
+export type iMainProjectData = Pick<iProject, "id" | "title" | "createdAt" | "updatedAt" | "showOrder" | "isHidden" | "author">
 
 export interface Info {
 	id: string
@@ -53,3 +56,17 @@ export interface iDescInput {
 export interface iInfoInput {
 	title: string
 }
+
+export interface iShortDataInput {
+	title: string
+	summary: string
+	github: string
+	link: string
+	showOrder: string
+	image?: File
+	description?: string
+	template?: string
+	isHidden: boolean
+}
+
+export type UpdatedShortData = Pick<iProject, "title" | "summary" | "image" | "link" | "github" | "description"| "template" | "showOrder" | "isHidden">

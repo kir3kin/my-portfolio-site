@@ -9,7 +9,7 @@ import { ProjectList } from "@components/Project/ProjectList"
 
 import { StorageType } from "@interfaces/services.interface"
 
-import lsAPI from "@services/localStorage.api"
+import lsAPI from "@services/localStorage.API"
 
 export const ProjectsPage: React.FC = () => {
 	const dispatch = useAppDispatch()

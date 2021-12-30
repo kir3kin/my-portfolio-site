@@ -1,10 +1,11 @@
 const path = require('path')
+const dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const MinimazierCssPlugin = require('css-minimizer-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
-// const CompressionPlugin = require("compression-webpack-plugin");
+// const CompressionPlugin = require("compression-webpack-plugin")
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -59,7 +60,13 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		port: 3644,
-		open: true
+		// open: true,
+		proxy: [
+			{
+				context: ['/images', '/api'],
+				target: 'http://localhost:5080'
+			}
+		]
 	},
 	optimization: {
 		usedExports: true,
@@ -73,6 +80,7 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new dotenv(),
 		new HtmlWebpackPlugin({
 			template: './template/index.html',
 			minify: {

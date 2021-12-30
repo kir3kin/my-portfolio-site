@@ -2,7 +2,7 @@ export interface Technology {
 	id: string
 	title: string
 	techType: techType
-	isHiden: boolean
+	isHidden: boolean
 }
 
 export interface techType {

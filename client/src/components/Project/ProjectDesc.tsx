@@ -5,10 +5,9 @@ import { ProjectInfo } from "./ProjectInfo"
 
 import { iProject } from "@interfaces/project.interface"
 
-import { getProjectImage } from "@services/projectImages"
+import { getServerProjectImage } from "@services/projectImages"
 import { getNormalName } from "@services/normaName"
 
-import { DEFAULT_IMAGES } from "@utils/default"
 
 export const ProjectDesc: React.FC<{
 	project: iProject
@@ -16,11 +15,7 @@ export const ProjectDesc: React.FC<{
 	project
 }) => {
 	const [modal, setModal] = useState<boolean>(false)
-	
-	const projectImage = getProjectImage(project.image, DEFAULT_IMAGES.project, false)
-
-	console.log('DEFAULT_IMAGES:', DEFAULT_IMAGES)
-
+	const projectImage = getServerProjectImage(project.image)
 	const toggleModal = () => { setModal(!modal) }
 
 	return (
