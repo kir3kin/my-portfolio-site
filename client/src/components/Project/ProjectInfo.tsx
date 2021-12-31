@@ -2,11 +2,8 @@ import React from "react"
 
 import { Info } from "@interfaces/project.interface"
 
-interface iProjectInfo {
-	info: Info
-}
 
-export const ProjectInfo: React.FC<iProjectInfo> = ({ info }) => (
+export const ProjectInfo: React.FC<{ info: Info }> = ({ info }) => (
 	<li className="info-list__item">
 		<h4 className="info-list__header">{info.title}</h4>
 		{info.descriptions && info.descriptions.length  >= 1 && (

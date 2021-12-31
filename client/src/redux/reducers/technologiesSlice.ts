@@ -16,11 +16,11 @@ const initialState: {
   }
 } = {
   technologies: [],
-  status: 'idle',
+  status: 'loading',
   chosens: [],
   techTypes: {
     data: [],
-    status: 'idle'
+    status: 'loading'
   }
 }
 

@@ -1,0 +1,22 @@
+.header--stylish {
+	color: $text-color;
+	text-shadow: 2px 2px 1px rgba(0,0,0,.2);
+	text-align: center;
+	position: relative;
+
+	span {
+		position: absolute;
+		color: $tech-tag-default;
+		font-size: 1.6rem;
+		bottom: -2rem;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		text-shadow: none;
+	}
+
+	@include breakpoint($sm-bp) {
+		span {
+			display: none;
+		}
+	}
+}

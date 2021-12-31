@@ -16,17 +16,17 @@ const initialState: {
   token: '',
   isAuth: false,
   error: undefined,
-  status: 'idle'
+  status: 'loading'
 }
 
 export const checkAuth = createAsyncThunk<
-  boolean, string, { dispatch: AppDispatch }
+  boolean, void, { state: RootState }
 >(
   'auth/checkAuth',
-  async (token, { dispatch }) => {
-    const isValid = await AuthAPI.checkToken(token)
-    if (isValid) dispatch(saveToken(token))
-    return isValid
+  async (_, { getState }) => {
+    const { token } = getState().auth
+    if (token) return await AuthAPI.checkToken(token)
+    else return false
   }
 )
 

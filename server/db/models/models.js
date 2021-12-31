@@ -83,27 +83,40 @@ export const Roles = sequelize.define('roles', {
 })
 
 
-Projects.hasMany(Info, { as: 'infos' })
+// Associations
+Projects.hasMany(Info, {
+	as: 'infos',
+	onDelete: 'CASCADE',
+	hooks: true
+})
 Info.belongsTo(Projects)
 
-Info.hasMany(Description, { as: 'descriptions'})
+Info.hasMany(Description, {
+	as: 'descriptions',
+	onDelete: 'CASCADE',
+	hooks: true
+})
 Description.belongsTo(Info)
 
-Description.hasMany(DescriptionItem, { as: 'children' })
+Description.hasMany(DescriptionItem, {
+	as: 'children',
+	onDelete: 'CASCADE',
+	hooks: true
+})
 DescriptionItem.belongsTo(Description)
 
-Projects.hasMany(ProjectTechnology)
+Projects.hasMany(ProjectTechnology, { onDelete: 'CASCADE', hooks: true })
 ProjectTechnology.belongsTo(Projects)
-Technologies.hasMany(ProjectTechnology)
+Technologies.hasMany(ProjectTechnology, { onDelete: 'CASCADE', hooks: true })
 ProjectTechnology.belongsTo(Technologies)
 
-TechnologyTypes.hasMany(Technologies)
+TechnologyTypes.hasMany(Technologies, { onDelete: 'CASCADE', hooks: true })
 Technologies.belongsTo(TechnologyTypes)
 
-Users.hasMany(ProjectAuthor)
+Users.hasMany(ProjectAuthor, { onDelete: 'CASCADE', hooks: true })
 ProjectAuthor.belongsTo(Users)
-Projects.hasMany(ProjectAuthor)
+Projects.hasMany(ProjectAuthor, { onDelete: 'CASCADE', hooks: true })
 ProjectAuthor.belongsTo(Projects)
 
-Roles.hasMany(Users)
+Roles.hasMany(Users, { onDelete: 'CASCADE', hooks: true })
 Users.belongsTo(Roles)

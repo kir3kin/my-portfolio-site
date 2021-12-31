@@ -1,6 +1,13 @@
-// Bsic settings
+// Basic settings
 @import '@scss-utils/vars';
 @import '@scss-utils//mixins';
+
+
+.home-page {
+	display: flex;
+	flex-flow: row;
+	width: 100%;
+}
 
 .projects {
 	width: 75%;

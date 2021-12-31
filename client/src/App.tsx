@@ -1,28 +1,35 @@
 import React from 'react'
 // import { Navbar } from '@components/Navbar'
+import '@scss/App'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { ProjectsPage } from './pages/ProjectsPage'
-import { Page404 } from './pages/Page404'
-import { ProjectPage } from './pages/ProjectPage'
-import { AdminPage } from './pages/AdminPage'
+import { Page404 } from '@pages/Page404'
+import { HomePage } from '@pages/HomePage'
+import { ProjectPage } from '@pages/ProjectPage'
 
-import { EditProjectPage } from './pages/Admin/EditProjectPage'
+import { EditProjectPage } from '@pages/Admin/EditProjectPage'
+import { AdminPage } from '@pages/Admin/AdminPage'
 
-import '@scss/App'
+import { PrivateLayout } from '@layouts/private.layout'
+import { PublicLayout } from '@layouts/public.layout'
 
-// TODO:
-// ? separate public & private Routes
 
 export const App: React.FC = () => (
 	<BrowserRouter>
 		<Routes>
-			<Route path="*" element={ <Page404 /> } />
-			<Route path="/" element={ <ProjectsPage /> } />
-			<Route path="/project/:id" element={ <ProjectPage /> } />
-			<Route path="/admin" element={ <AdminPage /> } />
-			<Route path="/edit-project/:id" element={ <EditProjectPage /> } />
+			<Route path="*" element={<Page404 />} />
+
+			<Route path="/" element={<PublicLayout />}>
+				<Route index element={<HomePage />} />
+				<Route path="project/:id" element={<ProjectPage />} />
+			</Route>
+
+			<Route path="/admin" element={<PrivateLayout />} >
+				<Route index element={<AdminPage />} />
+				<Route path="edit-project/:id" element={<EditProjectPage />} />
+			</Route>
+
 		</Routes>
 	</BrowserRouter>
 )

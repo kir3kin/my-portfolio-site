@@ -45,7 +45,7 @@ interface DescChild {
 }
 
 
-export type EditListType = 'project' | 'user' | 'technology' | 'techType'
+export type ProjectListType = 'project' | 'user' | 'technology' | 'techType'
 
 
 export interface iDescInput {

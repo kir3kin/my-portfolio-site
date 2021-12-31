@@ -9,11 +9,11 @@
 @import './components/Common';
 
 // ::: Pages
+// @import './pages/HomePage';
 @import './pages/ProjectPage';
-@import './pages/ProjectsPage';
 @import './pages/Page404';
 @import './pages/AuthPage';
-@import './pages/AdminPage';
+@import './pages/admin/AdminPage';
 @import './pages/admin/EditProjectPage';
 
 // ::: Components
@@ -23,8 +23,9 @@
 @import './components/ModalImage';
 
 // ::: Blocks
-@import './blocks/Loader';
-@import './blocks/ComeBack';
-@import './blocks/LoadingError';
-@import './blocks/NotFound';
-@import './blocks/SimpleBurger';
+@import './blocs/Titles';
+@import './blocs/Loader';
+@import './blocs/ComeBack';
+@import './blocs/LoadingError';
+@import './blocs/NotFound';
+@import './blocs/SimpleBurger';

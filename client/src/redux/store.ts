@@ -7,6 +7,7 @@ import authSlice from './reducers/authSlice'
 import usersSlice from './reducers/usersSlice'
 
 import { localStorageMiddleware } from './middlewares/localStorageMiddleware'
+import { authMiddleware } from './middlewares/auth.middleware'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +17,7 @@ export const store = configureStore({
     auth: authSlice,
     users: usersSlice
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware, authMiddleware)
 })
 
 export type AppDispatch = typeof store.dispatch;

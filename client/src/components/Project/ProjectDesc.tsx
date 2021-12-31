@@ -14,8 +14,8 @@ export const ProjectDesc: React.FC<{
 }> = ({
 	project
 }) => {
-	const [modal, setModal] = useState<boolean>(false)
 	const projectImage = getServerProjectImage(project.image)
+	const [modal, setModal] = useState<boolean>(false)
 	const toggleModal = () => { setModal(!modal) }
 
 	return (

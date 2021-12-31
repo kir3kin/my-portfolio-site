@@ -2,14 +2,14 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 
 import { User } from "@interfaces/auth.interface"
-import { EditListType, iMainProjectData, ShortProjectData } from "@interfaces/project.interface"
+import { ProjectListType, iMainProjectData, ShortProjectData } from "@interfaces/project.interface"
 import { Technology } from "@interfaces/technology.interface"
 import { useAppDispatch } from "@redux/hooks"
 import { createProject, removeProject } from "@redux/reducers/projectsSlice"
 
 
-export const EditList: React.FC<{
-	type: EditListType,
+export const ProjectList: React.FC<{
+	type: ProjectListType,
 	list: iMainProjectData[]
 }> = ({
 	type, list
@@ -94,7 +94,7 @@ export const EditList: React.FC<{
 								<td>
 									<div className="buttons">
 										<Link
-											to={`/edit-${type}/${item.id}`}
+											to={`${String(process.env.LINK_ADMIN)}/edit-${type}/${item.id}`}
 											className="button button--edit"
 										></Link>
 										<button

@@ -21,12 +21,19 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
       "paths": {
+        "@scss/*": ["assets/scss/*"],
+        "@scss-media/*": ["assets/scss/media/*"],
+        "@scss-utils/*": ["assets/scss/utils/*"],
+        "@images/*": ["assets/images/*"],
         "@utils/*": ["utils/*"],
         "@services/*": ["services/*"],
         "@interfaces/*": ["interfaces/*"],
         "@blocs/*": ["blocs/*"],
         "@components/*": ["components/*"],
         "@redux/*": ["redux/*"],
+        "@layouts/*": ["layouts/*"],
+        "@pages/*": ["pages/*"],
+        "@hooks/*": ["hooks/*"]
       }
   },
   "include": [

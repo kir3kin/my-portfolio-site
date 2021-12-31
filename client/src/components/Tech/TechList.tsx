@@ -7,6 +7,7 @@ import { LoadingStatus } from "@interfaces/loading.interface"
 import { Technology } from "@interfaces/technology.interface"
 
 import { TechItem } from "./TechItem"
+
 import { Loader } from "@blocs/Loader"
 import { LoadingError } from "@blocs/LoadingError"
 import { NotFound } from "@blocs/NotFound"
@@ -24,32 +25,32 @@ export const TechList: React.FC<iTechList> = ({
 }) => {
 	const chosens = useAppSelector(selectChosen)
 
-	return (<>
-		{status === 'loading' && <Loader />}
-		{status === 'failed' && <LoadingError name="Technology filter" />}
-		{status === 'idle' && (
-			<div>
-				<SimpleBurger />
-				<h2
-					className="sidebar__header header--stylish"
-				>
-					[ Technologies ]
-					<span>{Messages.techsTip}</span>
-				</h2>
-				{techs.length >= 1 ? (
-					<form className="tech">
-						{techs.map(item => (
-							<TechItem 
-								key={item.id}
-								item={item}
-								chosens={chosens}
-							/>
-						))}
-					</form>
-				) : (
-					<NotFound name="techs" />
-				)}
-			</div>
-		)}
-	</>)
+	return (
+		<aside className="sidebar">
+			{status === 'loading' && <Loader />}
+			{status === 'failed' && <LoadingError name="Technology filter" />}
+			{status === 'idle' && (
+				<div>
+					<SimpleBurger />
+					<h2 className="sidebar__header header--stylish">
+						[ Technologies ]
+						<span>{Messages.techsTip}</span>
+					</h2>
+					{techs.length >= 1 ? (
+						<form className="tech">
+							{techs.map(item => (
+								<TechItem 
+									key={item.id}
+									item={item}
+									chosens={chosens}
+								/>
+							))}
+						</form>
+					) : (
+						<NotFound name="techs" />
+					)}
+				</div>
+			)}
+		</aside>
+	)
 }

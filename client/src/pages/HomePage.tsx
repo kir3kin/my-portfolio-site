@@ -11,7 +11,10 @@ import { StorageType } from "@interfaces/services.interface"
 
 import lsAPI from "@services/localStorage.API"
 
-export const ProjectsPage: React.FC = () => {
+import '@scss/pages/HomePage'
+
+
+export const HomePage: React.FC = () => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
@@ -34,21 +37,15 @@ export const ProjectsPage: React.FC = () => {
 	const { projects, status: projectsStatus } = useAppSelector(selectProjectsByTechs)
 
 	return (
-		<div className="projects-page">
-			<div className="wrapper">
-				<div className="container">
-					<aside className="sidebar">
-						<TechList
-							techs={techs}
-							status={tecsStatus}
-						/>
-					</aside>
-					<ProjectList
-						projects={projects}
-						status={projectsStatus}
-					/>
-				</div>
-			</div>
-		</div>
+		<section className="home-page">
+			<TechList
+				techs={techs}
+				status={tecsStatus}
+			/>
+			<ProjectList
+				projects={projects}
+				status={projectsStatus}
+			/>
+		</section>
 	)
 }

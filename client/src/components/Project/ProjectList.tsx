@@ -24,9 +24,7 @@ export const ProjectList: React.FC<iProjectList> = ({
 		{status === 'failed' && <LoadingError name="Project list" />}
 		{status === 'idle' && (
 			<>
-				<h1
-					className="projects__header header--stylish"
-				>
+				<h1 className="projects__header header--stylish" >
 					=== [ Projects ] ===
 					<span>{Messages.projectsTip}</span>
 				</h1>

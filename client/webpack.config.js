@@ -54,6 +54,9 @@ module.exports = {
 			"@blocs": '/blocs',
 			"@components": '/components',
 			"@redux": '/redux',
+			"@layouts": '/layouts',
+			"@pages": '/pages',
+			"@hooks": '/hooks',
 		}
 	},
 	devtool: isProd ? false : 'inline-source-map',
@@ -61,12 +64,10 @@ module.exports = {
 		historyApiFallback: true,
 		port: 3644,
 		// open: true,
-		proxy: [
-			{
-				context: ['/images', '/api'],
-				target: 'http://localhost:5080'
-			}
-		]
+		proxy: [{
+			context: ['/images', '/api'],
+			target: 'http://localhost:5080'
+		}]
 	},
 	optimization: {
 		usedExports: true,

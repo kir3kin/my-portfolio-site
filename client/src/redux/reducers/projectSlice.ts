@@ -14,7 +14,7 @@ const initialState: {
   error: string | undefined
 } = {
   data: null,
-  status: 'idle',
+  status: 'loading',
   error: undefined
 }
 

@@ -15,7 +15,7 @@ const initialState: {
 } = {
   projects: [],
   technologies: [],
-  status: 'idle',
+  status: 'loading',
   mainProjectsData: []
 }
 

@@ -25,6 +25,16 @@ body {
 	background-image: url('@images/bg/brick-wall-dark.png');
 	background-color: #1e7ca8;
 	background-repeat: repeat;
+	
+	&--admin-page {
+		background-image: url('@images/bg/black-orchid.png');
+		background-color: darkolivegreen;
+	}
+
+	&--error-page {
+		background-image: url('@images/bg/bright-squares.png');
+		background-color: #7e57c2 ;
+	}
 
 	@include breakpoint($md-bp) {
 		padding: 1rem;
@@ -39,8 +49,10 @@ body {
 .container {
 	position: relative;
 	width: $website-lg-width;
+	min-height: calc(100vh - 6rem);
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	margin: auto;
 	overflow: hidden;
 	border: 1.5rem solid $theme-border-color ;
@@ -61,28 +73,5 @@ body {
 	@include breakpoint($sm-bp) {
 		padding: 1rem;
 		min-height: 100vh;
-	}
-}
-
-.header--stylish {
-	color: $text-color;
-	text-shadow: 2px 2px 1px rgba(0,0,0,.2);
-	text-align: center;
-	position: relative;
-
-	span {
-		position: absolute;
-		color: $tech-tag-default;
-		font-size: 1.6rem;
-		bottom: -2rem;
-		left: 50%;
-		transform: translate(-50%, 0%);
-		text-shadow: none;
-	}
-
-	@include breakpoint($sm-bp) {
-		span {
-			display: none;
-		}
 	}
 }
