@@ -6,6 +6,8 @@ import { InfoList } from "./InfoList"
 import { TechList } from "./TechList"
 import { ShortData } from "./ShortData"
 
+import '@scss/components/Admin/Project/ProjectForm'
+
 export const ProjectForm: React.FC<{ project: iProject }> = ({ project }) => (
 	<div className="edit-project">
 

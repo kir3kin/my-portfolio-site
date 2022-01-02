@@ -1,0 +1,42 @@
+// Basic settings
+@import '@scss-utils/vars';
+@import '@scss-utils/mixins';
+@import '@scss-utils/dev_mixins';
+
+.add-item {
+	width: 100%;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+
+	* {
+		font-size: 1.8rem;
+	}
+
+	input {
+		padding: 0.4rem 0.6rem;
+	}
+
+	button {
+		display: block;
+		width: 2.5rem;
+		height: 2.5rem;
+		font-size: 2rem;
+		border: 1px solid $text-color;
+		background-color: green;
+		color: white;
+		transition: .2s linear;
+		cursor: pointer;
+
+		&:hover {
+			background-color: lighten(green, 10%);
+		}
+
+		&:disabled {
+			background-color: gray;
+			cursor: auto;
+		}
+	}
+}

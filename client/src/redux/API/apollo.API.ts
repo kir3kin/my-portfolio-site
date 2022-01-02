@@ -4,7 +4,7 @@ import { createUploadLink } from "apollo-upload-client"
 
 import { StorageType } from "@interfaces/services.interface"
 
-import lsAPI from "@services/localStorage.API"
+import lsAPI from "@services/LocalStorage.API"
 
 
 export class ApolloAPI {

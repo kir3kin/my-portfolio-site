@@ -4,11 +4,13 @@ import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { getProject, selectProjectInfo } from "@redux/reducers/projectSlice"
 
-import { ProjectDesc } from "@components/Project/ProjectDesc"
+import { ProjectDesc } from "@components/Public/Project/ProjectDesc"
 
 import { ComeBack } from "@blocs/ComeBack"
 import { LoadingError } from "@blocs/LoadingError"
 import { Loader } from "@blocs/Loader"
+
+import '@scss/pages/ProjectPage'
 
 
 export const ProjectPage: React.FC = () => {

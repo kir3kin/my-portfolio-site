@@ -4,7 +4,7 @@ import { PayloadAction } from "@reduxjs/toolkit"
 import { ChosensType } from "@interfaces/technology.interface"
 import { StorageType } from "@interfaces/services.interface"
 
-import lsAPI from "@services/localStorage.API"
+import lsAPI from "@services/LocalStorage.API"
 
 export const localStorageMiddleware: Middleware = (store) => (next) => (action: PayloadAction) => {
 	const result = next(action)

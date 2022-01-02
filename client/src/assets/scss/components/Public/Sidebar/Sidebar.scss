@@ -11,9 +11,12 @@
 	border-right: .5rem solid $text-color;
 	position: relative;
 
-	&__header {
-		margin-bottom: 2rem;
-		font-size: $header-lg-size;
+
+	&__item {
+		&__header {
+			margin-bottom: 2rem;
+			font-size: $header-lg-size;
+		}
 	}
 
 	@include breakpoint($lg-bp) {

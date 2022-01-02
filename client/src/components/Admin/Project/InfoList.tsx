@@ -7,6 +7,8 @@ import { Info } from "@interfaces/project.interface"
 
 import { ProjectInfo } from "./ProjectInfo"
 
+import '@scss/components/Admin/Project/InfoList'
+
 
 type InfoListType = Info[] | undefined
 
@@ -39,7 +41,7 @@ export const InfoList: React.FC<{
 		<div className="edit-project__info">
 			<h3 className="edit-project__info__title">Project infos</h3>
 
-			<div className="edit-project__info__add add-info">
+			<div className="edit-project__info__add add-item">
 				<label htmlFor="new-info">New info title</label>
 				<input
 					type="text"

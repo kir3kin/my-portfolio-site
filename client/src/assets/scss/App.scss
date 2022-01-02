@@ -7,25 +7,3 @@
 
 // General settings
 @import './components/Common';
-
-// ::: Pages
-// @import './pages/HomePage';
-@import './pages/ProjectPage';
-@import './pages/Page404';
-@import './pages/AuthPage';
-@import './pages/admin/AdminPage';
-@import './pages/admin/EditProjectPage';
-
-// ::: Components
-@import './components/Sidebar';
-@import './components/ProjectList';
-@import './components/TechList';
-@import './components/ModalImage';
-
-// ::: Blocks
-@import './blocs/Titles';
-@import './blocs/Loader';
-@import './blocs/ComeBack';
-@import './blocs/LoadingError';
-@import './blocs/NotFound';
-@import './blocs/SimpleBurger';

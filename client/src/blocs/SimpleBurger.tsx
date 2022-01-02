@@ -1,5 +1,7 @@
 import React, { useState } from "react"
 
+import '@scss/blocs/SimpleBurger'
+
 export const SimpleBurger: React.FC = () => {
 	const [burger, setBurger] = useState<boolean>(false)
 

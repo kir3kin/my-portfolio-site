@@ -8,6 +8,10 @@ import { uploadPreview } from "@services/uploadPreview"
 
 import { iProject, iShortDataInput } from "@interfaces/project.interface"
 
+
+import '@scss/components/Admin/Project/ShortData'
+
+
 export const ShortData: React.FC<{
 	project: iProject
 }> = ({

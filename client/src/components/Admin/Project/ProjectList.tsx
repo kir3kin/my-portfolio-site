@@ -7,6 +7,8 @@ import { Technology } from "@interfaces/technology.interface"
 import { useAppDispatch } from "@redux/hooks"
 import { createProject, removeProject } from "@redux/reducers/projectsSlice"
 
+import '@scss/components/Admin/Project/ProjectList'
+
 
 export const ProjectList: React.FC<{
 	type: ProjectListType,
@@ -109,8 +111,7 @@ export const ProjectList: React.FC<{
 					</tbody>
 				</table>
 
-
-				<div className="admin-page__item__add-new add-info">
+				<div className="admin-page__item__add-new add-item">
 					<label htmlFor="new-project">Create project</label>
 					<input
 						type="text"

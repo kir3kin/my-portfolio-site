@@ -1,5 +1,7 @@
 import React from "react"
 
+import '@scss/components/Public/Project/ModalImage'
+
 export const ModalImage: React.FC<{
 	image: string,
 	toggle: () => void

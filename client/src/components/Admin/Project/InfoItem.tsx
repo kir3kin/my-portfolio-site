@@ -1,8 +1,11 @@
 import React, { useState } from "react"
 
-import { Description } from "@interfaces/project.interface"
 import { deleteDesc, updateDesc } from "@redux/reducers/projectSlice"
 import { useAppDispatch } from "@redux/hooks"
+
+import { Description } from "@interfaces/project.interface"
+
+import '@scss/components/Admin/Project/InfoItem'
 
 
 export const InfoItem: React.FC<{

@@ -3,6 +3,7 @@
 @import '@scss-utils/mixins';
 @import '@scss-utils/dev_mixins';
 
+
 .admin-page {
 	display: block;
 	width: 100%;
@@ -26,43 +27,6 @@
 			font-size: $item-title-size-lg;
 			text-transform: uppercase;
 		}
-
-		&__table {
-			width: 100%;
-			margin: 2rem auto;
-			outline: 2px solid black;
-
-			thead, tbody {
-				width: 100%;
-			}
-			
-			th {
-				background-color: #fff;
-				font-size: 1.8rem;
-				font-weight: 700;
-			}
-			
-			td {
-				padding: 0.5rem;
-				font-size: 1.6rem;
-				line-height: 3.5rem;
-
-				span:not(:last-child) {
-					margin-right: 1rem;
-				}
-
-				.buttons {
-					position: relative;
-					top: 0.6rem;
-				}
-			}
-			
-			th, td {
-				outline: 1px solid black;
-				text-align: center;
-			}
-		}
-
 
 		&__list {
 

@@ -1,3 +1,8 @@
+// Bsic settings
+@import '@scss-utils/vars';
+@import '@scss-utils/mixins';
+
+
 .header--stylish {
 	color: $text-color;
 	text-shadow: 2px 2px 1px rgba(0,0,0,.2);

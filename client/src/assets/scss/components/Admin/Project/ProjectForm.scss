@@ -1,0 +1,20 @@
+// Basic settings
+@import '@scss-utils/vars';
+@import '@scss-utils/mixins';
+@import '@scss-utils/dev_mixins';
+
+
+.edit-project {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+
+	&__header {
+		font-size: $header-size-lg;
+		text-align: center;
+	}
+
+	&__info {
+		margin-top: 2rem;
+	}
+}

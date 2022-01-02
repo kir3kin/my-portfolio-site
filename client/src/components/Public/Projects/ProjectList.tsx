@@ -11,6 +11,10 @@ import { LoadingError } from "@blocs/LoadingError"
 
 import { Messages } from "@utils/messages"
 
+
+import '@scss/components/Public/Projects/ProjectList'
+
+
 interface iProjectList {
 	projects: ShortProjectData[],
 	status: LoadingStatus

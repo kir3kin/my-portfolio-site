@@ -4,11 +4,17 @@ import { Outlet } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "@redux/hooks"
 import { checkAuth, saveToken, selectUserInfo } from "@redux/reducers/authSlice"
 
-import { AuthPage } from "@pages/AuthPage"
-import lsAPI from "@services/localStorage.API"
 import { StorageType } from "@interfaces/services.interface"
+
+import lsAPI from "@services/LocalStorage.API"
+
+import { AuthPage } from "@pages/AuthPage"
+
 import { Loader } from "@blocs/Loader"
 import { LoadingError } from "@blocs/LoadingError"
+
+import '@scss/blocs/Admin/AddItem'
+import '@scss/blocs/Admin/Buttons'
 
 
 export const PrivateLayout: React.FC = () => {

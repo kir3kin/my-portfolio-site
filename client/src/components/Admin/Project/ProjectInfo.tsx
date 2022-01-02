@@ -7,17 +7,17 @@ import { iDescInput, Info } from "@interfaces/project.interface"
 
 import { InfoItem } from "./InfoItem"
 
+import '@scss/components/Admin/Project/ProjectInfo'
+
 const defaultDesc = { title: '', link: '' }
 
-type ProjectInfoType = Info
-
 export const ProjectInfo: React.FC<{
-	info: ProjectInfoType
+	info: Info
 }> = ({
 	info,
 }) => {
 	const dispatch = useAppDispatch()
-	const [form, setForm] = useState<ProjectInfoType>(info)
+	const [form, setForm] = useState<Info>(info)
 	const [newDesc, setNewDesc] = useState<iDescInput>(defaultDesc)
 	const [isChanged, setIsChanged] = useState<boolean>(false)
 

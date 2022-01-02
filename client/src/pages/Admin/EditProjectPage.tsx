@@ -22,16 +22,12 @@ export const EditProjectPage: React.FC = () => {
 
 	return (
 		<section className="admin-page">
-			{/* <div className="wrapper"> */}
-				{/* <div className="container"> */}
-					<ComeBack />
-					{status === 'loading' && <Loader />}
-					{status === 'failed' && <LoadingError name="Project page" />}
-					{status === 'idle' && project !== null && (
-						<ProjectForm project={project} />
-					)}
-				{/* </div> */}
-			{/* </div> */}
+			<ComeBack />
+			{status === 'loading' && <Loader />}
+			{status === 'failed' && <LoadingError name="Project page" />}
+			{status === 'idle' && project !== null && (
+				<ProjectForm project={project} />
+			)}
 		</section>
 	)
 }

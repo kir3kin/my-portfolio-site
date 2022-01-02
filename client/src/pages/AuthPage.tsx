@@ -4,16 +4,15 @@ import { selectUserInfo, userLogin } from "@redux/reducers/authSlice"
 
 import { iLoginInput } from "@interfaces/auth.interface"
 
-const defaultForm = {
-	email: '', password: ''
-}
+import '@scss/pages/AuthPage'
+
 
 export const AuthPage: React.FC = () => {
 	const dispatch = useAppDispatch()
 	const { error } = useAppSelector(selectUserInfo)
+	const [form, setForm] = useState<iLoginInput>({ email: '', password: '' })
 
-	const [form, setForm] = useState<iLoginInput>(defaultForm)
-
+	// ====== [START:] Handlers ====== \\
 	const changeHandler = (
 		e: React.ChangeEvent<HTMLInputElement>
 	) => {
@@ -21,12 +20,13 @@ export const AuthPage: React.FC = () => {
 			...prev, [e.target.name]: e.target.value
 		}))
 	}
-
+	
 	const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		if (form.email && form.password)
-			dispatch(userLogin(form))
+		dispatch(userLogin(form))
 	}
+	// ====== [End:] Handlers ====== \\
 
 	return (
 		<section className="auth">

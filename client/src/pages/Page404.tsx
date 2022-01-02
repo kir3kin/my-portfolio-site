@@ -1,5 +1,6 @@
 import React from "react"
 
+import '@scss/pages/Page404'
 import { ComeBack } from "@blocs/ComeBack"
 
 export const Page404: React.FC = () => (

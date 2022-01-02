@@ -6,7 +6,7 @@ import technologiesSlice from './reducers/technologiesSlice'
 import authSlice from './reducers/authSlice'
 import usersSlice from './reducers/usersSlice'
 
-import { localStorageMiddleware } from './middlewares/localStorageMiddleware'
+import { localStorageMiddleware } from './middlewares/LocalStorage.middleware'
 import { authMiddleware } from './middlewares/auth.middleware'
 
 export const store = configureStore({

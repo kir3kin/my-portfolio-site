@@ -6,14 +6,16 @@ import { selectChosen } from "@redux/reducers/technologiesSlice"
 import { LoadingStatus } from "@interfaces/loading.interface"
 import { Technology } from "@interfaces/technology.interface"
 
-import { TechItem } from "./TechItem"
+import { TechItem } from "@components/Public/Sidebar/Tech/TechItem"
 
 import { Loader } from "@blocs/Loader"
 import { LoadingError } from "@blocs/LoadingError"
 import { NotFound } from "@blocs/NotFound"
-import { SimpleBurger } from "@blocs/SimpleBurger"
 
 import { Messages } from "@utils/messages"
+
+import '@scss/components/Public/Sidebar/TechList'
+
 
 interface iTechList {
 	techs: Technology[],
@@ -26,13 +28,12 @@ export const TechList: React.FC<iTechList> = ({
 	const chosens = useAppSelector(selectChosen)
 
 	return (
-		<aside className="sidebar">
+		<>
 			{status === 'loading' && <Loader />}
 			{status === 'failed' && <LoadingError name="Technology filter" />}
 			{status === 'idle' && (
 				<div>
-					<SimpleBurger />
-					<h2 className="sidebar__header header--stylish">
+					<h2 className="sidebar__item__header header--stylish">
 						[ Technologies ]
 						<span>{Messages.techsTip}</span>
 					</h2>
@@ -51,6 +52,6 @@ export const TechList: React.FC<iTechList> = ({
 					)}
 				</div>
 			)}
-		</aside>
+		</>
 	)
 }

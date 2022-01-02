@@ -8,6 +8,8 @@ import { Technology } from "@interfaces/technology.interface"
 
 import { getChosenTechs } from "@services/getChosenTechs"
 
+import '@scss/components/Admin/Project/TechList'
+
 
 export const TechList: React.FC<{
 	projectTechs: Technology[] | undefined,

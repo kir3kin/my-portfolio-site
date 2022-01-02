@@ -23,7 +23,7 @@ export const checkAuth = createAsyncThunk<
   boolean, void, { state: RootState }
 >(
   'auth/checkAuth',
-  async (_, { getState }) => {
+  async (undefined, { getState }) => {
     const { token } = getState().auth
     if (token) return await AuthAPI.checkToken(token)
     else return false

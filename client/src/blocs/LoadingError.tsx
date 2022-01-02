@@ -2,6 +2,8 @@ import React from "react"
 
 import { Messages } from "@utils/messages"
 
+import '@scss/blocs/LoadingError'
+
 export const LoadingError: React.FC<{
 	name?: string
 }> = ({

@@ -1,5 +1,7 @@
 import React from "react"
 
+import '@scss/blocs/NotFound'
+
 export const NotFound: React.FC<{
 	name?: string
 }> = ({

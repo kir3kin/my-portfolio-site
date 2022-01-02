@@ -17,8 +17,9 @@ import {
 	selectUsersData
 } from "@redux/reducers/usersSlice"
 
-
+import '@scss/pages/Admin/AdminPage'
 import { ProjectList } from "@components/Admin/Project/ProjectList"
+
 
 
 export const AdminPage: React.FC = () => {
